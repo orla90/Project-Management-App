@@ -1,0 +1,26 @@
+@import './../../../../mixins.scss';
+
+.logo {
+  display:inline-block ;
+  transition: all 0.3s ease 0s;
+  &__title {
+    color: $logoBlueColor;
+    text-transform: uppercase;
+    font-size: rem(34);
+    font-weight: 700;
+    transition: all 0.3s ease 0s;
+  }
+  @media (any-hover: hover){
+    &:hover{
+      transform: scale(1.02);
+      .logo__title {
+        text-decoration: underline;
+      }
+    }
+  }
+  &__subtitle{
+    color: $greyColor;
+    text-align:justify;
+    font-size: rem(15);
+  }
+}

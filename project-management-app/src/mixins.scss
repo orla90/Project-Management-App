@@ -1,0 +1,19 @@
+$logoBlueColor:rgb(51, 51, 204);
+$greyColor:rgb(95, 95, 95);
+$btnBgColor:rgb(0,82,255);
+$headerScrollColor: rgb(225, 238, 255);
+
+@function rem($px) {
+	$result: calc($px/ 16) + rem;
+	@return $result;
+}
+
+@function em($px, $current: 16) {
+	$result: calc($px/ $current) + em;
+	@return $result;
+}
+
+@function adaptivSize($maxWidth,$minWidth,$maxSizeContainer,$minSizeContainer){
+   $result: calc(#{$minWidth}px + (#{$maxWidth} - #{$minWidth}) * ((100vw - #{$minSizeContainer}px) / (#{$maxSizeContainer} - #{$minSizeContainer})));
+   @return $result;
+}

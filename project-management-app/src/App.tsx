@@ -7,6 +7,7 @@ import UserAuth from 'pages/user-auth-page/components/auth';
 import Welcome from 'pages/welcome-page/components/welcome';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import './global-style.scss';
 
 const App = () => {
   return (

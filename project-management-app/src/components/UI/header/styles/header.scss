@@ -1,0 +1,23 @@
+@import './../../../../mixins.scss';
+
+.header{
+  padding: 15px 0px;
+  position: fixed;
+  width: 100%;
+  transition: all 0.3s ease 0s;
+  &.scroll{
+  background-color: $headerScrollColor;
+  }
+  &__container{
+  }
+  &__body{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__logo{
+    margin-right: 15px;
+  }
+  &__sing-block{
+
+  }
+}
