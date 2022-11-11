@@ -27,12 +27,14 @@ const Header = () => {
             <CustomLink to={'/'}>{<Logo />}</CustomLink>
           </div>
           <div className="header__sing-block">
-            {
-              //in the future, there will be a logic for rendering buttons (whether the user is authorized or not yet)
-              <CustomLink className="main-page-btn" to={'/sing-in'}>
-                Sing in
-              </CustomLink>
-            }
+            {/*in the future, there will be a logic for rendering buttons (whether the user is authorized or not yet) */}
+            <CustomLink className="main-page-btn" to={'/sing-in'}>
+              Sing in
+            </CustomLink>
+
+            <CustomLink className="main-page-btn" to={'/sing-up'}>
+              Sing up
+            </CustomLink>
           </div>
         </div>
       </div>
