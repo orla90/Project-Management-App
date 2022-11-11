@@ -120,10 +120,14 @@ h6 {
   border-radius: 15px;
   box-shadow: 0 0 0 0px $btnBgColor;
   animation-duration: .7s;
+  transition: all 0.3s ease 0s;
   @media (any-hover: hover){
     &:hover{
       animation-name: animation-main-btn;
     }
+  }
+  &:active{
+    transform: scale(.95);
   }
 }
 
