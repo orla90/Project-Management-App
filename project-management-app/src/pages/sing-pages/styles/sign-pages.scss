@@ -1,14 +1,14 @@
 @import './../../../mixins.scss';
 
-.sing-in, .sing-up {
+.sign-in, .sign-up {
   padding: 90px 0px;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgb(97, 152, 255);
-  .sing-in &__container,
-  .sing-up &__container{
+  .sign-in &__container,
+  .sign-up &__container{
     max-width: 400px;
     width: 100%;
   }
@@ -36,11 +36,15 @@
       transition: all 0.3s ease 0s;
       &:focus {
         border: 2px solid $btnBgColor;
-         .sing-up__label{
+         .sign-up__label{
           color: red;
         }
       }
     }
+    input:-webkit-autofill {
+      -webkit-box-shadow:0 0 0 50px white inset; 
+      -webkit-text-fill-color: #333;
+  }
   }
   &__input-body{
     position: relative;
@@ -66,6 +70,13 @@
     transform: translateY(100%);
     font-size: rem(14);
     color: red;
+  }
+
+  &__error-submit {
+    text-align: center;
+    color: red;
+    position: relative;
+    top: -10px;
   }
   &__login{
 
