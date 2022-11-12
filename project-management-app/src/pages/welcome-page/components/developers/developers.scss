@@ -1,0 +1,23 @@
+@import './../../../../mixins.scss';
+
+.developers {
+  background-color: $lightGreyColor;
+  padding: 0 0 rem(50);
+  &__title {
+    font-size: rem(40);
+    font-family: 'Noto Serif', serif;
+    max-width: rem(645);
+    line-height: rem(54.48);
+    margin: 0 auto;
+    text-align: center;
+    color: $primaryBlackColor;
+  }
+  &__list {
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+}

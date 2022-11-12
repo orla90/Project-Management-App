@@ -1,0 +1,48 @@
+@import './../../../../mixins.scss';
+
+.developer {
+  padding: rem(40);
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  width: rem(650);
+  background-color: $whiteColor;
+  &__intro {
+    display: flex;
+  }
+  &__name {
+    font-family: 'Manrope', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: rem(36);
+    line-height: rem(49);
+    color: $primaryBlackColor;
+  }
+  &__title {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 48px;
+    color: #5b616e;
+  }
+  &__img {
+    width: 118px;
+    height: 118px;
+  }
+  &__img-icon {
+    width: 118px;
+    height: 118px;
+    border-radius: 50%;
+  }
+  &__description {
+    margin-top: 44px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: rem(32);
+    line-height: rem(48);
+    color: $blackColor;
+  }
+  &__info {
+    margin-left: 16px;
+  }
+}
