@@ -3,6 +3,7 @@
 .header{
   padding: 15px 0px;
   position: fixed;
+  z-index: 10;
   width: 100%;
   transition: all 0.3s ease 0s;
   &.scroll{
@@ -17,7 +18,9 @@
   &__logo{
     margin-right: 15px;
   }
-  &__sing-block{
-
+  &__sign-block{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
   }
 }

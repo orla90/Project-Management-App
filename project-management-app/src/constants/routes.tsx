@@ -4,4 +4,6 @@ export const ROUTES = {
   BOARD: 'board',
   AUTH: 'auth',
   ERROR: '*',
+  SIGN_IN: 'sign-in',
+  SIGN_UP: 'sign-up',
 };
