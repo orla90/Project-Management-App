@@ -14,6 +14,7 @@ const Developers = () => {
       name={developer.name}
       title={developer.title}
       description={developer.description}
+      img={developer.img}
     />
   ));
 

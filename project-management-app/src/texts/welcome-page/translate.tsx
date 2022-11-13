@@ -1,3 +1,8 @@
+import ArtiomFoto from '../../assets/main-page/developers/artiom.png';
+import DimaFoto from '../../assets/main-page/developers/dima.jpeg';
+import LenaFoto from '../../assets/main-page/developers/lena.jpeg';
+import OlyaFoto from '../../assets/main-page/developers/olya.jpg';
+
 const i18Obj = {
   en: {
     features: 'Handling your projects in the most efficient way is our mojo',
@@ -19,21 +24,25 @@ const i18Obj = {
         name: 'Artiom Savchuk',
         title: 'Mentor',
         description: 'Code review',
+        img: ArtiomFoto,
       },
       {
         name: 'Alena Staskevich',
         title: 'Web-developer',
         description: 'Developed...',
+        img: LenaFoto,
       },
       {
         name: 'Dmitry Ostapchuk',
         title: 'Web-developer',
         description: 'Developed...',
+        img: DimaFoto,
       },
       {
         name: 'Olga Andrievich',
         title: 'Web-developer, Teamlead',
         description: 'Developed...',
+        img: OlyaFoto,
       },
     ],
   },
@@ -57,21 +66,25 @@ const i18Obj = {
         name: 'Артем Савчук',
         title: 'Ментор',
         description: 'Ревью кода',
+        img: ArtiomFoto,
       },
       {
         name: 'Алена Стаскевич',
         title: 'Web-разработчик',
         description: 'Разработала...',
+        img: LenaFoto,
       },
       {
         name: 'Дмитрий Остапчук',
         title: 'Web-разработчик',
         description: 'Разработал...',
+        img: DimaFoto,
       },
       {
         name: 'Ольга Андриевич',
         title: 'Web-разработчик, Тимлид',
         description: 'Разработала...',
+        img: OlyaFoto,
       },
     ],
   },
