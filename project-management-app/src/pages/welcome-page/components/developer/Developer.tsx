@@ -4,13 +4,7 @@ import ArtiomFoto from '../../../../assets/main-page/developers/artiom.png';
 import DimaFoto from '../../../../assets/main-page/developers/dima.jpeg';
 import LenaFoto from '../../../../assets/main-page/developers/lena.jpeg';
 import OlyaFoto from '../../../../assets/main-page/developers/olya.jpg';
-
-interface DeveloperProp {
-  name: string;
-  title: string;
-  foto: string;
-  description: string;
-}
+import { DeveloperProp } from 'pages/welcome-page/interfaces/Interfaces';
 
 const Developer = (props: DeveloperProp) => {
   return (
@@ -19,11 +13,11 @@ const Developer = (props: DeveloperProp) => {
         <div className="developer__img">
           <img
             src={
-              props.foto === 'Artiom'
+              props.name === 'Artiom Savchuk' || props.name === 'Артем Савчук'
                 ? ArtiomFoto
-                : props.foto === 'Dima'
+                : props.name === 'Dmitry Ostapchuk' || props.name === 'Дмитрий Остапчук'
                 ? DimaFoto
-                : props.foto === 'Lena'
+                : props.name === 'Alena Staskevich' || props.name === 'Алена Стаскевич'
                 ? LenaFoto
                 : OlyaFoto
             }
