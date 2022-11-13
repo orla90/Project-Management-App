@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CustomLink } from '../custom-link/CustomLink';
 import Logo from './logo';
 import './styles/logo.scss';
@@ -8,6 +8,7 @@ import { signSlice } from 'store/slices/sign-slice';
 import { ROUTES } from 'constants/routes';
 import { useLocation } from 'react-router-dom';
 import { languageSlice } from 'store/slices/language-slice';
+import NewBoardModal from '../new-board/NewBoardModal';
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.signSlice);
@@ -33,6 +34,8 @@ const Header = () => {
 
   const setEnLAnguage = () => dispatch(setLanguage('en'));
   const setRuLAnguage = () => dispatch(setLanguage('ru'));
+
+  const [newBoardModal, setNewBoardModal] = useState(false);
 
   const signOut = () => {
     localStorage.removeItem('user');
@@ -73,9 +76,17 @@ const Header = () => {
                   </>
                 )
               ) : (
-                <div onClick={signOut} className="main-page-btn">
-                  Sign out
-                </div>
+                <>
+                  <div className="header_create-btn">
+                    <button className="main-page-btn" onClick={() => setNewBoardModal(true)}>
+                      CREATE BOARD
+                    </button>
+                  </div>
+                  <NewBoardModal open={newBoardModal} onClose={() => setNewBoardModal(false)} />
+                  <div onClick={signOut} className="main-page-btn">
+                    Sign out
+                  </div>
+                </>
               )}
             </div>
           </div>
