@@ -7,13 +7,17 @@ import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { signSlice } from 'store/slices/sign-slice';
 import { ROUTES } from 'constants/routes';
 import { useLocation } from 'react-router-dom';
+import { languageSlice } from 'store/slices/language-slice';
 
 const Header = () => {
   const { user } = useAppSelector((state) => state.signSlice);
-  const dispatch = useAppDispatch();
+  const { language } = useAppSelector((state) => state.languageSlice);
+  const { setLanguage } = languageSlice.actions;
   const { removeUser } = signSlice.actions;
+  const dispatch = useAppDispatch();
   const headerRef = useRef(null);
   const { pathname } = useLocation();
+
   useEffect(() => {
     window.onscroll = () => {
       const header = headerRef.current;
@@ -27,6 +31,9 @@ const Header = () => {
     };
   }, [pathname]);
 
+  const setEnLAnguage = () => dispatch(setLanguage('en'));
+  const setRuLAnguage = () => dispatch(setLanguage('ru'));
+
   const signOut = () => {
     localStorage.removeItem('user');
     dispatch(removeUser());
@@ -38,28 +45,39 @@ const Header = () => {
           <div className="header__logo">
             <CustomLink to={'/'}>{<Logo />}</CustomLink>
           </div>
-          <div className="header__sign-block">
-            {!user ? (
-              pathname == '/' + ROUTES.SIGN_IN || pathname == '/' + ROUTES.SIGN_UP ? (
-                <CustomLink className="main-page-btn" to={ROUTES.HOME}>
-                  Home
-                </CustomLink>
-              ) : (
-                <>
-                  <CustomLink className="main-page-btn" to={ROUTES.SIGN_IN}>
-                    sign in
+          <div className="header__menu-body">
+            <div className={`header__language ${language}`}>
+              <span onClick={setEnLAnguage} className="header__en">
+                EN
+              </span>
+              {' / '}
+              <span onClick={setRuLAnguage} className="header__ru">
+                RU
+              </span>
+            </div>
+            <div className="header__sign-block">
+              {!user ? (
+                pathname == '/' + ROUTES.SIGN_IN || pathname == '/' + ROUTES.SIGN_UP ? (
+                  <CustomLink className="main-page-btn" to={ROUTES.HOME}>
+                    Home
                   </CustomLink>
+                ) : (
+                  <>
+                    <CustomLink className="main-page-btn" to={ROUTES.SIGN_IN}>
+                      sign in
+                    </CustomLink>
 
-                  <CustomLink className="main-page-btn" to={ROUTES.SIGN_UP}>
-                    sign up
-                  </CustomLink>
-                </>
-              )
-            ) : (
-              <div onClick={signOut} className="main-page-btn">
-                Sign out
-              </div>
-            )}
+                    <CustomLink className="main-page-btn" to={ROUTES.SIGN_UP}>
+                      sign up
+                    </CustomLink>
+                  </>
+                )
+              ) : (
+                <div onClick={signOut} className="main-page-btn">
+                  Sign out
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

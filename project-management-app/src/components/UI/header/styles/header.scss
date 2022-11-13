@@ -14,6 +14,32 @@
   &__body{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+  &__menu-body {
+    display: flex;
+    align-items: center;
+  }
+
+  &__language {
+    font-weight: 800;
+    color: $btnBgColor;
+    user-select: none;
+    margin-right: 15px;
+    & span {
+      cursor: pointer;
+    }
+
+  }
+  &__language.en {
+    .header__en{
+      color: rgb(235, 91, 114);
+    }
+  }
+  &__language.ru {
+    .header__ru{
+      color: rgb(235, 91, 114);
+    }
   }
   &__logo{
     margin-right: 15px;
