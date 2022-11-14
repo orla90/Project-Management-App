@@ -9,23 +9,24 @@ import { IsignProps } from 'store/interfaces/signUpProps';
 import { signSlice } from 'store/slices/sign-slice';
 import Overlay from 'components/UI/overlay/overlay';
 import { Navigate } from 'react-router-dom';
+import { key } from 'texts/header/header-text';
+import { i18ObjSign } from 'texts/sign/sing-text';
+import { i18ObjSingFetchResponses } from 'texts/sign/sing-fetch-responses-text';
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm({ mode: 'onTouched' });
 
   const dispatch = useAppDispatch();
-  const { overlay, user } = useAppSelector((state) => state.signSlice);
+  const { overlay, user, errorRegistration, language } = useAppSelector((state) => state.signSlice);
   const { setSubmitErrorRegistration } = signSlice.actions;
-  const { errorRegistration } = useAppSelector((state) => state.signSlice);
 
   useEffect(() => {
     return () => {
-      dispatch(setSubmitErrorRegistration(''));
+      dispatch(setSubmitErrorRegistration(i18ObjSingFetchResponses.empty));
     };
   }, [dispatch, setSubmitErrorRegistration]);
 
@@ -39,13 +40,13 @@ const SignUp = () => {
       <div className="sign-up">
         <div className="sign-up__container">
           <div className="sign-up__title">
-            <h2>sign up</h2>
+            <h2>{i18ObjSign[language as key].singUp}</h2>
           </div>
           <div className="sign-up__body">
             <form className="sign-up__form" onSubmit={handleSubmit(onSubmit)}>
               <div className="sign-up__input-body">
                 <label htmlFor="login" className="sign-up__label">
-                  Login
+                  {i18ObjSign[language as key].login}
                 </label>
                 <input
                   {...register('login', {
@@ -60,12 +61,12 @@ const SignUp = () => {
                   id="login"
                 />
 
-                <div className="sign-up__error">{showError(errors, 'login')}</div>
+                <div className="sign-up__error">{showError(errors, 'login', language)}</div>
               </div>
 
               <div className="sign-up__input-body">
                 <label htmlFor="name" className="sign-up__label">
-                  Name
+                  {i18ObjSign[language as key].name}
                 </label>
                 <input
                   {...register('name', {
@@ -79,12 +80,12 @@ const SignUp = () => {
                   name="name"
                   id="name"
                 />
-                <div className="sign-up__error">{showError(errors, 'name')}</div>
+                <div className="sign-up__error">{showError(errors, 'name', language)}</div>
               </div>
 
               <div className="sign-up__input-body">
                 <label htmlFor="login" className="sign-up__label">
-                  Password
+                  {i18ObjSign[language as key].password}
                 </label>
                 <input
                   {...register('password', {
@@ -99,18 +100,22 @@ const SignUp = () => {
                   id="password"
                   autoComplete="on"
                 />
-
-                <div className="sign-up__error">{showError(errors, 'password')}</div>
+                <div className="sign-up__error">{showError(errors, 'password', language)}</div>
               </div>
-              <div className="sign-up__error-submit">{errorRegistration}</div>
+
               <div className="sign-up__question">
-                {`Have an account?`}
+                {i18ObjSign[language as key].questionUp}
                 <CustomLink className="sign-up__link" to={'/sign-in'}>
-                  sign in
+                  {i18ObjSign[language as key].singIn}
                 </CustomLink>
               </div>
+
+              <div className="sign-up__error-submit">
+                {errorRegistration[language as keyof typeof errorRegistration]}
+              </div>
+
               <button type="submit" className="sign-up__button main-page-btn">
-                sign up
+                {i18ObjSign[language as key].singUp}
               </button>
             </form>
           </div>
