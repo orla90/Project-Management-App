@@ -6,6 +6,8 @@ import { IsignProps } from 'store/interfaces/signUpProps';
 export const signInFetch = createAsyncThunk(
   'user/signInFetch',
   async (props: IsignProps, { rejectWithValue }) => {
+    console.log('ЛОГИГНИМСЯ');
+
     const { login, password } = props;
     return axios
       .post(`${BACK_END_URL}auth/signin`, {
