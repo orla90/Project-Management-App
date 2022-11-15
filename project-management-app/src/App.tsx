@@ -1,19 +1,18 @@
 import { Layout } from 'components/layout/Layout';
 import { ROUTES } from 'constants/routes';
-import Board from 'pages/board-page/components/Board';
-import BoardList from 'pages/boards-list-page/components/Board-list';
-import EditProfile from 'pages/sing-pages/edit-profile';
+import WelcomePage from 'pages/welcome-page/components/WelcomePage';
+import BoardPage from 'pages/board-page/components/BoardPage';
+import BoardList from 'pages/boards-list-page/components/board-list';
 import ErrorPage from 'pages/error-page/components/Error';
+import EditProfile from 'pages/sing-pages/edit-profile';
 import SignIn from 'pages/sing-pages/sing-in';
 import SignUp from 'pages/sing-pages/sing-up';
-import UserAuth from 'pages/user-auth-page/components/Auth';
-import WelcomePage from 'pages/welcome-page/components/WelcomePage';
-
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { setupStore } from 'store/store';
 import './global-style.scss';
+import UserAuth from 'pages/user-auth-page/components/Auth';
 
 const store = setupStore();
 
@@ -25,7 +24,7 @@ const App = () => {
           <Route path={ROUTES.HOME} element={<Layout />}>
             <Route index element={<WelcomePage />} />
             <Route path={ROUTES.BOARDS_LIST} element={<BoardList />} />
-            <Route path={ROUTES.BOARD} element={<Board />} />
+            <Route path={ROUTES.BOARD} element={<BoardPage />} />
             <Route path={ROUTES.AUTH} element={<UserAuth />} />
             <Route path={ROUTES.SIGN_IN} element={<SignIn />} />
             <Route path={ROUTES.SIGN_UP} element={<SignUp />} />
