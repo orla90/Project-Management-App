@@ -3,8 +3,9 @@ import { createPortal } from 'react-dom';
 import './modal.scss';
 
 interface IModalProps {
-  children: React.ReactNode;
   open: boolean;
+  title: string;
+  children: React.ReactNode;
   onClose: () => void;
 }
 
@@ -26,8 +27,16 @@ function Modal(props: IModalProps) {
 
   if (open) {
     return createPortal(
-      <div className="modal" onClick={onClose}>
-        <div className="modal__content">{props.children}</div>
+      <div className="modal">
+        <div className="modal__content">
+          <div className="modal__title">
+            <h2>{props.title}</h2>
+            <div className="modal__close-btn" onClick={onClose}>
+              &times;
+            </div>
+          </div>
+          <div className="modal__body">{props.children}</div>
+        </div>
       </div>,
       element
     );

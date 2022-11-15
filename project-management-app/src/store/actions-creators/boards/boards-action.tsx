@@ -1,18 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
+import { RootState } from 'store/types/types-redux';
 
-interface ICreateBoardProps {
+export interface ICreateBoardProps {
   title: string;
   owner: string;
   users: [];
 }
-
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
-  async (props: ICreateBoardProps, { rejectWithValue }) => {
+  async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+
     return axios
-      .post(`${BACK_END_URL}/boards`, props)
+      .post(`${BACK_END_URL}boards`, props, {
+        headers: {
+          Authorization: `Bearer ${state.signSlice.user.token}`,
+        },
+      })
       .then((response) => {
         return response.data;
       })

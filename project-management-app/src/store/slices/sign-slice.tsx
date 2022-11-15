@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { decode } from 'punycode';
 import { parseJwt } from 'store/actions-creators/sing-in-sing-up/decode-token';
 import { signInFetch } from 'store/actions-creators/sing-in-sing-up/sign-in-action';
 import { signUpFetch } from 'store/actions-creators/sing-in-sing-up/sign-up-action';
@@ -66,7 +67,7 @@ export const signSlice = createSlice({
     });
 
     builder.addCase(signInFetch.fulfilled, (state, action) => {
-      const decodeToken = parseJwt(action.payload.token);
+      const decodeToken = { ...parseJwt(action.payload.token), token: action.payload.token };
       localStorage.setItem('user', JSON.stringify(decodeToken));
       state.user = decodeToken;
       state.errorLogin = '';

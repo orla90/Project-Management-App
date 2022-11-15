@@ -1,7 +1,5 @@
 @import './../../../mixins.scss';
-#modal-root {
 
-}
 .modal {
   height: 100vh;
   width: 100vw;
@@ -15,9 +13,27 @@
   opacity: 1;
   transition: 0.5s;
   &__content {
-    padding: 10px;
-    background-color: white;
+    padding: 30px;
+    background-color: #fff;
     border-radius: 15px;
+  }
+  &__title {
+    border-bottom: 1px solid #eee;;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    position: relative;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 0.09375em;
+  }
+  &__close-btn {
+    color: $lightDarkColor;
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: 300;
+    position: absolute;
+    right: 0;
+    top: -8px;
   }
   .active {
     opacity: 1;
