@@ -3,6 +3,9 @@
 .logo {
   display:inline-block ;
   transition: all 0.3s ease 0s;
+  @media (max-width: em(575)){
+      display: none;
+  }
   &__title {
     color: $logoBlueColor;
     text-transform: uppercase;
@@ -20,7 +23,10 @@
   }
   &__subtitle{
     color: $greyColor;
-    text-align:justify;
     font-size: rem(15);
+    @media (max-width: em(530)){
+        text-align: center;
+        margin-bottom: 10px;
+    }
   }
 }

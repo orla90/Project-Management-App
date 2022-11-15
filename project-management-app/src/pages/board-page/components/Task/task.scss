@@ -5,6 +5,8 @@
   border-radius: 5px;
   padding: 10px;
   margin: 10px;
+  max-height: rem(150);
+  overflow-y: scroll;
 }
 
 .task__panel {

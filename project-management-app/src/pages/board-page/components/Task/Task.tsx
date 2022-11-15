@@ -8,7 +8,7 @@ const Task = () => {
         <h3 className="task__title">Title</h3>
         <div className="task__icon"></div>
       </div>
-      <p className="task__description">bb description nb bnb</p>
+      <p className="task__description">description</p>
     </div>
   );
 };
