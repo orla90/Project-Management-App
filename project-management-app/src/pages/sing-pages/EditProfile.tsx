@@ -21,7 +21,7 @@ const EditProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'all' });
+  } = useForm({ mode: 'onTouched' });
   const { user, editMessage, overlay, language, trueOrfalseEdit } = useAppSelector(
     (state) => state.signSlice
   );
@@ -29,14 +29,15 @@ const EditProfile = () => {
   const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FieldValues> = (e) => {
-    dispatch(
-      editProfileFetch({
-        ...e,
-        dispatch,
-        id: user.id,
-        token: user.token,
-      } as IeditProfileProps)
-    );
+    if (user)
+      dispatch(
+        editProfileFetch({
+          ...e,
+          dispatch,
+          id: user.id,
+          token: user.token,
+        } as IeditProfileProps)
+      );
   };
 
   useEffect(() => {

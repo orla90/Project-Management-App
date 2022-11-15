@@ -2,10 +2,10 @@ import { Layout } from 'components/layout/Layout';
 import { ROUTES } from 'constants/routes';
 import Board from 'pages/board-page/components/board';
 import BoardList from 'pages/boards-list-page/components/board-list';
-import EditProfile from 'pages/sing-pages/edit-profile';
+import EditProfile from 'pages/sing-pages/EditProfile';
 import ErrorPage from 'pages/error-page/components/error';
-import SignIn from 'pages/sing-pages/sing-in';
-import SignUp from 'pages/sing-pages/sing-up';
+import SignIn from 'pages/sing-pages/SingIn';
+import SignUp from 'pages/sing-pages/SingUp';
 import UserAuth from 'pages/user-auth-page/components/auth';
 import WelcomePage from 'pages/welcome-page/components/WelcomePage';
 

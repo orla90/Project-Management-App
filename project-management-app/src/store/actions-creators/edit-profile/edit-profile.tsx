@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { IeditProfileProps } from 'store/interfaces/edit-profile';
+import { number } from 'yup';
 
 export const editProfileFetch = createAsyncThunk(
   'user/editProfileFetch',
