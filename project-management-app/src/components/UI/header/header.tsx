@@ -89,11 +89,6 @@ const Header = () => {
                   </CustomLink>
                 </li>
                 <li onClick={closeHeaderMenuInLink} className="header__menu-item">
-                  <CustomLink className="header__menu-item-link" to={ROUTES.BOARD}>
-                    {i18ObjHeader[language as key].createBoard}
-                  </CustomLink>
-                </li>
-                <li onClick={closeHeaderMenuInLink} className="header__menu-item">
                   <CustomLink className="header__menu-item-link" to={ROUTES.HOME}>
                     {i18ObjHeader[language as key].home}
                   </CustomLink>
@@ -116,7 +111,10 @@ const Header = () => {
             ) : (
               <>
                 <div className="header_create-btn">
-                  <button className="main-page-btn" onClick={() => setNewBoardModal(true)}>
+                  <button
+                    className="main-page-btn create-board-btn"
+                    onClick={() => setNewBoardModal(true)}
+                  >
                     {i18ObjHeader[language as key].createBoard}
                   </button>
                 </div>
