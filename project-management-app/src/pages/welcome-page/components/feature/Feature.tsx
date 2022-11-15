@@ -1,10 +1,6 @@
+import { FeatureProp } from 'pages/welcome-page/interfaces/Interfaces';
 import React from 'react';
 import './feature.scss';
-
-interface FeatureProp {
-  title: string;
-  description: string;
-}
 
 const Feature = (props: FeatureProp) => {
   return (

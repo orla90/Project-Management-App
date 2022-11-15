@@ -1,6 +1,6 @@
 @import './../../../mixins.scss';
 
-.sign-in, .sign-up {
+.sign-in, .sign-up, .edite-profile {
   padding: 90px 0px;
   min-height: 100vh;
   display: flex;
@@ -8,7 +8,8 @@
   align-items: center;
   background-color: rgb(97, 152, 255);
   .sign-in &__container,
-  .sign-up &__container{
+  .sign-up &__container,
+  .edite-profile &__container{
     max-width: 400px;
     width: 100%;
   }
@@ -49,7 +50,7 @@
   &__input-body{
     position: relative;
     &:not(:last-child){
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
   }
   &__label{
@@ -65,6 +66,7 @@
   }
   &__error{
     position: absolute;
+    text-align: right;
     bottom: -5px;
     right: 0;
     transform: translateY(100%);
@@ -102,4 +104,12 @@
     width: 100%;
     border: none;
   }
+}
+
+
+.edite-profile__error-submit.fulfielled {
+  color: green;
+}
+.edite-profile__error-submi.rejected {
+  color: red;
 }
