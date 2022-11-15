@@ -1,0 +1,41 @@
+@import '../../../mixins.scss';
+
+.board {
+  padding-top: rem(100);
+}
+
+.board__container {
+  overflow-x: hidden;
+}
+
+.board__list {
+  display: inline-flex;
+  flex-direction: row;
+  gap: rem(30);
+  overflow-x: scroll;
+}
+
+.board__panel {
+  display: flex;
+  margin: rem(30) 0;
+}
+
+.board__add-column-btn {
+  font-size: rem(18);
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  align-items: center;
+  background-color: $headerScrollColor;
+  color: $btnBgColor;
+  display: flex;
+  gap: 5px;
+  transition: all 0.3s ease 0s;
+  border-radius: 15px;
+  box-shadow: 0 0 0 0px $btnBgColor;
+  margin-left: rem(25);
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
+}
