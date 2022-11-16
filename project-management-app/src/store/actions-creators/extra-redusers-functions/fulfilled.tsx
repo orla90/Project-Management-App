@@ -23,3 +23,7 @@ export const fulfilledSignIn = (
   state.errorRegistration = i18ObjSingFetchResponses.empty;
   state.overlay = false;
 };
+
+export const fulfilledSignUp = (state: IsignInitialState) => {
+  state.overlay = true;
+};

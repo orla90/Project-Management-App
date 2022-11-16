@@ -1,13 +1,20 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { editProfileFetch } from 'store/actions-creators/edit-profile/edit-profile';
 import {
   fulfilledSignIn,
   fulfilledEdit,
-} from 'store/actions-creators/edit-profile/extra-redusers-functions/fulfilled';
+  fulfilledSignUp,
+} from 'store/actions-creators/extra-redusers-functions/fulfilled';
+import {
+  pendingSignEdit,
+  pendingSignIn,
+  pendingSignUp,
+} from 'store/actions-creators/extra-redusers-functions/pending';
 import {
   rejectedEdit,
   rejectedSignIn,
-} from 'store/actions-creators/edit-profile/extra-redusers-functions/rejected';
+  rejectedSignUp,
+} from 'store/actions-creators/extra-redusers-functions/rejected';
 import { signInFetch } from 'store/actions-creators/sing-in-sing-up/sign-in-action';
 import { signUpFetch } from 'store/actions-creators/sing-in-sing-up/sign-up-action';
 import { IsignInitialState } from 'store/interfaces/sign-slice';
@@ -60,38 +67,16 @@ export const signSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(signUpFetch.pending, (state) => {
-      state.overlay = true;
-    });
+    builder.addCase(signUpFetch.pending, pendingSignUp);
+    builder.addCase(signUpFetch.fulfilled, fulfilledSignUp);
+    builder.addCase(signUpFetch.rejected, rejectedSignUp);
 
-    builder.addCase(signUpFetch.fulfilled, (state) => {
-      state.overlay = false;
-    });
-
-    builder.addCase(signUpFetch.rejected, (state, action) => {
-      const { payload } = action;
-      if (payload === 409) {
-        state.errorRegistration = i18ObjSingFetchResponses.singUpReject409;
-      } else {
-        state.errorRegistration = i18ObjSingFetchResponses.singUpReject;
-      }
-      state.overlay = false;
-    });
-
-    builder.addCase(signInFetch.pending, (state) => {
-      state.overlay = true;
-    });
-
+    builder.addCase(signInFetch.pending, pendingSignIn);
     builder.addCase(signInFetch.fulfilled, fulfilledSignIn);
-
     builder.addCase(signInFetch.rejected, rejectedSignIn);
 
-    builder.addCase(editProfileFetch.pending, (state) => {
-      state.overlay = true;
-    });
-
+    builder.addCase(editProfileFetch.pending, pendingSignEdit);
     builder.addCase(editProfileFetch.fulfilled, fulfilledEdit);
-
     builder.addCase(editProfileFetch.rejected, rejectedEdit);
   },
 });

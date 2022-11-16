@@ -9,7 +9,7 @@ export const signInFetch = createAsyncThunk<
   {
     rejectValue: number;
   }
->('user/signInFetch', async (props, thunkApi) => {
+>('user/signInFetch', async (props: IsignProps, { rejectWithValue }) => {
   const { login, password } = props;
   return axios
     .post(`${BACK_END_URL}auth/signin`, {
@@ -20,6 +20,6 @@ export const signInFetch = createAsyncThunk<
       return response.data;
     })
     .catch((error) => {
-      return thunkApi.rejectWithValue(error.response.data.statusCode);
+      return rejectWithValue(error.response.data.statusCode);
     });
 });

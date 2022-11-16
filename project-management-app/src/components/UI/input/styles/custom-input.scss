@@ -1,0 +1,58 @@
+@import './../../../../mixins.scss';
+
+.custom-form{
+  & input {
+    outline: none;
+    width: 100%;
+    padding: 15px 5px 15px 15px;
+    font-size: rem(20);
+    border: 2px solid rgba(0,26,51,.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+    transition: all 0.3s ease 0s;
+    &:focus {
+      border: 2px solid $btnBgColor;
+       .sign-up__label{
+        color: $redColor;
+      }
+    }
+  }
+  input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0 50px $whiteColor inset; 
+    -webkit-text-fill-color: #333;
+  }
+
+  &__input-body{
+    position: relative;
+    &:not(:last-child){
+      margin-bottom: 40px;
+    }
+  }
+  &__label{
+    font-weight: 600;
+    font-size: rem(18); 
+    position: absolute;
+    top: 0;
+    transform: translateY(-50%);
+    left: 10px;
+    padding: 5px;
+    background-color: #fff;
+    color: $greyColor;
+  }
+  &__error{
+    position: absolute;
+    text-align: right;
+    bottom: -5px;
+    right: 0;
+    transform: translateY(100%);
+    font-size: rem(14);
+    color: $redColor;
+  }
+
+  &__error-submit {
+    text-align: center;
+    color: $redColor;
+    position: relative;
+    top: -10px;
+  }
+}

@@ -1,4 +1,5 @@
 import { CustomLink } from 'components/UI/custom-link/CustomLink';
+import CustomInput from 'components/UI/input/CustomInput';
 import Overlay from 'components/UI/overlay/overlay';
 import React, { useEffect } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
@@ -16,7 +17,7 @@ const SignIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onTouched' });
+  } = useForm({ mode: 'all' });
 
   const dispatch = useAppDispatch();
   const { setSubmitErrorLogin } = signSlice.actions;
@@ -42,41 +43,36 @@ const SignIn = () => {
             <h2>{i18ObjSign[language as key].singIn}</h2>
           </div>
           <div className="sign-in__body">
-            <form className="sign-in__form" onSubmit={handleSubmit(onSubmit)}>
-              <div className="sign-in__input-body">
-                <label htmlFor="login" className="sign-in__label">
-                  {i18ObjSign[language as key].login}
-                </label>
-                <input
-                  {...register('login', {
+            <form className="sign-in__form custom-form" onSubmit={handleSubmit(onSubmit)}>
+              <CustomInput
+                label={i18ObjSign[language as key].login}
+                type={'text'}
+                name={'login'}
+                id={'login'}
+                propsForm={{
+                  ...register('login', {
                     required: true,
-                  })}
-                  type="text"
-                  className="sign-in__login"
-                  name="login"
-                  id="login"
-                />
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
-                <div className="sign-in__error">{showError(errors, 'login', language)}</div>
-              </div>
-
-              <div className="sign-in__input-body">
-                <label htmlFor="login" className="sign-in__label">
-                  {i18ObjSign[language as key].password}
-                </label>
-                <input
-                  {...register('password', {
+              <CustomInput
+                label={i18ObjSign[language as key].password}
+                type={'password'}
+                name={'password'}
+                id={'password'}
+                propsForm={{
+                  ...register('password', {
                     required: true,
-                  })}
-                  type="password"
-                  className="sign-in__password"
-                  name="password"
-                  id="password"
-                  autoComplete="on"
-                />
-
-                <div className="sign-in__error">{showError(errors, 'password', language)}</div>
-              </div>
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
               <div className="sign-in__question">
                 {i18ObjSign[language as key].questionIn}

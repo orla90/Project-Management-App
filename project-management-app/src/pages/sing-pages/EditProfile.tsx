@@ -1,3 +1,4 @@
+import CustomInput from 'components/UI/input/CustomInput';
 import Overlay from 'components/UI/overlay/overlay';
 import { ROUTES } from 'constants/routes';
 import {
@@ -21,7 +22,7 @@ const EditProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onTouched' });
+  } = useForm({ mode: 'all' });
   const { user, editMessage, overlay, language, trueOrfalseEdit } = useAppSelector(
     (state) => state.signSlice
   );
@@ -56,67 +57,60 @@ const EditProfile = () => {
             <h2> {i18ObjSign[language as key].singEdit}</h2>
           </div>
           <div className="edite-profile__body">
-            <form className="edite-profile__form" onSubmit={handleSubmit(onSubmit)}>
-              <div className="edite-profile__input-body">
-                <label htmlFor="login" className="edite-profile__label">
-                  {i18ObjSign[language as key].login}
-                </label>
-                <input
-                  {...register('login', {
+            <form className="edite-profile__form custom-form" onSubmit={handleSubmit(onSubmit)}>
+              <CustomInput
+                label={i18ObjSign[language as key].login}
+                type={'text'}
+                name={'login'}
+                id={'login'}
+                propsForm={{
+                  ...register('login', {
                     required: true,
                     validate: {
                       customFn: (value) => setErrorNameOrLogin(value),
                     },
-                  })}
-                  type="text"
-                  className="edite-profile__login"
-                  name="login"
-                  id="login"
-                />
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
-                <div className="edite-profile__error">{showError(errors, 'login', language)}</div>
-              </div>
-
-              <div className="edite-profile__input-body">
-                <label htmlFor="name" className="edite-profile__label">
-                  {i18ObjSign[language as key].name}
-                </label>
-                <input
-                  {...register('name', {
+              <CustomInput
+                label={i18ObjSign[language as key].name}
+                type={'text'}
+                name={'name'}
+                id={'name'}
+                propsForm={{
+                  ...register('name', {
                     required: true,
                     validate: {
                       customFn: (value) => setErrorNameOrLogin(value),
                     },
-                  })}
-                  type="text"
-                  className="edite-profile__email"
-                  name="name"
-                  id="name"
-                />
-                <div className="edite-profile__error">{showError(errors, 'name', language)}</div>
-              </div>
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
-              <div className="edite-profile__input-body">
-                <label htmlFor="login" className="edite-profile__label">
-                  {i18ObjSign[language as key].password}
-                </label>
-                <input
-                  {...register('password', {
+              <CustomInput
+                label={i18ObjSign[language as key].password}
+                type={'password'}
+                name={'password'}
+                id={'password'}
+                propsForm={{
+                  ...register('password', {
                     required: true,
                     validate: {
                       customFn: (value) => setErrorPassword(value),
                     },
-                  })}
-                  type="password"
-                  className="edite-profile__password"
-                  name="password"
-                  id="password"
-                  autoComplete="on"
-                />
-                <div className="edite-profile__error">
-                  {showError(errors, 'password', language)}
-                </div>
-              </div>
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
               <div
                 className={`edite-profile__error-submit ${
