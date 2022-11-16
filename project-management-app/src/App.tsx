@@ -2,7 +2,7 @@ import { Layout } from 'components/layout/Layout';
 import { ROUTES } from 'constants/routes';
 import WelcomePage from 'pages/welcome-page/components/WelcomePage';
 import BoardPage from 'pages/board-page/components/BoardPage';
-import BoardList from 'pages/boards-list-page/components/Board-list';
+import BoardList from 'pages/boards-list-page/components/BoardList';
 import ErrorPage from 'pages/error-page/components/Error';
 import EditProfile from 'pages/sing-pages/edit-profile';
 import SignIn from 'pages/sing-pages/sing-in';
