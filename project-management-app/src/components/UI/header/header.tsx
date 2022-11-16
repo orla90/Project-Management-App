@@ -8,6 +8,7 @@ import { signSlice } from 'store/slices/sign-slice';
 import { ROUTES } from 'constants/routes';
 import { useLocation } from 'react-router-dom';
 import { languageSlice } from 'store/slices/language-slice';
+import NewBoardModal from '../new-board/NewBoardModal';
 import { i18ObjHeader, key } from 'texts/header/header-text';
 
 const Header = () => {
@@ -53,6 +54,8 @@ const Header = () => {
     dispatch(setLanguageSign('ru'));
   };
 
+  const [newBoardModal, setNewBoardModal] = useState(false);
+
   const signOut = () => {
     localStorage.removeItem('user');
     dispatch(removeUser());
@@ -86,11 +89,6 @@ const Header = () => {
                   </CustomLink>
                 </li>
                 <li onClick={closeHeaderMenuInLink} className="header__menu-item">
-                  <CustomLink className="header__menu-item-link" to={ROUTES.BOARD}>
-                    {i18ObjHeader[language as key].creteBord}
-                  </CustomLink>
-                </li>
-                <li onClick={closeHeaderMenuInLink} className="header__menu-item">
                   <CustomLink className="header__menu-item-link" to={ROUTES.HOME}>
                     {i18ObjHeader[language as key].home}
                   </CustomLink>
@@ -111,9 +109,20 @@ const Header = () => {
                 </div>
               </div>
             ) : (
-              <button onClick={signOut} className="header__btn main-page-btn">
-                {i18ObjHeader[language as key].signOut}
-              </button>
+              <>
+                <div className="header_create-btn">
+                  <button
+                    className="main-page-btn create-board-btn"
+                    onClick={() => setNewBoardModal(true)}
+                  >
+                    {i18ObjHeader[language as key].createBoard}
+                  </button>
+                </div>
+                <NewBoardModal open={newBoardModal} onClose={() => setNewBoardModal(false)} />
+                <button onClick={signOut} className="header__btn main-page-btn">
+                  {i18ObjHeader[language as key].signOut}
+                </button>
+              </>
             )}
           </div>
           <button onClick={openHeaderMenu} type="button" className="icon-menu">
