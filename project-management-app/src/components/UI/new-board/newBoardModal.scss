@@ -1,0 +1,9 @@
+@import './mixins.scss';
+
+.form-container {
+  width: 50vw;
+
+  .create-board__btn-wrapper {
+    text-align: right;
+  }
+}

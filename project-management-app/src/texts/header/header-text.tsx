@@ -1,7 +1,7 @@
 export const i18ObjHeader = {
   en: {
     editProfile: 'Edit profile',
-    creteBord: 'Create board',
+    createBoard: 'Create board',
     home: 'Home',
     signIn: 'Sign in',
     signUp: 'Sign up',
@@ -9,7 +9,7 @@ export const i18ObjHeader = {
   },
   ru: {
     editProfile: 'Редактировать профиль',
-    creteBord: 'Создать доску',
+    createBoard: 'Создать доску',
     home: 'На главную',
     signIn: 'Войти',
     signUp: 'Регистрация',
