@@ -4,7 +4,7 @@ export interface IeditProfileProps {
   login: string;
   name: string;
   password: string;
-  id: number;
+  id: string;
   token: string;
   dispatch: AppDispatch;
 }

@@ -16,7 +16,7 @@ export const createBoardFetch = createAsyncThunk(
     return axios
       .post(`${BACK_END_URL}boards`, props, {
         headers: {
-          Authorization: `Bearer ${state.signSlice.user.token}`,
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
         },
       })
       .then((response) => {
