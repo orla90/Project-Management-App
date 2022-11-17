@@ -16,12 +16,15 @@
     padding: 30px;
     background-color: #fff;
     border-radius: 15px;
+    position: relative;
   }
   &__title {
-    border-bottom: 1px solid #eee;;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    border-bottom: 1px solid #eee;
     margin-bottom: 30px;
     padding-bottom: 20px;
-    position: relative;
     font-size: 1.5rem;
     font-weight: 800;
     letter-spacing: 0.09375em;
@@ -32,8 +35,8 @@
     font-size: 40px;
     font-weight: 300;
     position: absolute;
-    right: 0;
-    top: -8px;
+    right: 10px;
+    top: 10px;
   }
   .active {
     opacity: 1;

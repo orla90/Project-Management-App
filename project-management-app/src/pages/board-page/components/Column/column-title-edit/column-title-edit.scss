@@ -1,0 +1,41 @@
+@import 'mixins.scss';
+
+.column {
+  &__icons {
+    display: inline-flex;
+    width: 50px;
+    justify-content: space-between;
+  }
+
+  &__icon {
+    width: rem(20);
+    height: rem(20);
+    background-size: contain;
+    background-repeat: no-repeat;
+    align-self: center;
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 0.3s ease 0s;
+    }
+  }
+
+  &__icon_cross {
+    color: $pinkColor;
+    cursor: pointer;
+    font-size: 40px;
+    font-weight: 500;
+  }
+
+  &__icon_done {
+    background-image: url('../../../../../assets/board-page/done.svg');
+  }
+
+  &__input {
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: rem(16);
+    padding: 12px 20px 12px;
+  }
+}

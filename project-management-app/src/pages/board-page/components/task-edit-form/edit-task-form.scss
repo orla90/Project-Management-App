@@ -1,0 +1,6 @@
+@import './mixins.scss';
+
+.task-edit__error {
+  color: $redColor;
+  padding: 10px;
+}

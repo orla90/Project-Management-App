@@ -18,15 +18,28 @@
 .task__icon {
   width: rem(20);
   height: rem(20);
-  background-image: url('../../../../assets/board-page/edit.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  align-self: center;
+  align-self: baseline;
   &:hover {
     cursor: pointer;
     opacity: 0.8;
     transition: all 0.3s ease 0s;
   }
+}
+
+.task__icons {
+  display: flex;
+  gap: 5px;
+  padding-top: 3px;
+}
+
+.task__icon_edit {
+  background-image: url('../../../../assets/board-page/edit.svg');
+}
+
+.task__icon_bin {
+  background-image: url('../../../../assets/board-page/bin.svg');
 }
 
 .task__title {
