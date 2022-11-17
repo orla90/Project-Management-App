@@ -46,10 +46,10 @@ const BoardForm = (props: BoardFormModalProps) => {
         </div>
       )}
       <div className="btn-container">
-        <CustomButton className="main-page-btn" onClick={props.onClose}>
+        <CustomButton className="main-page-btn btn-container__btn" onClick={props.onClose}>
           {i18Obj[lang].no}
         </CustomButton>
-        <CustomButton className="main-page-btn create-board-btn" type="submit">
+        <CustomButton className="main-page-btn create-board-btn btn-container__btn" type="submit">
           {i18Obj[lang].yes}
         </CustomButton>
       </div>
