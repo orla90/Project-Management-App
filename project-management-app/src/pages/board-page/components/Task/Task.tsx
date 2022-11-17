@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
-import EditTaskForm from '../task-edit-form/EditTaskForm';
+import BoardForm from '../task-form/BoardForm';
 import './task.scss';
 
 const Task = () => {
@@ -45,7 +45,7 @@ const Task = () => {
         onClose={() => setEditTaskModal(false)}
         title={i18Obj[lang].editTask}
       >
-        {<EditTaskForm onClose={() => setEditTaskModal(false)} />}
+        {<BoardForm onClose={() => setEditTaskModal(false)} description={true} />}
       </Modal>
     </div>
   );

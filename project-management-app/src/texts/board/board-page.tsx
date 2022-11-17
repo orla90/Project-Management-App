@@ -11,6 +11,8 @@ const i18Obj = {
     title: 'Title',
     description: 'Description',
     required: 'This field is required',
+    addTask: 'Add a task',
+    addColumn: 'Add a list',
   },
   ru: {
     back: '← назад',
@@ -24,6 +26,8 @@ const i18Obj = {
     title: 'Название',
     description: 'Описание',
     required: 'Данное поле обязательно к заполнению',
+    addTask: 'Добавить задачу',
+    addColumn: 'Добавить список',
   },
 };
 

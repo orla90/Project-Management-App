@@ -5,11 +5,11 @@ import { ErrorMessage } from '@hookform/error-message';
 import { Language } from 'pages/welcome-page/types/types';
 import i18Obj from 'texts/board/board-page';
 import { CustomButton } from 'components/UI/button/CustomButton';
-import './edit-task-form.scss';
-import { TaskEditModalProps } from 'pages/board-page/interfaces/modal-interfaces';
+import './board-form.scss';
+import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { FormValues } from 'pages/board-page/types/modal-types';
 
-const EditTaskForm = (props: TaskEditModalProps) => {
+const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
   const lang = language.toString() as Language;
 
@@ -38,11 +38,13 @@ const EditTaskForm = (props: TaskEditModalProps) => {
           render={({ message }) => <p className="task-edit__error">{message}</p>}
         />
       </div>
-      <div className="input-body">
-        <label>{i18Obj[lang].description}</label>
-        <textarea {...register('description')} rows={4}></textarea>
-        <div className="form-error"></div>
-      </div>
+      {props.description && (
+        <div className="input-body">
+          <label>{i18Obj[lang].description}</label>
+          <textarea {...register('description')} rows={4}></textarea>
+          <div className="form-error"></div>
+        </div>
+      )}
       <div className="btn-container">
         <CustomButton className="main-page-btn" onClick={props.onClose}>
           {i18Obj[lang].no}
@@ -55,4 +57,4 @@ const EditTaskForm = (props: TaskEditModalProps) => {
   );
 };
 
-export default EditTaskForm;
+export default BoardForm;

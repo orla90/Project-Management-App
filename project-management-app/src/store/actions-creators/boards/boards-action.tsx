@@ -8,6 +8,14 @@ export interface ICreateBoardProps {
   owner: string;
   users: [];
 }
+
+export interface GetBoards {
+  id: string;
+  title: string;
+  owner: string;
+  users: [];
+}
+
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
   async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
@@ -20,6 +28,7 @@ export const createBoardFetch = createAsyncThunk(
         },
       })
       .then((response) => {
+        console.log(response);
         return response.data;
       })
       .catch((error) => {

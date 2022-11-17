@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useAppSelector } from 'store/custom-hooks';
 import './board-custom-modal.scss';
 import Modal from 'components/UI/modal/Modal';

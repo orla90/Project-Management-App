@@ -7,6 +7,7 @@ export interface CustomBoardModalProps {
   onClose: () => void;
 }
 
-export interface TaskEditModalProps {
+export interface BoardFormModalProps {
   onClose: () => void;
+  description?: boolean;
 }
