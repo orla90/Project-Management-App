@@ -9,13 +9,6 @@ export interface ICreateBoardProps {
   users: [];
 }
 
-export interface GetBoards {
-  id: string;
-  title: string;
-  owner: string;
-  users: [];
-}
-
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
   async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
