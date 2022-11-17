@@ -5,7 +5,7 @@
   position: fixed;
   z-index: 10;
   width: 100%;
-  background-color: rgb(225, 238, 255);
+  background-color:$headerColor;
   transition: all 0.3s ease 0s;
   &.scroll{
     background-color: $headerScrollColor;
@@ -118,12 +118,12 @@
   }
   &__language.en {
     .header__en{
-      color: rgb(235, 91, 114);
+      color: $accentColor;
     }
   }
   &__language.ru {
     .header__ru{
-      color: rgb(235, 91, 114);
+      color: $accentColor;
     }
   }
   &__logo{
@@ -186,17 +186,17 @@
      .menu-open & {
         span {
            transform: scale(0);
-           background-color: rgb(235, 91, 114);
+           background-color: $accentColor;
         }
         &::before {
            transform: rotate(-45deg);
            top: calc(50% - 2px);
-           background-color: rgb(235, 91, 114);
+           background-color: $accentColor;
         }
         &::after {
            transform: rotate(45deg);
            bottom: calc(50% - 2px);
-           background-color: rgb(235, 91, 114);
+           background-color: $accentColor;
         }
      }
   }
