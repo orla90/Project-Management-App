@@ -11,7 +11,7 @@
 
 .column__content {
   max-height: 55vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 body::-webkit-scrollbar-thumb {

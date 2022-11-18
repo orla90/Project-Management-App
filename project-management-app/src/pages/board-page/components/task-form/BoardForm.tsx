@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppSelector } from 'store/custom-hooks';
 import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
 import { Language } from 'pages/welcome-page/types/types';
 import i18Obj from 'texts/board/board-page';
 import { CustomButton } from 'components/UI/button/CustomButton';
@@ -23,20 +22,18 @@ const BoardForm = (props: BoardFormModalProps) => {
   const onSubmit = handleSubmit(() => null);
 
   return (
-    <form className="task-edit__form" onSubmit={onSubmit}>
+    <form className="board-form__body" onSubmit={onSubmit}>
       <div className="input-body">
-        <label className="task-edit__label">{i18Obj[lang].title}</label>
+        <label className="board-form__label">{i18Obj[lang].title}</label>
         <input
           type="text"
           {...register('title', {
             required: `${i18Obj[lang].required}`,
           })}
         ></input>
-        <ErrorMessage
-          errors={errors}
-          name="title"
-          render={({ message }) => <p className="task-edit__error">{message}</p>}
-        />
+        {errors.title?.type === 'required' && (
+          <div className="board-form__error">{i18Obj[lang].required}</div>
+        )}
       </div>
       {props.description && (
         <div className="input-body">
@@ -46,10 +43,10 @@ const BoardForm = (props: BoardFormModalProps) => {
         </div>
       )}
       <div className="btn-container">
-        <CustomButton className="main-page-btn btn-container__btn" onClick={props.onClose}>
+        <CustomButton className="main-page-btn board-form__btn" onClick={props.onClose}>
           {i18Obj[lang].no}
         </CustomButton>
-        <CustomButton className="main-page-btn create-board-btn btn-container__btn" type="submit">
+        <CustomButton className="main-page-btn create-board-btn board-form__btn" type="submit">
           {i18Obj[lang].yes}
         </CustomButton>
       </div>
