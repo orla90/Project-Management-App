@@ -1,0 +1,17 @@
+@import './mixins.scss';
+
+.board-form__error {
+  color: $redColor;
+  padding: 10px;
+}
+
+.board-form__btn {
+  min-width: 120px;
+}
+
+.board-form__btn-container {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+  margin: 15px auto 0;
+}

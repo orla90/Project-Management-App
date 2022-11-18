@@ -12,13 +12,14 @@ import { Navigate } from 'react-router-dom';
 import { key } from 'texts/header/header-text';
 import { i18ObjSign } from 'texts/sign/sing-text';
 import { i18ObjSingFetchResponses } from 'texts/sign/sing-fetch-responses-text';
+import CustomInput from 'components/UI/input/CustomInput';
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: 'onTouched' });
+  } = useForm({ mode: 'all' });
 
   const dispatch = useAppDispatch();
   const { overlay, user, errorRegistration, language } = useAppSelector((state) => state.signSlice);
@@ -43,65 +44,60 @@ const SignUp = () => {
             <h2>{i18ObjSign[language as key].singUp}</h2>
           </div>
           <div className="sign-up__body">
-            <form className="sign-up__form" onSubmit={handleSubmit(onSubmit)}>
-              <div className="sign-up__input-body">
-                <label htmlFor="login" className="sign-up__label">
-                  {i18ObjSign[language as key].login}
-                </label>
-                <input
-                  {...register('login', {
+            <form className="sign-up__form custom-form" onSubmit={handleSubmit(onSubmit)}>
+              <CustomInput
+                label={i18ObjSign[language as key].login}
+                type={'text'}
+                name={'login'}
+                id={'login'}
+                propsForm={{
+                  ...register('login', {
                     required: true,
                     validate: {
                       customFn: (value) => setErrorNameOrLogin(value),
                     },
-                  })}
-                  type="text"
-                  className="sign-up__login"
-                  name="login"
-                  id="login"
-                />
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
-                <div className="sign-up__error">{showError(errors, 'login', language)}</div>
-              </div>
-
-              <div className="sign-up__input-body">
-                <label htmlFor="name" className="sign-up__label">
-                  {i18ObjSign[language as key].name}
-                </label>
-                <input
-                  {...register('name', {
+              <CustomInput
+                label={i18ObjSign[language as key].name}
+                type={'text'}
+                name={'name'}
+                id={'name'}
+                propsForm={{
+                  ...register('name', {
                     required: true,
                     validate: {
                       customFn: (value) => setErrorNameOrLogin(value),
                     },
-                  })}
-                  type="text"
-                  className="sign-up__email"
-                  name="name"
-                  id="name"
-                />
-                <div className="sign-up__error">{showError(errors, 'name', language)}</div>
-              </div>
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
-              <div className="sign-up__input-body">
-                <label htmlFor="login" className="sign-up__label">
-                  {i18ObjSign[language as key].password}
-                </label>
-                <input
-                  {...register('password', {
+              <CustomInput
+                label={i18ObjSign[language as key].password}
+                type={'password'}
+                name={'password'}
+                id={'password'}
+                propsForm={{
+                  ...register('password', {
                     required: true,
                     validate: {
                       customFn: (value) => setErrorPassword(value),
                     },
-                  })}
-                  type="password"
-                  className="sign-up__password"
-                  name="password"
-                  id="password"
-                  autoComplete="on"
-                />
-                <div className="sign-up__error">{showError(errors, 'password', language)}</div>
-              </div>
+                  }),
+                }}
+                showErrorFn={showError}
+                errors={errors}
+                language={language}
+              />
 
               <div className="sign-up__question">
                 {i18ObjSign[language as key].questionUp}
@@ -110,7 +106,7 @@ const SignUp = () => {
                 </CustomLink>
               </div>
 
-              <div className="sign-up__error-submit">
+              <div className="custom-form__error-submit">
                 {errorRegistration[language as keyof typeof errorRegistration]}
               </div>
 

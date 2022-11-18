@@ -1,4 +1,4 @@
-import { FieldErrors } from './types/errors-type';
+import { FieldErrors } from 'components/UI/input/types/custom-input-types';
 
 export const setErrorNameOrLogin = (value: string) => {
   const minLength = value.length >= 2;

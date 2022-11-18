@@ -8,6 +8,7 @@ export interface ICreateBoardProps {
   owner: string;
   users: [];
 }
+
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
   async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
@@ -16,10 +17,11 @@ export const createBoardFetch = createAsyncThunk(
     return axios
       .post(`${BACK_END_URL}boards`, props, {
         headers: {
-          Authorization: `Bearer ${state.signSlice.user.token}`,
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
         },
       })
       .then((response) => {
+        console.log(response);
         return response.data;
       })
       .catch((error) => {

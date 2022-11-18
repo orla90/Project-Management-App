@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CustomLink } from '../custom-link/CustomLink';
-import Logo from './logo';
+import Logo from './Logo';
 import './styles/logo.scss';
 import './styles/header.scss';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';

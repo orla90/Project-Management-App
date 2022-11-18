@@ -36,7 +36,7 @@ function NewBoardModal(props: INewBoardModalProps) {
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
-      await dispatch(createBoardFetch({ title: data.title, owner: user.id, users: [] })).unwrap();
+      await dispatch(createBoardFetch({ title: data.title, owner: user!.id, users: [] })).unwrap();
       reset({ title: '', description: '' });
       props.onClose();
       navigate(ROUTES.BOARDS_LIST);

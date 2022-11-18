@@ -15,11 +15,11 @@ const Welcome = () => {
           <h1 className="welcome__title">{i18ObjGeneral[language as key].title}</h1>
           <h3 className="welcome__sub-title">{i18ObjGeneral[language as key].subTitle}</h3>
           {!user ? (
-            <CustomLink className="welcom-page__btn main-page-btn" to={ROUTES.SIGN_IN}>
+            <CustomLink className="welcome-page__btn main-page-btn" to={ROUTES.SIGN_IN}>
               {i18ObjGeneral[language as key].buttonWithoutAuthorization}
             </CustomLink>
           ) : (
-            <CustomLink className="welcom-page__btn main-page-btn" to={ROUTES.BOARDS_LIST}>
+            <CustomLink className="welcome-page__btn main-page-btn" to={ROUTES.BOARDS_LIST}>
               {i18ObjGeneral[language as key].buttonWithAuthorization}
             </CustomLink>
           )}
