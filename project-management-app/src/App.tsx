@@ -7,6 +7,10 @@ import ErrorPage from 'pages/error-page/components/Error';
 import EditProfile from 'pages/sing-pages/EditProfile';
 import SignIn from 'pages/sing-pages/SingIn';
 import SignUp from 'pages/sing-pages/SingUp';
+import React from 'react';
+import { setupStore } from 'store/store';
+import { Provider } from 'react-redux';
+import { Routes, Route } from 'react-router';
 
 const store = setupStore();
 

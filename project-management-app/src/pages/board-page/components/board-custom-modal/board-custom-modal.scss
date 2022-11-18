@@ -1,0 +1,13 @@
+@import './mixins.scss';
+
+.btn-container {
+  width: rem(300);
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.btn-container__btn {
+  min-width: 120px;
+}
