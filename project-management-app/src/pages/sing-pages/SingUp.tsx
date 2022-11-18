@@ -5,7 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { setErrorNameOrLogin, setErrorPassword, showError } from './validation-functions';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { signUpFetch } from 'store/actions-creators/sing-in-sing-up/sign-up-action';
-import { IsignProps } from 'store/interfaces/signUpProps';
+import { IsignProps } from 'store/interfaces/sign-up-props';
 import { signSlice } from 'store/slices/sign-slice';
 import Overlay from 'components/UI/overlay/overlay';
 import { Navigate } from 'react-router-dom';

@@ -1,19 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { editProfileFetch } from 'store/actions-creators/edit-profile/edit-profile';
+import { deleteUserFetch } from 'store/actions-creators/edit-profile/delete-user';
+import { editProfileFetch } from 'store/actions-creators/edit-profile/edit-user';
 import {
   fulfilledSignIn,
   fulfilledEdit,
   fulfilledSignUp,
+  fulfilledDeleteUser,
 } from 'store/actions-creators/extra-redusers-functions/fulfilled';
 import {
   pendingSignEdit,
   pendingSignIn,
   pendingSignUp,
+  pendingDeleteUser,
 } from 'store/actions-creators/extra-redusers-functions/pending';
 import {
   rejectedEdit,
   rejectedSignIn,
   rejectedSignUp,
+  rejectedDeleteUser,
 } from 'store/actions-creators/extra-redusers-functions/rejected';
 import { signInFetch } from 'store/actions-creators/sing-in-sing-up/sign-in-action';
 import { signUpFetch } from 'store/actions-creators/sing-in-sing-up/sign-up-action';
@@ -78,6 +82,10 @@ export const signSlice = createSlice({
     builder.addCase(editProfileFetch.pending, pendingSignEdit);
     builder.addCase(editProfileFetch.fulfilled, fulfilledEdit);
     builder.addCase(editProfileFetch.rejected, rejectedEdit);
+
+    builder.addCase(deleteUserFetch.pending, pendingDeleteUser);
+    builder.addCase(deleteUserFetch.fulfilled, fulfilledDeleteUser);
+    builder.addCase(deleteUserFetch.rejected, rejectedDeleteUser);
   },
 });
 

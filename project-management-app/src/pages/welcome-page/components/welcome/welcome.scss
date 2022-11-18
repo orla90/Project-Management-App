@@ -7,7 +7,7 @@
   background-position: top center;
   padding: 190px 0px;
   @media (max-width: em(1500)) {
-    padding: adaptivSize(190, 55, 1500, 320) 0px;
+    padding: adaptivSize(190, 85, 1500, 320) 0px;
   }
   &__body {
     max-width: 710px;

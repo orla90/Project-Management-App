@@ -6,7 +6,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
 import { signInFetch } from 'store/actions-creators/sing-in-sing-up/sign-in-action';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
-import { IsignProps } from 'store/interfaces/signUpProps';
+import { IsignProps } from 'store/interfaces/sign-up-props';
 import { signSlice } from 'store/slices/sign-slice';
 import { i18ObjSingFetchResponses } from 'texts/sign/sing-fetch-responses-text';
 import { i18ObjSign, key } from 'texts/sign/sing-text';

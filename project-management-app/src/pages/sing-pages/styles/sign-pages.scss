@@ -42,6 +42,11 @@
   &__button.main-page-btn{
     width: 100%;
     border: none;
+    margin-bottom: 10px;
+  }
+  &__remove-user-button,&__remove-user-button.main-page-btn{
+    width: 100%;
+    background-color: $accentColor;
   }
 }
 
@@ -50,6 +55,14 @@
 }
 .edite-profile__error-submi.rejected {
   color: $redColor;
+}
+
+.delete-user-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 

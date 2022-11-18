@@ -3,9 +3,6 @@
 .logo {
   display:inline-block ;
   transition: all 0.3s ease 0s;
-  @media (max-width: em(575)){
-      display: none;
-  }
   &__title {
     color: $logoBlueColor;
     text-transform: uppercase;
