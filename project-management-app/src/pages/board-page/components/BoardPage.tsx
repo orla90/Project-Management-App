@@ -9,7 +9,7 @@ import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
 import Column from './column/Column';
-import BoardForm from './task-form/BoardForm';
+import BoardForm from './board-form/BoardForm';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);

@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
-import BoardForm from '../task-form/BoardForm';
+import BoardForm from '../board-form/BoardForm';
 import './task.scss';
 
 const Task = () => {
