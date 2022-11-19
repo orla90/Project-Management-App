@@ -1,5 +1,5 @@
 import CustomInput from 'components/UI/input/CustomInput';
-import Overlay from 'components/UI/overlay/overlay';
+import Overlay from 'components/UI/overlay/Overlay';
 import { ROUTES } from 'constants/routes';
 import {
   setErrorNameOrLogin,

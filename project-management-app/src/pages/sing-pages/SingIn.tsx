@@ -1,6 +1,6 @@
 import { CustomLink } from 'components/UI/custom-link/CustomLink';
 import CustomInput from 'components/UI/input/CustomInput';
-import Overlay from 'components/UI/overlay/overlay';
+import Overlay from 'components/UI/overlay/Overlay';
 import React, { useEffect } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';

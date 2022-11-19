@@ -11,7 +11,7 @@ import { setupStore } from 'store/store';
 import { Provider } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import BoardList from 'pages/boards-list-page/components/board-list';
-import ErrorPage from 'pages/error-page/components/error';
+import ErrorPage from 'pages/error-page/components/Error';
 
 const store = setupStore();
 

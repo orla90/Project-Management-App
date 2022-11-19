@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { signUpFetch } from 'store/actions-creators/sing-in-sing-up/sign-up-action';
 import { IsignProps } from 'store/interfaces/sign-up-props';
 import { signSlice } from 'store/slices/sign-slice';
-import Overlay from 'components/UI/overlay/overlay';
+import Overlay from 'components/UI/overlay/Overlay';
 import { Navigate } from 'react-router-dom';
 import { key } from 'texts/header/header-text';
 import { i18ObjSign } from 'texts/sign/sing-text';
