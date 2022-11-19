@@ -9,3 +9,6 @@ export const pendingSignIn = (state: IsignInitialState) => {
 export const pendingSignEdit = (state: IsignInitialState) => {
   state.overlay = true;
 };
+export const pendingDeleteUser = (state: IsignInitialState) => {
+  state.overlay = true;
+};

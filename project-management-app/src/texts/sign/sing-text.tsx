@@ -9,13 +9,10 @@ export const i18ObjSign = {
     singUp: 'Sign up',
     singEdit: 'Edit profile',
     change: 'Сhange',
-    error: {
-      required: 'Required',
-      leastCharacters: 'at least 8 characters',
-      tooShort: 'Too short',
-      onlyLatine: 'only latin letters',
-      and: 'and',
-    },
+    remove: 'Delete account',
+    submit: 'Submit',
+    close: 'Close',
+    deleteUserTitle: 'Are you sure want delet youre accoutn?',
   },
   ru: {
     login: 'Логин',
@@ -27,13 +24,10 @@ export const i18ObjSign = {
     singUp: 'Регистрация',
     singEdit: 'Изменить профииль',
     change: 'Изменить',
-    error: {
-      required: 'Обязательное поле',
-      leastCharacters: 'Не менее 8 символов',
-      tooShort: 'Очень коротко',
-      onlyLatine: 'только латинские буквы',
-      and: 'и',
-    },
+    remove: 'Удалить аккаунт',
+    submit: 'Подтвердить',
+    close: 'Закрыть',
+    deleteUserTitle: 'Ты точно хочешь удалить свой аккаунт?',
   },
 };
 

@@ -25,5 +25,11 @@ export const fulfilledSignIn = (
 };
 
 export const fulfilledSignUp = (state: IsignInitialState) => {
-  state.overlay = true;
+  state.overlay = false;
+};
+
+export const fulfilledDeleteUser = (state: IsignInitialState) => {
+  state.overlay = false;
+  state.user = null;
+  localStorage.removeItem('user');
 };

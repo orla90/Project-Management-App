@@ -112,7 +112,7 @@ const Header = () => {
               <>
                 <div className="header_create-btn">
                   <button
-                    className="main-page-btn create-board-btn"
+                    className="main-page-btn-accent create-board-btn"
                     onClick={() => setNewBoardModal(true)}
                   >
                     {i18ObjHeader[language as key].createBoard}
