@@ -2,17 +2,22 @@
 
 .board {
   padding-top: rem(100);
+  overflow: hidden;
 }
 
 .board__container {
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+.board-list__container {
+  overflow: auto;
 }
 
 .board__list {
   display: inline-flex;
   flex-direction: row;
   gap: rem(30);
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .board__panel {

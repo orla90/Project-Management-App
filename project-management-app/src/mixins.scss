@@ -7,11 +7,13 @@ $lightDarkColor: #5b616e;
 $lightGreyColor: #f5f5f5;
 $whiteColor: #ffffff;
 $blackColor: #000000;
-$redColor:#ff0000;
+$pinkColor: #dd4286;
+$lightGreenColor: #2cde98;
+$redColor: #ff0000;
 $greenColor: #008000;
-$signPagesBackground:#6198ff;
-$accentColor:#eb5b72;
-$headerColor:#e1eeff;
+$signPagesBackground: #6198ff;
+$accentColor: #eb5b72;
+$headerColor: #e1eeff;
 
 @function rem($px) {
   $result: calc($px/ 16) + rem;
