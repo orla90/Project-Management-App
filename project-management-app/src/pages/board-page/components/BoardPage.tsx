@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
-import Column from './column/Column';
+import Column from './Column/Column';
 import BoardForm from './board-form/BoardForm';
 
 const BoardPage = () => {

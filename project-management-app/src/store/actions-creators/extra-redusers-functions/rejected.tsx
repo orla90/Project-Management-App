@@ -38,3 +38,7 @@ export const rejectedSignUp = (
   }
   state.overlay = false;
 };
+
+export const rejectedDeleteUser = (state: IsignInitialState) => {
+  state.overlay = false;
+};
