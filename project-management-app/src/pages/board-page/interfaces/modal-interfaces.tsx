@@ -10,4 +10,5 @@ export interface CustomBoardModalProps {
 export interface BoardFormModalProps {
   onClose: () => void;
   description?: boolean;
+  target: string;
 }

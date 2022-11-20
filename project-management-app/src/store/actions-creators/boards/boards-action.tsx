@@ -13,6 +13,7 @@ export const createBoardFetch = createAsyncThunk(
   'boards/create',
   async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
+    console.log(state);
 
     return axios
       .post(`${BACK_END_URL}boards`, props, {

@@ -7,6 +7,7 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import './board-form.scss';
 import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { FormValues } from 'pages/board-page/types/modal-types';
+import { createColumnFetch } from 'store/actions-creators/board/board-action';
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -19,7 +20,32 @@ const BoardForm = (props: BoardFormModalProps) => {
     reset,
   } = useForm<FormValues>({ mode: 'onChange' });
 
+  // const onSubmit = handleSubmit(async (data: FormValues) => {
+  //   if (props.target === 'addColumn') {
+  //     try {
+  //       await dispatch(createColumnFetch({ title: data.title, order: 0, boardId:  })).unwrap();
+  //       reset({ title: '', description: '' });
+  //       props.onClose();
+  //       // navigate(ROUTES.BOARDS_LIST);
+  //     } catch (error) {
+  //       alert(error);
+  //     }
+  //   }
+  // });
+  // target={'addColumn'}
+
   const onSubmit = handleSubmit(() => null);
+  // const onSubmit = handleSubmit(async (data: FormValues) => {
+  //   try {
+  //     await dispatch(createBoardFetch({ title: data.title, owner: user!.id, users: [] })).unwrap();
+  //     reset({ title: '', description: '' });
+  //     props.onClose();
+  //     navigate(ROUTES.BOARDS_LIST);
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // });
+  // target={'addColumn'}
 
   return (
     <form className="board-form__body" onSubmit={onSubmit}>

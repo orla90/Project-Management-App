@@ -48,7 +48,7 @@ const Column = () => {
         onClose={() => setAddTaskModal(false)}
         title={i18Obj[lang].addTask}
       >
-        {<BoardForm onClose={() => setAddTaskModal(false)} description={true} />}
+        {<BoardForm onClose={() => setAddTaskModal(false)} description={true} target={'addTask'} />}
       </Modal>
     </div>
   );

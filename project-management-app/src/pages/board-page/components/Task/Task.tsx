@@ -45,7 +45,13 @@ const Task = () => {
         onClose={() => setEditTaskModal(false)}
         title={i18Obj[lang].editTask}
       >
-        {<BoardForm onClose={() => setEditTaskModal(false)} description={true} />}
+        {
+          <BoardForm
+            onClose={() => setEditTaskModal(false)}
+            description={true}
+            target={'editTask'}
+          />
+        }
       </Modal>
     </div>
   );
