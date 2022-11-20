@@ -23,7 +23,7 @@ const BoardList = () => {
 
   useEffect(() => {
     loadBoards();
-  });
+  }, []);
 
   return (
     <div className="board-list-container">
