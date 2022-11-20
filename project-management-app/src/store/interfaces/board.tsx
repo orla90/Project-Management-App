@@ -9,8 +9,12 @@ export interface BoardProps extends BoardsProps {
 }
 
 export interface ColumnProps {
-  _id: string;
-  title: string;
-  order: number;
-  boardId: string;
+  _id?: string;
+  title?: string;
+  order?: number;
+  boardId?: string;
+}
+
+export interface BoardWithColumnsProps {
+  board: ColumnProps;
 }

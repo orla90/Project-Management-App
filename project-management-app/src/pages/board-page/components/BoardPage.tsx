@@ -9,10 +9,7 @@ import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
 import Column from './column/Column';
 import BoardForm from './board-form/BoardForm';
-import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
-import { getBoardFetch, getBoardsFetch } from 'store/actions-creators/board/board-action';
-import { BoardProps } from 'store/interfaces/board';
-import { boardSlice } from 'store/slices/board-slice';
+import { useAppSelector } from 'store/custom-hooks';
 import { RootState } from 'store/types/types-redux';
 import { useSelector } from 'react-redux';
 
@@ -20,48 +17,15 @@ const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
   const lang = language.toString() as Language;
-  const { user } = useAppSelector((state) => state.signSlice);
-  const [boards, setBoards] = useState([]);
-  const board = useSelector((state: RootState) => state.boardSlice);
-  const state = useSelector((state: RootState) => state);
-  const dispatch = useAppDispatch();
-  const { setBoard } = boardSlice.actions;
+  const board = useSelector((state: RootState) => state.boardSlice.board);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    getBoards();
+    console.log(board);
     return () => {
       document.body.style.overflow = 'visible';
     };
   }, []);
-
-  useEffect(() => {
-    if (boards.length !== 0) {
-      getBoard((boards[0] as BoardProps)._id);
-    }
-  }, [boards]);
-
-  useEffect(() => {
-    if (board) {
-      console.log(state);
-      console.log(board);
-    }
-  }, [board]);
-
-  const getBoards = async () => {
-    await dispatch(getBoardsFetch({}))
-      .unwrap()
-      .then((data) => setBoards(data))
-      .catch((e) => console.log(e));
-  };
-
-  const getBoard = async (_id: string) => {
-    await dispatch(getBoardFetch({ _id }))
-      .unwrap()
-      .then((data) => dispatch(setBoard(data)))
-      .then(() => console.log(board))
-      .catch((e) => console.log(e));
-  };
 
   return (
     <article className="board">

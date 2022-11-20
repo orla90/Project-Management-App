@@ -1,21 +1,22 @@
 import CustomInput from 'components/UI/input/CustomInput';
-import Overlay from 'components/UI/overlay/overlay';
+import Overlay from 'components/UI/overlay/Overlay';
 import { ROUTES } from 'constants/routes';
 import {
   setErrorNameOrLogin,
   showError,
   setErrorPassword,
 } from 'pages/sing-pages/validation-functions';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
-import { editProfileFetch } from 'store/actions-creators/edit-profile/edit-profile';
+import { editProfileFetch } from 'store/actions-creators/edit-profile/edit-user';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { IeditProfileProps } from 'store/interfaces/edit-profile';
 import { signSlice } from 'store/slices/sign-slice';
 import { key } from 'texts/header/header-text';
 import { i18ObjSingFetchResponses } from 'texts/sign/sing-fetch-responses-text';
 import { i18ObjSign } from 'texts/sign/sing-text';
+import DeleteUser from './DeleteUser';
 
 const EditProfile = () => {
   const {
@@ -23,11 +24,6 @@ const EditProfile = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'all' });
-  const { user, editMessage, overlay, language, trueOrfalseEdit } = useAppSelector(
-    (state) => state.signSlice
-  );
-  const { setEditMessage } = signSlice.actions;
-  const dispatch = useAppDispatch();
 
   const onSubmit: SubmitHandler<FieldValues> = (e) => {
     if (user)
@@ -40,6 +36,17 @@ const EditProfile = () => {
         } as IeditProfileProps)
       );
   };
+
+  const { user, editMessage, overlay, language, trueOrfalseEdit } = useAppSelector(
+    (state) => state.signSlice
+  );
+  const { setEditMessage } = signSlice.actions;
+  const dispatch = useAppDispatch();
+
+  const [deleteUserModal, setDeleteUserModal] = useState(false);
+
+  const closeModalDeleteUser = () => setDeleteUserModal(false);
+  const openeModalDeleteUser = () => setDeleteUserModal(true);
 
   useEffect(() => {
     return () => {
@@ -123,6 +130,14 @@ const EditProfile = () => {
                 {i18ObjSign[language as key].change}
               </button>
             </form>
+            <DeleteUser open={deleteUserModal} onClose={closeModalDeleteUser} />
+            <button
+              type="button"
+              onClick={openeModalDeleteUser}
+              className="edite-profile__remove-user-button  main-page-btn-accent"
+            >
+              {i18ObjSign[language as key].remove}
+            </button>
           </div>
         </div>
       </div>

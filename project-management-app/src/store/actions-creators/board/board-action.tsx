@@ -38,7 +38,6 @@ export const getBoardFetch = createAsyncThunk(
         },
       })
       .then((response) => {
-        console.log(response);
         return response.data;
       })
       .catch((error) => {
@@ -53,7 +52,28 @@ export const createColumnFetch = createAsyncThunk(
     const state = getState() as RootState;
 
     return axios
-      .post(`${BACK_END_URL}boards/${props.boardId}/columns`, {
+      .post(`${BACK_END_URL}boards/${state.boardSlice.board.board._id}/columns`, props, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        return rejectWithValue(error.response.data.statusCode);
+      });
+  }
+);
+
+export const getColumnsFetch = createAsyncThunk(
+  'board/getColumns',
+  async (props: ColumnProps, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+
+    return axios
+      .get(`${BACK_END_URL}boards/${state.boardSlice.board.board._id}/columns`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${state.signSlice.user!.token}`,

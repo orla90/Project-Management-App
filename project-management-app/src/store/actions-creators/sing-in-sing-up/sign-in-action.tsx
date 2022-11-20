@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
-import { IsignProps } from 'store/interfaces/signUpProps';
+import { IsignProps } from 'store/interfaces/sign-up-props';
 
 export const signInFetch = createAsyncThunk<
   { token: string },

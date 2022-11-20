@@ -133,8 +133,50 @@ h6 {
   }
 }
 
+.main-page-btn-accent {
+  display: inline-block;
+  font-size: rem(18);
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 10px 15px;
+  background-color: $accentColor;
+  color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 0 0px $btnBgColor;
+  animation-duration: 0.7s;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  @media (any-hover: hover) {
+    &:hover {
+      animation-name: animation-main-btn-accent;
+    }
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes animation-main-btn-accent {
+  0% {
+    box-shadow: 0 0 0 0px $accentColor;
+  }
+  100% {
+    box-shadow: 0 0 0 7px #eb5b7300;
+  }
+}
+
+@keyframes animation-main-btn {
+  0% {
+    box-shadow: 0 0 0 0px $btnBgColor;
+  }
+  100% {
+    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0);
+  }
+}
+
 .create-board-btn {
-  background-color: #dd4286;
+  width: 100%;
+  background-color: #DD4286;
 }
 
 form {
@@ -184,14 +226,6 @@ form {
   }
 }
 
-@keyframes animation-main-btn {
-  0% {
-    box-shadow: 0 0 0 0px $btnBgColor;
-  }
-  100% {
-    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0);
-  }
-}
 
 .overlay {
   position: fixed;

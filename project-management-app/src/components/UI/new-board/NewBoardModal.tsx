@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '../modal/Modal';
 import './newBoardModal.scss';
 import { ROUTES } from 'constants/routes';
+import i18Obj from 'texts/board/board-page';
+import { Language } from 'pages/welcome-page/types/types';
 
 interface INewBoardModalProps {
   open: boolean;
@@ -18,6 +20,9 @@ type FormValues = {
 };
 
 function NewBoardModal(props: INewBoardModalProps) {
+  const { language } = useAppSelector((state) => state.languageSlice);
+  const lang = language.toString() as Language;
+
   const {
     register,
     formState: { errors },
@@ -41,15 +46,15 @@ function NewBoardModal(props: INewBoardModalProps) {
   });
 
   return (
-    <Modal open={props.open} title="Create board" onClose={props.onClose}>
+    <Modal open={props.open} title={i18Obj[lang].createBoard} onClose={props.onClose}>
       <div className="form-container">
         <form className="create-board__form" onSubmit={onSubmit}>
           <div className="input-body">
-            <label className="create-board__label">Title</label>
+            <label className="create-board__label">{i18Obj[lang].title}</label>
             <input
               type="text"
               {...register('title', {
-                required: 'Title is a required field',
+                required: i18Obj[lang].errorModal,
               })}
             ></input>
             <div className="form-error">
@@ -57,13 +62,13 @@ function NewBoardModal(props: INewBoardModalProps) {
             </div>
           </div>
           <div className="input-body">
-            <label>Description</label>
+            <label>{i18Obj[lang].description}</label>
             <textarea {...register('description')} rows={4}></textarea>
             <div className="form-error"></div>
           </div>
           <div className="create-board__btn-wrapper">
             <button type="submit" className="main-page-btn">
-              CREATE
+              {i18Obj[lang].create}
             </button>
           </div>
         </form>
