@@ -4,6 +4,7 @@
   background-color: $lightGreyColor;
   padding: 0 0 rem(50);
   &__title {
+    transition: all 0.3s ease 0s;
     font-size: rem(40);
     font-family: 'Noto Serif', serif;
     max-width: rem(645);

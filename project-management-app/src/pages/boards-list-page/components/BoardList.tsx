@@ -6,19 +6,23 @@ import { getBoardsByUserIdFetch } from '../../../store/actions-creators/boards/b
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { IBoard } from './interfaces/IBoard';
 import { io } from 'socket.io-client';
+import Overlay from 'components/UI/overlay/Overlay';
 
 const BoardList = () => {
   const [boards, setBoards] = useState<IBoard[]>([]);
-
+  const [overlay, setOverlay] = useState(false);
   const { user } = useAppSelector((state) => state.signSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const loadBoards = async () => {
+      setOverlay(true);
       try {
         const userBoards = await dispatch(getBoardsByUserIdFetch({ userId: user!.id })).unwrap();
         setBoards(userBoards);
+        setOverlay(false);
       } catch (error) {
+        setOverlay(false);
         alert(error);
       }
     };
@@ -35,12 +39,15 @@ const BoardList = () => {
   }, [dispatch, user]);
 
   return (
-    <div className="board-list-container">
-      {boards.map((board) => (
-        <BoardItem board={board} key={board._id} />
-      ))}
-      <BoardItemAdd />
-    </div>
+    <>
+      {overlay && <Overlay />}
+      <div className="board-list-container">
+        {boards.map((board) => (
+          <BoardItem board={board} key={board._id} />
+        ))}
+        <BoardItemAdd />
+      </div>
+    </>
   );
 };
 

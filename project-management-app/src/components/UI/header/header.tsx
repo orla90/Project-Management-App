@@ -39,6 +39,8 @@ const Header = () => {
     setOpenMenu((prev) => !prev);
   };
   const closeHeaderMenuInLink = () => {
+    console.log('aaaaaa');
+
     if (openMenu === true) {
       setOpenMenu((prev) => !prev);
       document.body.classList.remove('_lock');
@@ -113,7 +115,10 @@ const Header = () => {
                 <div className="header_create-btn">
                   <button
                     className="main-page-btn-accent create-board-btn"
-                    onClick={() => setNewBoardModal(true)}
+                    onClick={() => {
+                      setNewBoardModal(true);
+                      closeHeaderMenuInLink();
+                    }}
                   >
                     {i18ObjHeader[language as key].createBoard}
                   </button>
