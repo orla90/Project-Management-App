@@ -7,49 +7,52 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import './board-form.scss';
 import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { FormValues } from 'pages/board-page/types/modal-types';
-import { createColumnFetch, getColumnsFetch } from 'store/actions-creators/board/board-action';
+import { createColumnFetch } from 'store/actions-creators/board/board-action';
+import { createTasksColumnFetch } from 'store/actions-creators/board/task-actions';
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
   const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
-
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<FormValues>({ mode: 'onChange' });
 
-  const onSubmitAddColumn = handleSubmit(async (data: FormValues) => {
-    try {
-      await dispatch(createColumnFetch({ title: data.title, order: 0 })).unwrap();
-      props.onClose();
-    } catch (error) {
-      alert(error);
-    } finally {
-      getColumns();
-    }
-  });
+  const onSubmitAddColumn = async (data: FormValues) => {
+    console.log('ОТправка формы', props.target);
 
-  const getColumns = async () => {
-    try {
-      await dispatch(getColumnsFetch({}))
-        .unwrap()
-        .then((data) => console.log(data));
-    } catch (error) {
-      alert(error);
-    }
-  };
-
-  const chooseSubmitType = () => {
     if (props.target === 'addColumn') {
-      onSubmitAddColumn();
+      try {
+        await dispatch(createColumnFetch({ title: data.title, order: 0 })).unwrap();
+        props.onClose();
+      } catch (error) {
+        alert(error);
+      }
+    }
+    if (props.target === 'addTask') {
+      try {
+        console.log('++++');
+
+        await dispatch(
+          createTasksColumnFetch({
+            title: data.title,
+            columnId: props.columbId!,
+            order: 1,
+            description: data.description || '',
+          })
+        ).unwrap();
+        props.onClose();
+      } catch (error) {
+        console.log('----');
+        alert(error);
+      }
     }
   };
 
   return (
-    <form className="board-form__body" onSubmit={chooseSubmitType}>
+    <form className="board-form__body" onSubmit={handleSubmit(onSubmitAddColumn)}>
       <div className="input-body">
         <label className="board-form__label">{i18Obj[lang].title}</label>
         <input

@@ -9,7 +9,7 @@ import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import './task.scss';
 
-const Task = () => {
+const Task = ({ title, description }: { title: string; description: string }) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -18,7 +18,7 @@ const Task = () => {
   return (
     <div className="task">
       <div className="task__panel">
-        <h3 className="task__title">Title</h3>
+        <h3 className="task__title">{title}</h3>
         <div className="task__icons">
           <CustomButton
             className="task__icon task__icon_edit"
@@ -34,11 +34,12 @@ const Task = () => {
           />
         </div>
       </div>
-      <p className="task__description">description</p>
+      <p className="task__description">{description}</p>
       <BoardCustomModal
         open={deleteTaskModal}
         onClose={() => setDeleteTaskModal(false)}
         title={i18Obj[lang].deleteTask}
+        columnId={''}
       />
       <Modal
         open={editTaskModal}

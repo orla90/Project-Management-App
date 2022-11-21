@@ -6,7 +6,7 @@ const ColumnTitleConfirmed = (props: ColumnTitleConfirmedProps) => {
   return (
     <>
       <div className="column__icon column__icon_pen" onClick={() => props.setTitleEditMode(true)} />
-      <h3 className="column__title">Title</h3>
+      <h3 className="column__title">{props.title}</h3>
       <div
         className="column__icon column__icon_bin"
         onClick={() => props.setDeleteColumnModal(true)}
