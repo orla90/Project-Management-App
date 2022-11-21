@@ -1,3 +1,5 @@
+import { string } from 'prop-types';
+
 export interface BoardsProps {
   title?: string;
   owner?: string;
@@ -17,4 +19,18 @@ export interface ColumnProps {
 
 export interface BoardWithColumnsProps {
   board: ColumnProps;
+}
+
+export interface IuppdateTitle {
+  title: string;
+  columnId: string;
+  order: number;
+}
+
+export interface IdeleteColumn {
+  columnId: string;
+}
+
+export interface TaskDeleteParams extends IdeleteColumn {
+  taskId: string;
 }

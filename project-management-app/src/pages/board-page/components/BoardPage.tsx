@@ -7,7 +7,7 @@ import React, { useMemo, useState } from 'react';
 import { useEffect } from 'react';
 import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
-import Column from './Column/Column';
+import Column from './column/Column';
 import BoardForm from './board-form/BoardForm';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { getColumnsFetch } from 'store/actions-creators/board/board-action';

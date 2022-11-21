@@ -6,7 +6,7 @@ import {
   getBoardFetch,
   getColumnsFetch,
 } from 'store/actions-creators/board/board-action';
-import { getTasksColumnFetch } from 'store/actions-creators/board/task-actions';
+import { deleteTaskFetch, getTasksColumnFetch } from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
 
 const initialState = {
@@ -79,6 +79,17 @@ export const boardSlice = createSlice({
     });
     builder.addCase(getTasksColumnFetch.rejected, (state) => {
       console.log('При получении заданий колонки произошла ошибка rejected');
+      state.overlay = false;
+    });
+    builder.addCase(deleteTaskFetch.pending, (state) => {
+      state.overlay = false;
+    });
+    builder.addCase(deleteTaskFetch.fulfilled, (state) => {
+      console.log('Удалена задача fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(deleteTaskFetch.rejected, (state) => {
+      console.log('При удалении задачи произошла ошибка rejected');
       state.overlay = false;
     });
   },

@@ -2,7 +2,13 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
-import { BoardProps, BoardsProps, ColumnProps } from 'store/interfaces/board';
+import {
+  BoardProps,
+  BoardsProps,
+  ColumnProps,
+  IdeleteColumn,
+  IuppdateTitle,
+} from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
 
 export const getvFetch = createAsyncThunk(
@@ -90,16 +96,6 @@ export const getColumnsFetch = createAsyncThunk(
     }
   }
 );
-
-interface IuppdateTitle {
-  title: string;
-  columnId: string;
-  order: number;
-}
-
-interface IdeleteColumn {
-  columnId: string;
-}
 
 export const uppdateColumnTitleFetch = createAsyncThunk(
   'board/uppdateColumnTitle',

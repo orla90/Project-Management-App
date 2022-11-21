@@ -8,7 +8,11 @@ import './board-form.scss';
 import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { FormValues } from 'pages/board-page/types/modal-types';
 import { createColumnFetch } from 'store/actions-creators/board/board-action';
-import { createTasksColumnFetch } from 'store/actions-creators/board/task-actions';
+import {
+  createTasksColumnFetch,
+  getTasksColumnFetch,
+} from 'store/actions-creators/board/task-actions';
+import { Itasks } from 'pages/board-page/interfaces/task-interface';
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -19,6 +23,13 @@ const BoardForm = (props: BoardFormModalProps) => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>({ mode: 'onChange' });
+
+  const getDataTaskas = async () => {
+    const data = await dispatch(getTasksColumnFetch({ columnId: props.columbId! }));
+    if (props.setTasks) {
+      props.setTasks(data.payload as Itasks[]);
+    }
+  };
 
   const onSubmitAddColumn = async (data: FormValues) => {
     console.log('ОТправка формы', props.target);
@@ -44,6 +55,7 @@ const BoardForm = (props: BoardFormModalProps) => {
           })
         ).unwrap();
         props.onClose();
+        getDataTaskas();
       } catch (error) {
         console.log('----');
         alert(error);

@@ -1,5 +1,6 @@
 import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
+import { TaskProps } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { useState } from 'react';
@@ -9,7 +10,7 @@ import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import './task.scss';
 
-const Task = ({ title, description }: { title: string; description: string }) => {
+const Task = ({ title, description, taskId, columnId }: TaskProps) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -39,7 +40,9 @@ const Task = ({ title, description }: { title: string; description: string }) =>
         open={deleteTaskModal}
         onClose={() => setDeleteTaskModal(false)}
         title={i18Obj[lang].deleteTask}
-        columnId={''}
+        columnId={columnId}
+        taskId={taskId}
+        target={'deleteTask'}
       />
       <Modal
         open={editTaskModal}
