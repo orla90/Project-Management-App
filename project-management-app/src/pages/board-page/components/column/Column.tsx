@@ -67,6 +67,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
               description={a.description}
               taskId={a._id}
               columnId={props._id!}
+              order={order}
             />
           );
         })}
@@ -93,7 +94,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
           <BoardForm
             onClose={() => setAddTaskModal(false)}
             description={true}
-            columbId={props._id}
+            columnId={props._id}
             target={'addTask'}
             order={order}
           />
