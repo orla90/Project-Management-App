@@ -33,10 +33,7 @@ const BoardList = () => {
     });
     console.log(socket);
     loadBoards();
-    return () => {
-      socket.close();
-    };
-  }, [dispatch, user]);
+  }, []);
 
   return (
     <>
