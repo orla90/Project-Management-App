@@ -12,6 +12,7 @@ import { createTasksColumnFetch } from 'store/actions-creators/board/task-action
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
+  const { columnOrder } = useAppSelector((state) => state.boardSlice);
   const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
   const {
@@ -23,7 +24,7 @@ const BoardForm = (props: BoardFormModalProps) => {
   const onSubmitAddColumn = async (data: FormValues) => {
     if (props.target === 'addColumn') {
       try {
-        await dispatch(createColumnFetch({ title: data.title, order: props.order || 0 })).unwrap();
+        await dispatch(createColumnFetch({ title: data.title, order: columnOrder })).unwrap();
         props.onClose();
       } catch (error) {
         alert(error);
@@ -41,7 +42,6 @@ const BoardForm = (props: BoardFormModalProps) => {
         ).unwrap();
         props.onClose();
       } catch (error) {
-        console.log('----');
         alert(error);
       }
     }

@@ -12,6 +12,7 @@ const initialState = {
   board: null,
   columns: [] as ColumnProps[],
   overlay: false,
+  columnOrder: 0,
 };
 
 export const boardSlice = createSlice({
@@ -37,8 +38,8 @@ export const boardSlice = createSlice({
     });
     builder.addCase(getColumnsFetch.fulfilled, (state, action) => {
       console.log('получение колонки fulfilled', action.payload);
+      state.columnOrder = action.payload.length;
       state.columns = action.payload;
-      state.overlay = false;
     });
     builder.addCase(getColumnsFetch.rejected, (state, action) => {
       console.log('Ошибка при получении всех колонок', action.payload);
@@ -58,7 +59,7 @@ export const boardSlice = createSlice({
     });
 
     builder.addCase(deleteColumnFetch.pending, (state) => {
-      state.overlay = false;
+      state.overlay = true;
     });
     builder.addCase(deleteColumnFetch.fulfilled, (state) => {
       console.log('Удалена колонка fulfilled');
@@ -70,7 +71,7 @@ export const boardSlice = createSlice({
     });
 
     builder.addCase(getTasksColumnFetch.pending, (state) => {
-      state.overlay = false;
+      state.overlay;
     });
     builder.addCase(getTasksColumnFetch.fulfilled, (state, action) => {
       console.log('Получении заданий колонки fulfilled', action.payload);
@@ -81,7 +82,7 @@ export const boardSlice = createSlice({
       state.overlay = false;
     });
     builder.addCase(deleteTaskFetch.pending, (state) => {
-      state.overlay = false;
+      state.overlay = true;
     });
     builder.addCase(deleteTaskFetch.fulfilled, (state) => {
       console.log('Удалена задача fulfilled');

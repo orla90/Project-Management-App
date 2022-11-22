@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
-import { TaskDeleteParams } from 'store/interfaces/board';
+import { ColumnProps, TaskDeleteParams } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
 
 export const getTasksColumnFetch = createAsyncThunk<
@@ -23,7 +23,7 @@ export const getTasksColumnFetch = createAsyncThunk<
       },
     })
     .then((response) => {
-      return response.data;
+      return response.data.sort((a: Itasks, b: Itasks) => a.order! - b.order!);
     })
     .catch((error) => {
       console.log(error);

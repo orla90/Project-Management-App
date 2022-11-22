@@ -86,7 +86,7 @@ export const getColumnsFetch = createAsyncThunk(
           },
         })
         .then((response) => {
-          return response.data;
+          return response.data.sort((a: ColumnProps, b: ColumnProps) => a.order! - b.order!);
         })
         .catch((error) => {
           return rejectWithValue(error);

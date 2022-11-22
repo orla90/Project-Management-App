@@ -27,14 +27,13 @@ const BoardPage = () => {
     socket.on('columns', () => {
       dispatch(getColumnsFetch({}));
     });
-
-    dispatch(getColumnsFetch({}));
     console.log('сработал useEffect BOARD-PAGE');
+    dispatch(getColumnsFetch({}));
+
     return () => {
       socket.close();
     };
   }, [dispatch, board]);
-
   return (
     <>
       {board === null && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}

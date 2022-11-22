@@ -7,30 +7,19 @@ import i18Obj from 'texts/board/board-page';
 import { CustomButton } from 'components/UI/button/CustomButton';
 import { CustomBoardModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { deleteColumnFetch } from 'store/actions-creators/board/board-action';
-import { deleteTaskFetch, getTasksColumnFetch } from 'store/actions-creators/board/task-actions';
-import { Itasks } from 'pages/board-page/interfaces/task-interface';
+import { deleteTaskFetch } from 'store/actions-creators/board/task-actions';
 
 const BoardCustomModal = (props: CustomBoardModalProps) => {
   const dispatch = useAppDispatch();
   const { language } = useAppSelector((state) => state.languageSlice);
   const lang = language.toString() as Language;
 
-  const getDataTaskas = async () => {
-    const data = await dispatch(getTasksColumnFetch({ columnId: props.columnId }));
-    if (props.setTasks) {
-      props.setTasks(data.payload as Itasks[]);
-    }
-  };
-
   const handleOnClick = () => {
     if (props.target === 'deleteColumn') {
-      console.log('delete column');
       dispatch(deleteColumnFetch({ columnId: props.columnId! }));
     } else if (props.target === 'deleteTask') {
       dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId! }));
       props.onClose();
-      getDataTaskas();
-      console.log('delete task');
     }
   };
 

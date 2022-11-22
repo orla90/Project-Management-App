@@ -18,5 +18,4 @@ export interface BoardFormModalProps {
   onClose: () => void;
   description?: boolean;
   target: string;
-  setTasks?: Dispatch<SetStateAction<Itasks[]>>;
 }
