@@ -13,12 +13,15 @@ import { getColumnsFetch } from 'store/actions-creators/board/board-action';
 import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 import { Navigate } from 'react-router-dom';
+import { ColumnProps } from 'store/interfaces/board';
+import { boardSlice } from 'store/slices/board-slice';
 import Column from './column/Column';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
   const dispatch = useAppDispatch();
+  const { resetBordAndColumns } = boardSlice.actions;
   const { columns, overlay, board } = useAppSelector((state) => state.boardSlice);
   const lang = language.toString() as Language;
 
@@ -32,6 +35,7 @@ const BoardPage = () => {
 
     return () => {
       socket.close();
+      dispatch(resetBordAndColumns());
     };
   }, [dispatch, board]);
   return (
@@ -66,10 +70,10 @@ const BoardPage = () => {
               {i18Obj[lang].column}
             </CustomButton>
           </div>
-          <div className="board-list__container">
+          <div className="board-list__body">
             <div className="board__list">
-              {columns.map((a) => {
-                return <Column key={a.title! + Date.now()} props={a} />;
+              {columns.map((a: ColumnProps) => {
+                return <Column key={a.title} props={a} />;
               })}
             </div>
           </div>

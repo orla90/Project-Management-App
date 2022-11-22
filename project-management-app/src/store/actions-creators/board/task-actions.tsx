@@ -62,7 +62,6 @@ export const createTasksColumnFetch = createAsyncThunk<
     })
     .catch((error) => {
       console.log(error);
-
       return rejectWithValue([]);
     });
 });

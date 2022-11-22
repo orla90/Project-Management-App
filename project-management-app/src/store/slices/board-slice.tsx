@@ -24,11 +24,14 @@ export const boardSlice = createSlice({
   initialState,
   reducers: {
     setBoard: (state, action) => {
-      console.log('СОХРАНЯЕМ БОРД', action.payload);
       state.board = action.payload.board;
     },
     setColumns: (state, action) => {
       state.columns = action.payload;
+    },
+    resetBordAndColumns: (state) => {
+      state.columns = [];
+      state.board = null;
     },
   },
   extraReducers: (builder) => {
@@ -44,6 +47,7 @@ export const boardSlice = createSlice({
       console.log('получение колонки fulfilled', action.payload);
       state.columnOrder = action.payload.length;
       state.columns = action.payload;
+      state.overlay = false;
     });
     builder.addCase(getColumnsFetch.rejected, (state, action) => {
       console.log('Ошибка при получении всех колонок', action.payload);
@@ -75,7 +79,7 @@ export const boardSlice = createSlice({
     });
 
     builder.addCase(getTasksColumnFetch.pending, (state) => {
-      state.overlay;
+      state.overlay = true;
     });
     builder.addCase(getTasksColumnFetch.fulfilled, (state, action) => {
       console.log('Получении заданий колонки fulfilled', action.payload);
