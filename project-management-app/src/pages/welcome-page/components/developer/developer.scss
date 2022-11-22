@@ -5,10 +5,16 @@
   display: flex;
   flex-direction: column;
   border-radius: 16px;
-  width: rem(650);
+  max-width: rem(650);
+  width: 100%;
   background-color: $whiteColor;
   &__intro {
     display: flex;
+    @media (max-width: em(600)){
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
   }
   &__name {
     font-family: 'Manrope', sans-serif;
@@ -17,13 +23,19 @@
     font-size: rem(36);
     line-height: rem(49);
     color: $primaryBlackColor;
+    @media (max-width: em(600)){
+      font-size: rem(30);  
+    }
   }
   &__title {
     font-family: 'Noto Serif', serif;
     font-weight: 400;
-    font-size: 32px;
+    font-size: rem(32);
     line-height: 48px;
     color: #5b616e;
+    @media (max-width: em(600)){
+      font-size: rem(26);  
+    }
   }
   &__img {
     width: 118px;
@@ -36,6 +48,9 @@
   }
   &__description {
     margin-top: 44px;
+    @media (max-width: em(1000)){
+        margin-top: adaptivSize(44,15,1420,320);
+    }
     font-family: 'Noto Serif', serif;
     font-weight: 400;
     font-size: rem(32);
@@ -43,6 +58,8 @@
     color: $blackColor;
   }
   &__info {
-    margin-left: 16px;
+    @media (min-width:em(600.98)){
+      margin-left: 16px;
+    }
   }
 }

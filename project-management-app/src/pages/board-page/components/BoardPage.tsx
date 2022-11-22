@@ -8,8 +8,8 @@ import { useEffect } from 'react';
 import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
-import Column from './column/Column';
 import BoardForm from './board-form/BoardForm';
+import Column from './column/Column';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);

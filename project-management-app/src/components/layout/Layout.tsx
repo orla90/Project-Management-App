@@ -1,3 +1,4 @@
+import Footer from 'components/UI/footer/Footer';
 import Header from 'components/UI/header/Header';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
@@ -9,7 +10,7 @@ export const Layout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>2022</footer>
+      <Footer />
     </div>
   );
 };

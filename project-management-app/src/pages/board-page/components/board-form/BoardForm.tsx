@@ -16,7 +16,6 @@ const BoardForm = (props: BoardFormModalProps) => {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<FormValues>({ mode: 'onChange' });
 
   const onSubmit = handleSubmit(() => null);
