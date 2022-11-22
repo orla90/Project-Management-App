@@ -35,7 +35,7 @@ const BoardForm = (props: BoardFormModalProps) => {
         await dispatch(
           createTasksColumnFetch({
             title: data.title,
-            columnId: props.columbId!,
+            columnId: props.columnId!,
             order: props.order || 0,
             description: data.description || '',
           })

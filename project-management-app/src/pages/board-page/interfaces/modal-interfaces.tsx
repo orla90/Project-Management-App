@@ -14,7 +14,7 @@ export interface CustomBoardModalProps {
 
 export interface BoardFormModalProps {
   order?: number;
-  columbId?: string;
+  columnId?: string;
   onClose: () => void;
   description?: boolean;
   target: string;

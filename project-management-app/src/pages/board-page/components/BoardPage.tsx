@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
-import Column from './Column/Column';
 import BoardForm from './board-form/BoardForm';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { getColumnsFetch } from 'store/actions-creators/board/board-action';
@@ -16,6 +15,7 @@ import Overlay from 'components/UI/overlay/Overlay';
 import { Navigate } from 'react-router-dom';
 import { ColumnProps } from 'store/interfaces/board';
 import { boardSlice } from 'store/slices/board-slice';
+import Column from './column/Column';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);

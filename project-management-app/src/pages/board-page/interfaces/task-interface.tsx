@@ -14,4 +14,5 @@ export interface TaskProps {
   description: string;
   taskId: string;
   columnId: string;
+  order: number;
 }
