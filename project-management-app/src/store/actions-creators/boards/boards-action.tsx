@@ -13,6 +13,10 @@ export interface IGetBoardsByUserIdProps {
   userId: string;
 }
 
+export interface IDeleteBoard {
+  id: string;
+}
+
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
   async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
@@ -39,18 +43,27 @@ export const getBoardsByUserIdFetch = createAsyncThunk(
   async (props: IGetBoardsByUserIdProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
 
-    return axios
-      .get(`${BACK_END_URL}boardsSet/${props.userId}`, {
-        headers: {
-          Authorization: `Bearer ${state.signSlice.user!.token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        return response.data;
-      })
-      .catch((error) => {
-        return rejectWithValue(error.response.data.statusCode);
-      });
+    const response = await axios.get(`${BACK_END_URL}boardsSet/${props.userId}`, {
+      headers: {
+        Authorization: `Bearer ${state.signSlice.user!.token}`,
+      },
+    });
+
+    return response.data;
+  }
+);
+
+export const deleteBoardFetch = createAsyncThunk(
+  'boards/delete',
+  async (props: IDeleteBoard, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+
+    const response = await axios.delete(`${BACK_END_URL}boards/${props.id}`, {
+      headers: {
+        Authorization: `Bearer ${state.signSlice.user!.token}`,
+      },
+    });
+
+    return response.data;
   }
 );
