@@ -1,0 +1,39 @@
+@import './../../../../mixins.scss';
+
+.footer {
+  padding: 20px 0px;
+  &__body {
+  display: flex;
+  font-size:rem(20) ;
+  font-weight: 600;
+  @media (max-width: em(600)){
+      flex-direction: column;
+      align-items: center;
+      row-gap: 10px;
+  }
+  & a {
+    transition: all 0.3s ease 0s;
+    @media (any-hover: hover){
+      &:hover{
+        color: $accentColor;
+      }
+    }
+  }
+  }
+  &__item {
+    @media (min-width:em(600.98)){
+      &:first-child {
+        margin-right: 15px;
+      }
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+  }
+  &__list{
+    margin-left: auto;
+    display: flex;
+    column-gap: 10px;
+
+  }
+}

@@ -10,7 +10,7 @@ import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';
 import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
-import Task from '../Task/Task';
+import Task from '../task/Task';
 import ColumnTitleConfirmed from './column-title-confirmed/ColumnTitleConfirmed';
 import ColumnTitleEdit from './column-title-edit/ColumnTitleEdit';
 import './column.scss';
