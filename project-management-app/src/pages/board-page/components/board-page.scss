@@ -3,14 +3,31 @@
 .board {
   padding-top: rem(100);
   overflow: hidden;
+  scrollbar-color: $btnBgColor;
+  position: relative;
+  ::-webkit-scrollbar {
+    background-color: $btnBgColor;
+    border-radius: 10px;
+    width: 100%;
+    height: 10px;
+    cursor:pointer;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $accentColor;
+    border-radius:10px;
+    cursor:pointer;
+    transition: all 0.3s ease 0s;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+  }
 }
 
-.board__container {
-  overflow: hidden;
-}
 
-.board-list__container {
-  overflow: auto;
+.board-list__body {
+  overflow-x: auto;
+  position: relative;
 }
 
 .board__list {
@@ -18,6 +35,7 @@
   flex-direction: row;
   gap: rem(30);
   overflow-x: auto;
+  padding: 10px 0px;
 }
 
 .board__panel {

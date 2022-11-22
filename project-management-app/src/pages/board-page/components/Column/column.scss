@@ -2,11 +2,11 @@
 
 .column {
   min-width: 300px;
-  max-width: 300px;
   background-color: $logoBlueColor;
   border-radius: 5px;
   padding: 10px;
   margin: 0 auto;
+  height: fit-content;
 }
 
 .column__content {

@@ -32,7 +32,7 @@ const BoardCustomModal = (props: CustomBoardModalProps) => {
         </CustomButton>
         <CustomButton
           onClick={handleOnClick}
-          className="main-page-btn create-board-btn btn-container__btn"
+          className="main-page-btn-accent create-board-btn btn-container__btn"
         >
           {i18Obj[lang].yes}
         </CustomButton>
