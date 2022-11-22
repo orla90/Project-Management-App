@@ -67,7 +67,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
               description={a.description}
               taskId={a._id}
               columnId={props._id!}
-              order={props.order!}
+              order={order}
             />
           );
         })}

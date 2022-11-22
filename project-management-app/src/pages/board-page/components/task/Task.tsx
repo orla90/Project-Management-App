@@ -10,7 +10,7 @@ import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import './task.scss';
 
-const Task = ({ title, description, taskId, columnId }: TaskProps) => {
+const Task = ({ title, description, taskId, columnId, order }: TaskProps) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -53,7 +53,10 @@ const Task = ({ title, description, taskId, columnId }: TaskProps) => {
           <BoardForm
             onClose={() => setEditTaskModal(false)}
             description={true}
+            columnId={columnId}
+            taskId={taskId}
             target={'editTask'}
+            order={order}
           />
         }
       </Modal>

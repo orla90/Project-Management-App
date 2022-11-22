@@ -5,7 +5,11 @@ import {
   getBoardFetch,
   getColumnsFetch,
 } from 'store/actions-creators/board/board-action';
-import { deleteTaskFetch, getTasksColumnFetch } from 'store/actions-creators/board/task-actions';
+import {
+  deleteTaskFetch,
+  editTaskFetch,
+  getTasksColumnFetch,
+} from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
 
 const initialState = {
@@ -94,6 +98,17 @@ export const boardSlice = createSlice({
     });
     builder.addCase(deleteTaskFetch.rejected, (state) => {
       console.log('При удалении задачи произошла ошибка rejected');
+      state.overlay = false;
+    });
+    builder.addCase(editTaskFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(editTaskFetch.fulfilled, (state) => {
+      console.log('Задача обновлена fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(editTaskFetch.rejected, (state) => {
+      console.log('При обновлении задачи произошла ошибка rejected');
       state.overlay = false;
     });
   },

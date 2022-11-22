@@ -1,5 +1,3 @@
-import { string } from 'prop-types';
-
 export interface BoardsProps {
   title?: string;
   owner?: string;
@@ -33,4 +31,12 @@ export interface IdeleteColumn {
 
 export interface TaskDeleteParams extends IdeleteColumn {
   taskId: string;
+}
+export interface TaskChangeParams extends TaskDeleteParams {
+  title: string;
+  order: number;
+  description: string;
+  taskId: string;
+  userId?: string;
+  users?: string[];
 }

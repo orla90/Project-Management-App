@@ -18,4 +18,5 @@ export interface BoardFormModalProps {
   onClose: () => void;
   description?: boolean;
   target: string;
+  taskId?: string;
 }
