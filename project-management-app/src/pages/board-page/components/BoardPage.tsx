@@ -3,11 +3,11 @@ import { CustomLink } from 'components/UI/custom-link/CustomLink';
 import Modal from 'components/UI/modal/Modal';
 import { ROUTES } from 'constants/routes';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
-import Column from './column/Column';
+import Column from './Column/Column';
 import BoardForm from './board-form/BoardForm';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { getColumnsFetch } from 'store/actions-creators/board/board-action';
@@ -33,7 +33,7 @@ const BoardPage = () => {
     return () => {
       socket.close();
     };
-  }, [dispatch, getColumnsFetch, board]);
+  }, [dispatch, board]);
 
   return (
     <>

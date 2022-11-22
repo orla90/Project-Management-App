@@ -13,6 +13,7 @@ export interface CustomBoardModalProps {
 }
 
 export interface BoardFormModalProps {
+  order?: number;
   columbId?: string;
   onClose: () => void;
   description?: boolean;

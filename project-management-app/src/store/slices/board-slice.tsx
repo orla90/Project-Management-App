@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IBoardItemProps } from 'pages/boards-list-page/components/interfaces/IBoardItemProps';
 import {
   createColumnFetch,
   deleteColumnFetch,

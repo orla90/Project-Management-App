@@ -8,11 +8,7 @@ import './board-form.scss';
 import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { FormValues } from 'pages/board-page/types/modal-types';
 import { createColumnFetch } from 'store/actions-creators/board/board-action';
-import {
-  createTasksColumnFetch,
-  getTasksColumnFetch,
-} from 'store/actions-creators/board/task-actions';
-import { Itasks } from 'pages/board-page/interfaces/task-interface';
+import { createTasksColumnFetch } from 'store/actions-creators/board/task-actions';
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -24,19 +20,10 @@ const BoardForm = (props: BoardFormModalProps) => {
     handleSubmit,
   } = useForm<FormValues>({ mode: 'onChange' });
 
-  const getDataTaskas = async () => {
-    const data = await dispatch(getTasksColumnFetch({ columnId: props.columbId! }));
-    if (props.setTasks) {
-      props.setTasks(data.payload as Itasks[]);
-    }
-  };
-
   const onSubmitAddColumn = async (data: FormValues) => {
-    console.log('ОТправка формы', props.target);
-
     if (props.target === 'addColumn') {
       try {
-        await dispatch(createColumnFetch({ title: data.title, order: 0 })).unwrap();
+        await dispatch(createColumnFetch({ title: data.title, order: props.order || 0 })).unwrap();
         props.onClose();
       } catch (error) {
         alert(error);
@@ -44,18 +31,15 @@ const BoardForm = (props: BoardFormModalProps) => {
     }
     if (props.target === 'addTask') {
       try {
-        console.log('++++');
-
         await dispatch(
           createTasksColumnFetch({
             title: data.title,
             columnId: props.columbId!,
-            order: 1,
+            order: props.order || 0,
             description: data.description || '',
           })
         ).unwrap();
         props.onClose();
-        getDataTaskas();
       } catch (error) {
         console.log('----');
         alert(error);

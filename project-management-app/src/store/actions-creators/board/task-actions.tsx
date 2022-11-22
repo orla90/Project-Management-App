@@ -45,7 +45,7 @@ export const createTasksColumnFetch = createAsyncThunk<
       `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks`,
       {
         title: props.title,
-        order: 1,
+        order: props.order,
         description: props.description,
         userId: state.signSlice.user?.id,
         users: board.users,

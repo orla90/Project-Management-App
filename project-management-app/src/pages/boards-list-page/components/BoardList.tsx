@@ -12,18 +12,17 @@ const BoardList = () => {
   const { user } = useAppSelector((state) => state.signSlice);
   const dispatch = useAppDispatch();
 
-  const loadBoards = async () => {
-    try {
-      const userBoards = await dispatch(getBoardsByUserIdFetch({ userId: user!.id })).unwrap();
-      setBoards(userBoards);
-    } catch (error) {
-      alert(error);
-    }
-  };
-
   useEffect(() => {
+    const loadBoards = async () => {
+      try {
+        const userBoards = await dispatch(getBoardsByUserIdFetch({ userId: user!.id })).unwrap();
+        setBoards(userBoards);
+      } catch (error) {
+        alert(error);
+      }
+    };
     loadBoards();
-  }, []);
+  }, [dispatch, user]);
 
   return (
     <div className="board-list-container">
