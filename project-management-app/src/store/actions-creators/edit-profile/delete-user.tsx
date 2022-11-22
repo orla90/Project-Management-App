@@ -12,7 +12,6 @@ export const deleteUserFetch = createAsyncThunk<
   }
 >('user/deleteUserFetch', async (props, { rejectWithValue }) => {
   const { id, token } = props;
-  console.log(token);
   return axios
     .delete(`${BACK_END_URL}users/${id}`, {
       headers: {

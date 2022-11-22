@@ -1,4 +1,4 @@
 export type FormValues = {
   title: string;
-  description: string;
+  description?: string;
 };
