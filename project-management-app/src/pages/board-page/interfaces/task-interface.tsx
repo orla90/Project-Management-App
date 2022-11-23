@@ -1,4 +1,4 @@
-import { GetAllUsersProps } from 'store/interfaces/board';
+import { Dispatch, SetStateAction } from 'react';
 
 export interface Itasks {
   boardId: string;
@@ -17,8 +17,17 @@ export interface TaskProps {
   taskId: string;
   columnId: string;
   order: number;
+  userId: string;
+  users: string[];
 }
-
+export interface TaskUsersProps {
+  _id: string;
+  name?: string;
+  login: string;
+}
 export interface TaskUsers {
-  users: GetAllUsersProps[];
+  users: TaskUsersProps[];
+  setTaskOwnerUser: Dispatch<SetStateAction<TaskUsersProps | null>>;
+  setUserList: Dispatch<SetStateAction<boolean>>;
+  task: TaskProps;
 }

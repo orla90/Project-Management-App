@@ -3,14 +3,15 @@
 .task__users-list {
   position: absolute;
   z-index: 1;
-  bottom: -20px;
-  right: -10px;
+  bottom: -5px;
+  left: 40px;
   max-height: 200px;
   min-width: 60%;
   overflow-y: auto;
   background-color: $headerScrollColor;
   border-radius: 5px;
   font-family: 'Noto Serif', serif;
+  transition: all 0.3s ease 0s;
 }
 
 .task__users-item {

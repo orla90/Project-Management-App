@@ -14,6 +14,8 @@ $greenColor: #008000;
 $signPagesBackground: #6198ff;
 $accentColor: #eb5b72;
 $headerColor: #e1eeff;
+$lightPink: rgba(238, 174, 202, 1);
+$lightBlue: rgba(148, 187, 233, 1);
 
 @function rem($px) {
   $result: calc($px/ 16) + rem;

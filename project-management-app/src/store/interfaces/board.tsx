@@ -41,7 +41,7 @@ export interface TaskChangeParams extends TaskDeleteParams {
   users?: string[];
 }
 
-export interface GetAllUsersProps {
+export interface UserProps {
   _id?: string;
   name?: string;
   login?: string;

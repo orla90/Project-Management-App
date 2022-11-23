@@ -10,12 +10,12 @@
     border-radius: 10px;
     width: 100%;
     height: 10px;
-    cursor:pointer;
+    cursor: pointer;
   }
   ::-webkit-scrollbar-thumb {
     background-color: $accentColor;
-    border-radius:10px;
-    cursor:pointer;
+    border-radius: 10px;
+    cursor: pointer;
     transition: all 0.3s ease 0s;
   }
   ::-webkit-scrollbar-thumb:hover {
@@ -24,10 +24,11 @@
   }
 }
 
-
 .board-list__body {
   overflow-x: auto;
   position: relative;
+  height: 70vh;
+  background: radial-gradient(circle, $lightPink 0%, $lightBlue 100%);
 }
 
 .board__list {
@@ -35,7 +36,7 @@
   flex-direction: row;
   gap: rem(30);
   overflow-x: auto;
-  padding: 10px 0px;
+  padding: 10px;
 }
 
 .board__panel {

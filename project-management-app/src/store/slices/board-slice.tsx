@@ -8,7 +8,9 @@ import {
 import {
   deleteTaskFetch,
   editTaskFetch,
+  getTaskFetch,
   getTasksColumnFetch,
+  getUserFetch,
   getUsersFetch,
 } from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
@@ -112,6 +114,17 @@ export const boardSlice = createSlice({
       console.log('При обновлении задачи произошла ошибка rejected');
       state.overlay = false;
     });
+    builder.addCase(getTaskFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(getTaskFetch.fulfilled, (state) => {
+      console.log('Задача получена fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(getTaskFetch.rejected, (state) => {
+      console.log('При получении задачи произошла ошибка rejected');
+      state.overlay = false;
+    });
     builder.addCase(getUsersFetch.pending, (state) => {
       state.overlay = true;
     });
@@ -121,6 +134,17 @@ export const boardSlice = createSlice({
     });
     builder.addCase(getUsersFetch.rejected, (state) => {
       console.log('При получении пользователей произошла ошибка rejected');
+      state.overlay = false;
+    });
+    builder.addCase(getUserFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(getUserFetch.fulfilled, (state) => {
+      console.log('Пользователь получен fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(getUserFetch.rejected, (state) => {
+      console.log('При получении пользователя произошла ошибка rejected');
       state.overlay = false;
     });
   },
