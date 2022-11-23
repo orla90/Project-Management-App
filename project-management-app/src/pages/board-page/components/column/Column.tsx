@@ -25,7 +25,6 @@ const Column = ({ props }: { props: ColumnProps }) => {
   const [tasks, setTasks] = useState<Itasks[]>([]);
   const [order, setOrder] = useState<number>(0);
   useEffect(() => {
-    console.log('ЭФФЕКТ КОЛОНКИ');
     const getDataTaskas = async () => {
       const data = await dispatch(getTasksColumnFetch({ columnId: props._id! }));
       setOrder((data.payload as Itasks[]).length);

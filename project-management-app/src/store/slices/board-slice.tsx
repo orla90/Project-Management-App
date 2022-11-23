@@ -10,6 +10,10 @@ import {
   editTaskFetch,
   getTasksColumnFetch,
 } from 'store/actions-creators/board/task-actions';
+import {
+  inviteUserFetch,
+  uppdateUsersInBoard,
+} from 'store/actions-creators/invite-user/invite-user';
 import { ColumnProps } from 'store/interfaces/board';
 
 const initialState = {
@@ -17,6 +21,8 @@ const initialState = {
   columns: [] as ColumnProps[],
   overlay: false,
   columnOrder: 0,
+  inviteUserError: { en: '', ru: '' },
+  isErrorOrTrue: false,
 };
 
 export const boardSlice = createSlice({
@@ -32,6 +38,9 @@ export const boardSlice = createSlice({
     resetBordAndColumns: (state) => {
       state.columns = [];
       state.board = null;
+    },
+    resetInviteUserError: (state) => {
+      state.inviteUserError = { en: '', ru: '' };
     },
   },
   extraReducers: (builder) => {
@@ -58,11 +67,9 @@ export const boardSlice = createSlice({
       state.overlay = true;
     });
     builder.addCase(createColumnFetch.fulfilled, (state) => {
-      console.log('Создалась колонка fulfilled');
       state.overlay = false;
     });
     builder.addCase(createColumnFetch.rejected, (state) => {
-      console.log('При создании колонки что-то пошло не так rejected');
       state.overlay = false;
     });
 
@@ -70,11 +77,9 @@ export const boardSlice = createSlice({
       state.overlay = true;
     });
     builder.addCase(deleteColumnFetch.fulfilled, (state) => {
-      console.log('Удалена колонка fulfilled');
       state.overlay = false;
     });
     builder.addCase(deleteColumnFetch.rejected, (state) => {
-      console.log('При удалении произошла ошибка rejected');
       state.overlay = false;
     });
 
@@ -86,30 +91,47 @@ export const boardSlice = createSlice({
       state.overlay = false;
     });
     builder.addCase(getTasksColumnFetch.rejected, (state) => {
-      console.log('При получении заданий колонки произошла ошибка rejected');
       state.overlay = false;
     });
+
     builder.addCase(deleteTaskFetch.pending, (state) => {
       state.overlay = true;
     });
     builder.addCase(deleteTaskFetch.fulfilled, (state) => {
-      console.log('Удалена задача fulfilled');
       state.overlay = false;
     });
     builder.addCase(deleteTaskFetch.rejected, (state) => {
-      console.log('При удалении задачи произошла ошибка rejected');
       state.overlay = false;
     });
+
     builder.addCase(editTaskFetch.pending, (state) => {
       state.overlay = true;
     });
     builder.addCase(editTaskFetch.fulfilled, (state) => {
-      console.log('Задача обновлена fulfilled');
       state.overlay = false;
     });
     builder.addCase(editTaskFetch.rejected, (state) => {
-      console.log('При обновлении задачи произошла ошибка rejected');
       state.overlay = false;
+    });
+
+    builder.addCase(inviteUserFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(inviteUserFetch.rejected, (state, action) => {
+      state.overlay = false;
+      state.isErrorOrTrue = false;
+      state.inviteUserError = action.payload!;
+    });
+
+    builder.addCase(uppdateUsersInBoard.fulfilled, (state, action) => {
+      state.overlay = false;
+      state.isErrorOrTrue = true;
+      state.inviteUserError = action.payload;
+    });
+    builder.addCase(uppdateUsersInBoard.rejected, (state, action) => {
+      state.overlay = false;
+      state.isErrorOrTrue = false;
+      state.inviteUserError = action.payload!;
     });
   },
 });

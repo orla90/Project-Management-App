@@ -44,7 +44,7 @@ const initialState: IsignInitialState = {
   user: getUserData(),
   errorRegistration: i18ObjSingFetchResponses.empty,
   errorLogin: i18ObjSingFetchResponses.empty,
-  editMessage: i18ObjSingFetchResponses.empty,
+  editMessage: { en: 'asdasd', ru: 'adasdasd' },
   trueOrfalseEdit: false,
   overlay: false,
   language: (localStorage.getItem('language') as 'en' | 'ru') || 'en',

@@ -37,7 +37,18 @@
         }
       }
     }
-
+  }
+  &__login, &__id {
+    & span {
+      font-weight: 700;
+      font-size: rem(24);
+    }
+  }
+  &__login{
+    margin-bottom: 5px;
+  }
+  &__id {
+    margin-bottom: 20px;
   }
   &__button.main-page-btn{
     width: 100%;

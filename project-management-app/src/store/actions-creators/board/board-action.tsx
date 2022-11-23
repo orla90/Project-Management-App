@@ -76,24 +76,20 @@ export const getColumnsFetch = createAsyncThunk(
   'board/getColumns',
   async (props: ColumnProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
-    const board = state.boardSlice.board as IBoard | null;
-    if (board) {
-      return axios
-        .get(`${BACK_END_URL}boards/${board._id}/columns`, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${state.signSlice.user!.token}`,
-          },
-        })
-        .then((response) => {
-          return response.data.sort((a: ColumnProps, b: ColumnProps) => a.order! - b.order!);
-        })
-        .catch((error) => {
-          return rejectWithValue(error);
-        });
-    } else {
-      return rejectWithValue('no board in the storage');
-    }
+    const board = state.boardSlice.board! as IBoard;
+    return axios
+      .get(`${BACK_END_URL}boards/${board._id}/columns`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      })
+      .then((response) => {
+        return response.data.sort((a: ColumnProps, b: ColumnProps) => a.order! - b.order!);
+      })
+      .catch((error) => {
+        return rejectWithValue(error);
+      });
   }
 );
 

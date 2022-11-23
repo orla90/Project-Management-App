@@ -16,9 +16,13 @@ import { Navigate } from 'react-router-dom';
 import { ColumnProps } from 'store/interfaces/board';
 import { boardSlice } from 'store/slices/board-slice';
 import Column from './column/Column';
+import InviteUser from './invite-user/InviteUser';
+import { i18ObjInviteUSer } from 'texts/board/invite-user';
+import { key } from 'texts/footer/footer-text';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
+  const [inviteUser, setInviteUser] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
   const dispatch = useAppDispatch();
   const { resetBordAndColumns } = boardSlice.actions;
@@ -30,14 +34,12 @@ const BoardPage = () => {
     socket.on('columns', () => {
       dispatch(getColumnsFetch({}));
     });
-    console.log('сработал useEffect BOARD-PAGE');
     dispatch(getColumnsFetch({}));
-
     return () => {
       socket.close();
       dispatch(resetBordAndColumns());
     };
-  }, [dispatch, board]);
+  }, [dispatch, board, resetBordAndColumns]);
   return (
     <>
       {board === null && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}
@@ -47,7 +49,7 @@ const BoardPage = () => {
           <div className="board__panel">
             <CustomLink className="welcome-page__btn main-page-btn" to={`../${ROUTES.BOARDS_LIST}`}>
               {i18Obj[lang].back}
-            </CustomLink>{' '}
+            </CustomLink>
             <Modal
               open={addColumnModal}
               onClose={() => setAddColumnModal(false)}
@@ -68,6 +70,22 @@ const BoardPage = () => {
               }}
             >
               {i18Obj[lang].column}
+            </CustomButton>
+
+            <Modal
+              open={inviteUser}
+              onClose={() => setInviteUser(false)}
+              title={i18ObjInviteUSer[language as key].title}
+            >
+              {<InviteUser />}
+            </Modal>
+            <CustomButton
+              className="board__add-column-btn"
+              onClick={() => {
+                setInviteUser(true);
+              }}
+            >
+              {i18ObjInviteUSer[language as key].generalButton}
             </CustomButton>
           </div>
           <div className="board-list__body">
