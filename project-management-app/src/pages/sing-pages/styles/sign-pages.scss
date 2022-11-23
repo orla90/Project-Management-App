@@ -59,6 +59,10 @@
     width: 100%;
     background-color: $accentColor;
   }
+  &__error-submit {
+    text-align: center;
+    margin-bottom: 5px;
+  }
 }
 
 .edite-profile__error-submit.fulfielled {

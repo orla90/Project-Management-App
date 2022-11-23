@@ -47,7 +47,7 @@ const BoardPage = () => {
       <article className="board">
         <div className="board__container">
           <div className="board__panel">
-            <CustomLink className="welcome-page__btn main-page-btn" to={`../${ROUTES.BOARDS_LIST}`}>
+            <CustomLink className="board__btn main-page-btn" to={`../${ROUTES.BOARDS_LIST}`}>
               {i18Obj[lang].back}
             </CustomLink>
             <Modal
