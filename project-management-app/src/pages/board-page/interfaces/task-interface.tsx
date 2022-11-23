@@ -1,3 +1,5 @@
+import { GetAllUsersProps } from 'store/interfaces/board';
+
 export interface Itasks {
   boardId: string;
   columnId: string;
@@ -15,4 +17,8 @@ export interface TaskProps {
   taskId: string;
   columnId: string;
   order: number;
+}
+
+export interface TaskUsers {
+  users: GetAllUsersProps[];
 }

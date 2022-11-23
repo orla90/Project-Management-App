@@ -1,0 +1,23 @@
+@import '../../../../../mixins.scss';
+
+.task__users-list {
+  position: absolute;
+  z-index: 1;
+  bottom: -20px;
+  right: -10px;
+  max-height: 200px;
+  min-width: 60%;
+  overflow-y: auto;
+  background-color: $headerScrollColor;
+  border-radius: 5px;
+  font-family: 'Noto Serif', serif;
+}
+
+.task__users-item {
+  cursor: pointer;
+  padding: 3px 10px;
+  &:hover {
+    background-color: rgba(246, 237, 237, 0.944);
+    color: $greyColor;
+  }
+}

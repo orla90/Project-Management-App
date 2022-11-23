@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
-import { TaskDeleteParams, TaskChangeParams } from 'store/interfaces/board';
+import { TaskDeleteParams, TaskChangeParams, GetAllUsersProps } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
 
 export const getTasksColumnFetch = createAsyncThunk<
@@ -119,6 +119,27 @@ export const editTaskFetch = createAsyncThunk(
       .catch((error) => {
         console.log(error);
         return rejectWithValue(error.response.data.statusCode);
+      });
+  }
+);
+
+export const getUsersFetch = createAsyncThunk(
+  'board/getAllUsers',
+  async (props: GetAllUsersProps, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    return axios
+      .get(`${BACK_END_URL}users`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      })
+      .then((response) => {
+        return response.data.sort();
+      })
+      .catch((error) => {
+        console.log(error);
+        return rejectWithValue([]);
       });
   }
 );

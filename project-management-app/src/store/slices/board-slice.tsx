@@ -9,6 +9,7 @@ import {
   deleteTaskFetch,
   editTaskFetch,
   getTasksColumnFetch,
+  getUsersFetch,
 } from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
 
@@ -109,6 +110,17 @@ export const boardSlice = createSlice({
     });
     builder.addCase(editTaskFetch.rejected, (state) => {
       console.log('При обновлении задачи произошла ошибка rejected');
+      state.overlay = false;
+    });
+    builder.addCase(getUsersFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(getUsersFetch.fulfilled, (state) => {
+      console.log('Пользователи получены fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(getUsersFetch.rejected, (state) => {
+      console.log('При получении пользователей произошла ошибка rejected');
       state.overlay = false;
     });
   },
