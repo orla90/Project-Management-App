@@ -3,14 +3,32 @@
 .board {
   padding-top: rem(100);
   overflow: hidden;
+  scrollbar-color: $btnBgColor;
+  position: relative;
+  ::-webkit-scrollbar {
+    background-color: $btnBgColor;
+    border-radius: 10px;
+    width: 100%;
+    height: 10px;
+    cursor: pointer;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $accentColor;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+  }
 }
 
-.board__container {
-  overflow: hidden;
-}
-
-.board-list__container {
-  overflow: auto;
+.board-list__body {
+  overflow-x: auto;
+  position: relative;
+  height: 70vh;
+  background: radial-gradient(circle, $lightPink 0%, $lightBlue 100%);
 }
 
 .board__list {
@@ -18,13 +36,20 @@
   flex-direction: row;
   gap: rem(30);
   overflow-x: auto;
+  padding: 10px;
 }
 
 .board__panel {
   display: flex;
+  gap: 15px;
+  flex-wrap:wrap;
   margin: rem(30) 0;
 }
-
+.board__btn{
+  @media (max-width: em(380)){
+    margin: 0 auto;
+  }
+}
 .board__add-column-btn {
   font-size: rem(18);
   font-weight: 600;
@@ -33,13 +58,15 @@
   align-items: center;
   background-color: $headerScrollColor;
   color: $btnBgColor;
-  display: flex;
   gap: 5px;
   transition: all 0.3s ease 0s;
   border-radius: 15px;
   box-shadow: 0 0 0 0px $btnBgColor;
-  margin-left: rem(25);
   cursor: pointer;
+  @media (max-width: em(380)){
+    width: 100%;
+    text-align: center;
+  }
   &:hover {
     opacity: 0.8;
   }

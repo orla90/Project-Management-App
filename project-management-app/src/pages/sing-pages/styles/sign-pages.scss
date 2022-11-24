@@ -37,7 +37,18 @@
         }
       }
     }
-
+  }
+  &__login, &__id {
+    & span {
+      font-weight: 700;
+      font-size: rem(24);
+    }
+  }
+  &__login{
+    margin-bottom: 5px;
+  }
+  &__id {
+    margin-bottom: 20px;
   }
   &__button.main-page-btn{
     width: 100%;
@@ -47,6 +58,10 @@
   &__remove-user-button,&__remove-user-button.main-page-btn{
     width: 100%;
     background-color: $accentColor;
+  }
+  &__error-submit {
+    text-align: center;
+    margin-bottom: 5px;
   }
 }
 

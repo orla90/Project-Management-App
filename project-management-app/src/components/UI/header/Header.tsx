@@ -113,7 +113,10 @@ const Header = () => {
                 <div className="header_create-btn">
                   <button
                     className="main-page-btn-accent create-board-btn"
-                    onClick={() => setNewBoardModal(true)}
+                    onClick={() => {
+                      setNewBoardModal(true);
+                      closeHeaderMenuInLink();
+                    }}
                   >
                     {i18ObjHeader[language as key].createBoard}
                   </button>

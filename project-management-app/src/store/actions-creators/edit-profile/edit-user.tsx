@@ -12,7 +12,6 @@ export const editProfileFetch = createAsyncThunk<
   }
 >('user/editProfileFetch', async (props, { rejectWithValue }) => {
   const { login, name, password, id, token } = props;
-  console.log(token);
   return axios
     .put(
       `${BACK_END_URL}users/${id}`,
@@ -29,8 +28,6 @@ export const editProfileFetch = createAsyncThunk<
       }
     )
     .then((response) => {
-      console.log(response.data);
-
       return response.data;
     })
     .catch((error) => {

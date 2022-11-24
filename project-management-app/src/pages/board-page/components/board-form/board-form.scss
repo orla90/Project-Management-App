@@ -7,6 +7,9 @@
 
 .board-form__btn {
   min-width: 120px;
+  &_pink {
+    background-color: $pinkColor;
+  }
 }
 
 .board-form__btn-container {

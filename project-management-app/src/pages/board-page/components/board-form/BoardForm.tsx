@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from 'store/custom-hooks';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { useForm } from 'react-hook-form';
 import { Language } from 'pages/welcome-page/types/types';
 import i18Obj from 'texts/board/board-page';
@@ -7,22 +7,77 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import './board-form.scss';
 import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { FormValues } from 'pages/board-page/types/modal-types';
+import { createColumnFetch } from 'store/actions-creators/board/board-action';
+import { createTasksColumnFetch, editTaskFetch } from 'store/actions-creators/board/task-actions';
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
+  const { columnOrder } = useAppSelector((state) => state.boardSlice);
+  const user = useAppSelector((state) => state.signSlice.user);
   const lang = language.toString() as Language;
-
+  const dispatch = useAppDispatch();
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm<FormValues>({ mode: 'onChange' });
 
-  const onSubmit = handleSubmit(() => null);
+  const handleOnSubmit = (data: FormValues) => {
+    if (props.target === 'addColumn') {
+      handleAddColumn(data);
+    } else if (props.target === 'addTask') {
+      handleAddTask(data);
+    } else if (props.target === 'editTask') {
+      handleEditTask(data);
+    }
+  };
+
+  const handleAddColumn = async (data: FormValues) => {
+    try {
+      await dispatch(createColumnFetch({ title: data.title, order: columnOrder })).unwrap();
+      props.onClose();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const handleAddTask = async (data: FormValues) => {
+    try {
+      await dispatch(
+        createTasksColumnFetch({
+          title: data.title,
+          columnId: props.columnId!,
+          order: props.order || 0,
+          description: data.description || '',
+        })
+      ).unwrap();
+      props.onClose();
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const handleEditTask = async (data: FormValues) => {
+    try {
+      await dispatch(
+        editTaskFetch({
+          title: data.title,
+          columnId: props.columnId!,
+          taskId: props.taskId!,
+          description: data.description || '',
+          order: props.order || 0,
+          userId: user!.id,
+          users: [user!.id],
+        })
+      ).unwrap();
+      props.onClose();
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   return (
-    <form className="board-form__body" onSubmit={onSubmit}>
+    <form className="board-form__body" onSubmit={handleSubmit(handleOnSubmit)}>
       <div className="input-body">
         <label className="board-form__label">{i18Obj[lang].title}</label>
         <input
@@ -46,7 +101,7 @@ const BoardForm = (props: BoardFormModalProps) => {
         <CustomButton className="main-page-btn board-form__btn" onClick={props.onClose}>
           {i18Obj[lang].no}
         </CustomButton>
-        <CustomButton className="main-page-btn create-board-btn board-form__btn" type="submit">
+        <CustomButton className="main-page-btn board-form__btn board-form__btn_pink" type="submit">
           {i18Obj[lang].yes}
         </CustomButton>
       </div>
