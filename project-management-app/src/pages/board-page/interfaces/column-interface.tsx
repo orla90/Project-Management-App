@@ -8,4 +8,5 @@ export interface ColumnTitleEditProps {
   order: number;
   columnId: string;
   setTitleEditMode: (flag: boolean) => void;
+  title: string;
 }

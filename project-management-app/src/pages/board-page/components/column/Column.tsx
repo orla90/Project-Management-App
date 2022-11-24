@@ -41,6 +41,10 @@ const Column = ({ props }: { props: ColumnProps }) => {
     };
   }, [dispatch, props._id]);
 
+  useEffect(() => {
+    console.log(tasks);
+  }, [tasks]);
+
   return (
     <div className="column">
       <div className="column__info">
@@ -49,6 +53,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
             setTitleEditMode={setTitleEditMode}
             columnId={props._id!}
             order={props.order!}
+            title={props.title!}
           />
         ) : (
           <ColumnTitleConfirmed
@@ -59,19 +64,8 @@ const Column = ({ props }: { props: ColumnProps }) => {
         )}
       </div>
       <div className="column__content">
-        {tasks.map((a: Itasks) => {
-          return (
-            <Task
-              key={a._id}
-              title={a.title}
-              description={a.description}
-              taskId={a._id}
-              columnId={props._id!}
-              order={a.order}
-              userId={a.userId}
-              users={a.users}
-            />
-          );
+        {tasks.map((task: Itasks) => {
+          return <Task key={task._id} columnId={props._id!} task={task} />;
         })}
       </div>
       <div className="column__btn">

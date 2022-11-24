@@ -1,6 +1,6 @@
 import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
-import { TaskProps } from 'pages/board-page/interfaces/task-interface';
+import { TaskWithProps } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ import BoardForm from '../board-form/BoardForm';
 import './task.scss';
 import UsersList from './users-list/UsersList';
 
-const Task = (props: TaskProps) => {
+const Task = (props: TaskWithProps) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -20,8 +20,9 @@ const Task = (props: TaskProps) => {
   const lang = language.toString() as Language;
   const [userList, setUserList] = useState(false);
   const [taskOwnerUser, setTaskOwnerUser] = useState<string>(
-    findUserLogin(props.userId, usersLogins)
+    findUserLogin(props.task.userId, usersLogins)
   );
+  const [taskDetailedWindow, serTaskDetailedWindow] = useState(false);
 
   function findUserLogin(userID: string, obj: { [x: string]: string }): string {
     const newArr = Object.entries(obj);
@@ -34,10 +35,14 @@ const Task = (props: TaskProps) => {
     setUserList(!userList);
   };
 
+  const handleTaskOnClick = () => {
+    console.log('task');
+  };
+
   return (
-    <div className="task">
-      <h3 className="task__text_title">{props.title}</h3>
-      <p className="task__text_description">{props.description}</p>
+    <div className="task" onClick={() => handleTaskOnClick()}>
+      <h3 className="task__text_title">{props.task.title}</h3>
+      <p className="task__text_description">{props.task.description}</p>
       <div className="task__panel">
         <div className="task__panel_user">
           <CustomButton
@@ -65,7 +70,7 @@ const Task = (props: TaskProps) => {
             users={Object.keys(usersLogins)}
             setTaskOwnerUser={setTaskOwnerUser}
             setUserList={setUserList}
-            task={props}
+            task={props.task}
           />
         )}
       </div>
@@ -73,8 +78,8 @@ const Task = (props: TaskProps) => {
         open={deleteTaskModal}
         onClose={() => setDeleteTaskModal(false)}
         title={i18Obj[lang].deleteTask}
-        columnId={props.columnId}
-        taskId={props.taskId}
+        columnId={props.task.columnId}
+        taskId={props.task._id}
         target={'deleteTask'}
       />
       <Modal
@@ -86,10 +91,8 @@ const Task = (props: TaskProps) => {
           <BoardForm
             onClose={() => setEditTaskModal(false)}
             description={true}
-            columnId={props.columnId}
-            taskId={props.taskId}
             target={'editTask'}
-            order={props.order}
+            task={props.task}
           />
         }
       </Modal>

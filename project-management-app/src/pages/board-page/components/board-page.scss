@@ -42,11 +42,11 @@
 .board__panel {
   display: flex;
   gap: 15px;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   margin: rem(30) 0;
 }
-.board__btn{
-  @media (max-width: em(380)){
+.board__btn {
+  @media (max-width: em(380)) {
     margin: 0 auto;
   }
 }
@@ -63,7 +63,7 @@
   border-radius: 15px;
   box-shadow: 0 0 0 0px $btnBgColor;
   cursor: pointer;
-  @media (max-width: em(380)){
+  @media (max-width: em(380)) {
     width: 100%;
     text-align: center;
   }

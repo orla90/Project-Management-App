@@ -5,7 +5,7 @@ import { useAppDispatch } from 'store/custom-hooks';
 import './column-title-edit.scss';
 
 const ColumnTitleEdit = (props: ColumnTitleEditProps) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(props.title);
   const dispatch = useAppDispatch();
 
   return (

@@ -102,7 +102,7 @@ const BoardPage = () => {
           <div className="board-list__body">
             <div className="board__list">
               {columns.map((a: ColumnProps) => {
-                return <Column key={a.title} props={a} />;
+                return <Column key={a._id} props={a} />;
               })}
             </div>
           </div>
