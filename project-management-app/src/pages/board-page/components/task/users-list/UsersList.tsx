@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import './user-list.scss';
 
 const UsersList = (props: TaskUsers) => {
-  console.log(props);
   const { usersLogins } = useAppSelector((state) => state.boardSlice);
   const dispatch = useAppDispatch();
   const handleOnClick = async (user: string) => {
@@ -24,7 +23,7 @@ const UsersList = (props: TaskUsers) => {
       props.setUserList(false);
       props.setTaskOwnerUser(user);
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
 

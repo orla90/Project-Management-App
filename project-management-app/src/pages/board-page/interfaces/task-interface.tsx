@@ -14,6 +14,10 @@ export interface Itasks {
 export interface TaskWithProps {
   task: Itasks;
   columnId?: string;
+  setTaskDetailedWindow?: Dispatch<SetStateAction<boolean>>;
+  setEditTaskModal?: Dispatch<SetStateAction<boolean>>;
+  setDeleteTaskModal?: Dispatch<SetStateAction<boolean>>;
+  findUserLogin?: (userID: string, obj: { [x: string]: string }) => string;
 }
 export interface TaskUsersProps {
   _id: string;

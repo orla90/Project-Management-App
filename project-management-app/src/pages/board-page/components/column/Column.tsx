@@ -41,10 +41,6 @@ const Column = ({ props }: { props: ColumnProps }) => {
     };
   }, [dispatch, props._id]);
 
-  useEffect(() => {
-    console.log(tasks);
-  }, [tasks]);
-
   return (
     <div className="column">
       <div className="column__info">

@@ -1,0 +1,24 @@
+@import '../../../../mixins.scss';
+
+.task-detailed__description {
+  border: 3.5mm ridge rgba(0, 128, 0, 0.6);
+  padding: 15px;
+  font-family: 'Noto Serif', serif;
+  font-size: rem(16);
+  font-weight: 500;
+  line-height: 1.3;
+  color: $lightDarkColor;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  &::first-letter {
+    text-transform: capitalize;
+  }
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.task-detailed {
+  &_hidden {
+    display: none;
+  }
+}

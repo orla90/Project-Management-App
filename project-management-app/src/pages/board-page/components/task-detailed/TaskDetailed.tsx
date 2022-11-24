@@ -9,11 +9,10 @@ import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
-import TaskDetailed from '../task-detailed/TaskDetailed';
-import './task.scss';
-import UsersList from './users-list/UsersList';
+import UsersList from '../task/users-list/UsersList';
+import './task-detailed.scss';
 
-const Task = (props: TaskWithProps) => {
+const TaskDetailed = (props: TaskWithProps) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -21,43 +20,17 @@ const Task = (props: TaskWithProps) => {
   const lang = language.toString() as Language;
   const [userList, setUserList] = useState(false);
   const [taskOwnerUser, setTaskOwnerUser] = useState<string>(
-    findUserLogin(props.task.userId, usersLogins)
+    props.findUserLogin!(props.task.userId, usersLogins)
   );
-  const [taskDetailedWindow, setTaskDetailedWindow] = useState(false);
-
-  function findUserLogin(userID: string, obj: { [x: string]: string }): string {
-    const newArr = Object.entries(obj);
-    for (let i = 0; i < newArr.length; i++) {
-      if (newArr[i][1] === userID) return newArr[i][0];
-    }
-    return '';
-  }
-
-  const handleOnAssignBtnClick = () => {
-    setUserList(!userList);
-  };
-
-  const handleTaskOnClick = () => {
-    if (!taskDetailedWindow) {
-      setTaskDetailedWindow(true);
-    } else {
-      setTaskDetailedWindow(false);
-    }
-  };
 
   return (
-    <div className="task">
-      <h3 className="task__text_title" onClick={() => handleTaskOnClick()}>
-        {props.task.title}
-      </h3>
-      <p className="task__text_description" onClick={() => handleTaskOnClick()}>
-        {props.task.description}
-      </p>
+    <div className="task-detailed">
+      <p className="task-detailed__description">{props.task.description}</p>
       <div className="task__panel">
         <div className="task__panel_user">
           <CustomButton
             className="task__icon task__icon_assign"
-            onClick={() => handleOnAssignBtnClick()}
+            onClick={() => setUserList(!userList)}
           />
           <span className="task__text_user">{taskOwnerUser}</span>
         </div>
@@ -65,13 +38,15 @@ const Task = (props: TaskWithProps) => {
           <CustomButton
             className="task__icon task__icon_edit"
             onClick={() => {
-              setEditTaskModal(true);
+              props.setTaskDetailedWindow!(false);
+              props.setEditTaskModal!(true);
             }}
           />
           <CustomButton
             className="task__icon task__icon_bin"
             onClick={() => {
-              setDeleteTaskModal(true);
+              props.setTaskDetailedWindow!(false);
+              props.setDeleteTaskModal!(true);
             }}
           />
         </div>
@@ -106,21 +81,8 @@ const Task = (props: TaskWithProps) => {
           />
         }
       </Modal>
-      <Modal
-        open={taskDetailedWindow}
-        onClose={() => setTaskDetailedWindow(false)}
-        title={props.task.title}
-      >
-        <TaskDetailed
-          task={props.task}
-          setTaskDetailedWindow={setTaskDetailedWindow}
-          setEditTaskModal={setEditTaskModal}
-          setDeleteTaskModal={setDeleteTaskModal}
-          findUserLogin={findUserLogin}
-        />
-      </Modal>
     </div>
   );
 };
 
-export default Task;
+export default TaskDetailed;
