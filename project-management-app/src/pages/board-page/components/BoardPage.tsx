@@ -19,6 +19,8 @@ import Column from './column/Column';
 import InviteUser from './invite-user/InviteUser';
 import { i18ObjInviteUSer } from 'texts/board/invite-user';
 import { key } from 'texts/footer/footer-text';
+import { getAllUserLoginFetch } from 'store/actions-creators/board/task-actions';
+import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
@@ -30,16 +32,25 @@ const BoardPage = () => {
   const lang = language.toString() as Language;
 
   useEffect(() => {
+    const getAllUserLoginst = async () => {
+      (board! as IBoard).users.forEach(async (userID: string) => {
+        await dispatch(getAllUserLoginFetch({ id: userID }));
+      });
+    };
     const socket = io('https://react-final-project-production.up.railway.app/');
     socket.on('columns', () => {
       dispatch(getColumnsFetch({}));
     });
-    dispatch(getColumnsFetch({}));
+    if (board) {
+      dispatch(getColumnsFetch({}));
+      getAllUserLoginst();
+    }
     return () => {
       socket.close();
       dispatch(resetBordAndColumns());
     };
-  }, [dispatch, board, resetBordAndColumns]);
+  }, [dispatch, resetBordAndColumns, board]);
+
   return (
     <>
       {board === null && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}

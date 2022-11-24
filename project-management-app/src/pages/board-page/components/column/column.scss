@@ -1,6 +1,7 @@
 @import '../../../../mixins.scss';
 
 .column {
+  max-width: 300px;
   min-width: 300px;
   background-color: $logoBlueColor;
   border-radius: 5px;
