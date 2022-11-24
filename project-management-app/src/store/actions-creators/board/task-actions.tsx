@@ -25,8 +25,7 @@ export const getTasksColumnFetch = createAsyncThunk<
     .then((response) => {
       return response.data.sort((a: Itasks, b: Itasks) => a.order! - b.order!);
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return rejectWithValue([]);
     });
 });
@@ -60,8 +59,7 @@ export const createTasksColumnFetch = createAsyncThunk<
     .then((response) => {
       return response.data;
     })
-    .catch((error) => {
-      console.log(error);
+    .catch(() => {
       return rejectWithValue([]);
     });
 });
@@ -117,7 +115,6 @@ export const editTaskFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        console.log(error);
         return rejectWithValue(error.response.data.statusCode);
       });
   }

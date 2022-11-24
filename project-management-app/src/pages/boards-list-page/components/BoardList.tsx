@@ -28,12 +28,10 @@ const BoardList = () => {
     };
     const socket = io('https://react-final-project-production.up.railway.app/');
     socket.on('boards', () => {
-      console.log('СРАБОТАЛО ОБНОВЛЕНИЕ BOARDS-LIST');
       loadBoards();
     });
-    console.log(socket);
     loadBoards();
-  }, []);
+  }, [dispatch, user]);
 
   return (
     <>

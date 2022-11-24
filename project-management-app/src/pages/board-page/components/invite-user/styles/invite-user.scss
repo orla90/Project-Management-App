@@ -1,0 +1,21 @@
+@import './../../../../../mixins.scss';
+
+.invite-user {
+ &__button {
+  width: 100%;
+ }
+
+ &__error-submit {
+  position: relative;
+  top: -14px;
+  margin-bottom: 5px;
+  text-align: center;
+ }
+ 
+}  
+.error-response .invite-user__error-submit {
+    color: $redColor;
+  }
+.true-response .invite-user__error-submit {
+    color: $greenColor;
+  }

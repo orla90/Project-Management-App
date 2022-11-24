@@ -64,6 +64,14 @@ const EditProfile = () => {
             <h2> {i18ObjSign[language as key].singEdit}</h2>
           </div>
           <div className="edite-profile__body">
+            <div className="edite-profile__login">
+              <span>{`${i18ObjSign[language as key].login}: `}</span>
+              {user!.login}
+            </div>
+            <div className="edite-profile__id">
+              <span>{`ID: `}</span>
+              {user!.id}
+            </div>
             <form className="edite-profile__form custom-form" onSubmit={handleSubmit(onSubmit)}>
               <CustomInput
                 label={i18ObjSign[language as key].login}

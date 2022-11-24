@@ -39,8 +39,6 @@ const Header = () => {
     setOpenMenu((prev) => !prev);
   };
   const closeHeaderMenuInLink = () => {
-    console.log('aaaaaa');
-
     if (openMenu === true) {
       setOpenMenu((prev) => !prev);
       document.body.classList.remove('_lock');
