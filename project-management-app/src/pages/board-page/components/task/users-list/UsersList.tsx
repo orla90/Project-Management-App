@@ -1,12 +1,13 @@
 import { TaskUsers, TaskUsersProps } from 'pages/board-page/interfaces/task-interface';
 import React from 'react';
 import { editTaskFetch } from 'store/actions-creators/board/task-actions';
-import { useAppDispatch } from 'store/custom-hooks';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import './user-list.scss';
 
 const UsersList = (props: TaskUsers) => {
+  const { usersLogins } = useAppSelector((state) => state.boardSlice);
   const dispatch = useAppDispatch();
-  const handleOnClick = async (user: TaskUsersProps) => {
+  const handleOnClick = async (user: string) => {
     try {
       await dispatch(
         editTaskFetch({
@@ -15,8 +16,8 @@ const UsersList = (props: TaskUsers) => {
           taskId: props.task.taskId!,
           description: props.task.description || '',
           order: props.task.order || 0,
-          userId: user._id,
-          users: [user._id],
+          userId: usersLogins[user as keyof typeof usersLogins],
+          users: [...props.users],
         })
       ).unwrap();
       props.setUserList(false);
@@ -27,8 +28,8 @@ const UsersList = (props: TaskUsers) => {
   };
 
   const userItem = props.users.map((user) => (
-    <li className="task__users-item" key={user._id} onClick={() => handleOnClick(user)}>
-      {user.login}
+    <li className="task__users-item" key={user} onClick={() => handleOnClick(user)}>
+      {user}
     </li>
   ));
   return <ul className="task__users-list">{userItem}</ul>;

@@ -8,9 +8,9 @@ import {
 import {
   deleteTaskFetch,
   editTaskFetch,
+  getAllUserLoginFetch,
   getTaskFetch,
   getTasksColumnFetch,
-  getUserFetch,
   getUsersFetch,
 } from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
@@ -20,6 +20,7 @@ const initialState = {
   columns: [] as ColumnProps[],
   overlay: false,
   columnOrder: 0,
+  usersLogins: {},
 };
 
 export const boardSlice = createSlice({
@@ -136,16 +137,12 @@ export const boardSlice = createSlice({
       console.log('При получении пользователей произошла ошибка rejected');
       state.overlay = false;
     });
-    builder.addCase(getUserFetch.pending, (state) => {
-      state.overlay = true;
+    builder.addCase(getAllUserLoginFetch.fulfilled, (state, action) => {
+      const { payload } = action;
+      if (payload) state.usersLogins = { ...state.usersLogins, [payload.login]: payload._id };
     });
-    builder.addCase(getUserFetch.fulfilled, (state) => {
-      console.log('Пользователь получен fulfilled');
-      state.overlay = false;
-    });
-    builder.addCase(getUserFetch.rejected, (state) => {
-      console.log('При получении пользователя произошла ошибка rejected');
-      state.overlay = false;
+    builder.addCase(getAllUserLoginFetch.rejected, () => {
+      alert('Загрузка пользователей не удалась');
     });
   },
 });

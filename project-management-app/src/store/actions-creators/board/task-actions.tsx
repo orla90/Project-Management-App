@@ -166,12 +166,12 @@ export const getUsersFetch = createAsyncThunk(
   }
 );
 
-export const getUserFetch = createAsyncThunk(
-  'board/getUser',
-  async (props: UserProps, { getState, rejectWithValue }) => {
+export const getAllUserLoginFetch = createAsyncThunk(
+  'board/getLoginAndIDUser',
+  async (props: { id: string }, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     return axios
-      .get(`${BACK_END_URL}users/${props._id}`, {
+      .get(`${BACK_END_URL}users/${props.id}`, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${state.signSlice.user!.token}`,

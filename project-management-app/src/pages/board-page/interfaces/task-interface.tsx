@@ -26,8 +26,8 @@ export interface TaskUsersProps {
   login: string;
 }
 export interface TaskUsers {
-  users: TaskUsersProps[];
-  setTaskOwnerUser: Dispatch<SetStateAction<TaskUsersProps | null>>;
+  users: Array<string>;
+  setTaskOwnerUser: Dispatch<SetStateAction<string>>;
   setUserList: Dispatch<SetStateAction<boolean>>;
   task: TaskProps;
 }

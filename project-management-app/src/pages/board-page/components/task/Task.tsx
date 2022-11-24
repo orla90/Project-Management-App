@@ -1,11 +1,11 @@
 import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
-import { TaskProps, TaskUsersProps } from 'pages/board-page/interfaces/task-interface';
+import { TaskProps } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState } from 'react';
-import { getUserFetch, getUsersFetch } from 'store/actions-creators/board/task-actions';
-import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
+import {} from 'store/actions-creators/board/task-actions';
+import { useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
@@ -16,31 +16,20 @@ const Task = (props: TaskProps) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
   const [editTaskModal, setEditTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
+  const { usersLogins } = useAppSelector((state) => state.boardSlice);
   const lang = language.toString() as Language;
-  const [users, setUsers] = useState<TaskUsersProps[]>([]);
   const [userList, setUserList] = useState(false);
-  const dispatch = useAppDispatch();
-  const [taskOwnerUser, setTaskOwnerUser] = useState<TaskUsersProps | null>(null);
+  const [taskOwnerUser, setTaskOwnerUser] = useState<string>(
+    findUserLogin(props.userId, usersLogins)
+  );
 
-  useEffect(() => {
-    getAllUsers();
-    getTaskOwnerUser();
-  }, [dispatch]);
-
-  const getAllUsers = async () => {
-    await dispatch(getUsersFetch({}))
-      .unwrap()
-      .then((data) => setUsers(data))
-      .catch((e) => console.log(e));
-  };
-
-  const getTaskOwnerUser = async () => {
-    await dispatch(getUserFetch({ _id: props.userId }))
-      .unwrap()
-      .then((data) => setTaskOwnerUser(data))
-      .catch((e) => console.log(e));
-  };
-
+  function findUserLogin(userID: string, obj: { [x: string]: string }): string {
+    const newArr = Object.entries(obj);
+    for (let i = 0; i < newArr.length; i++) {
+      if (newArr[i][1] === userID) return newArr[i][0];
+    }
+    return '';
+  }
   const handleOnAssignBtnClick = () => {
     setUserList(!userList);
   };
@@ -55,7 +44,7 @@ const Task = (props: TaskProps) => {
             className="task__icon task__icon_assign"
             onClick={() => handleOnAssignBtnClick()}
           />
-          <span className="task__text_user">{taskOwnerUser?.login}</span>
+          <span className="task__text_user">{taskOwnerUser}</span>
         </div>
         <div className="task__panel_task">
           <CustomButton
@@ -73,7 +62,7 @@ const Task = (props: TaskProps) => {
         </div>
         {userList && (
           <UsersList
-            users={users}
+            users={Object.keys(usersLogins)}
             setTaskOwnerUser={setTaskOwnerUser}
             setUserList={setUserList}
             task={props}
