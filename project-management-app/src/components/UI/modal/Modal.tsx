@@ -23,7 +23,7 @@ function Modal(props: IModalProps) {
         modalRootElement.removeChild(element);
       };
     }
-  });
+  }, [element, open]);
 
   if (open) {
     return createPortal(

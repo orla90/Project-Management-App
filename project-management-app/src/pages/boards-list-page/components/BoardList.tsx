@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import BoardItem from './BoardItem';
 import './board-list.scss';
 import BoardItemAdd from './BoardItemAdd';

@@ -1,0 +1,14 @@
+@import '../../../mixins.scss';
+
+.delete-board__btn-wrapper {
+  display: flex;
+  justify-content: center;
+  .btn-yes {
+    width: 64px;
+    margin: 10px;
+  }
+  .btn-no {
+    margin: 10px;
+    background-color: $pinkColor;
+  }
+}

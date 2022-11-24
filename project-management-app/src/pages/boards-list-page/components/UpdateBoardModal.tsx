@@ -1,23 +1,25 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
-import { createBoardFetch } from 'store/actions-creators/boards/boards-action';
-import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
-import { useNavigate } from 'react-router-dom';
-import Modal from '../modal/Modal';
-import './newBoardModal.scss';
-import { ROUTES } from 'constants/routes';
-import i18Obj from 'texts/board/board-page';
+import Modal from 'components/UI/modal/Modal';
 import { Language } from 'pages/welcome-page/types/types';
-import { FormValues } from 'pages/board-page/types/modal-types';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { updateBoardFetch } from 'store/actions-creators/boards/boards-action';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
+import i18Obj from 'texts/board/board-page';
+import { FormValues } from '../types/FormValues';
+import { IBoard } from './interfaces/IBoard';
 
-interface INewBoardModalProps {
+interface IUpdateBoardModalProps {
+  board: IBoard;
   open: boolean;
   onClose: () => void;
 }
-
-function NewBoardModal(props: INewBoardModalProps) {
+function UpdateBoardModal(props: IUpdateBoardModalProps) {
   const { language } = useAppSelector((state) => state.languageSlice);
   const lang = language.toString() as Language;
+
+  const dispatch = useAppDispatch();
+
+  const [title, setTiyle] = useState(props.board.title);
 
   const {
     register,
@@ -26,26 +28,22 @@ function NewBoardModal(props: INewBoardModalProps) {
     reset,
   } = useForm<FormValues>({ mode: 'onChange' });
 
-  const { user } = useAppSelector((state) => state.signSlice);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
   const onSubmit = handleSubmit(async (data: FormValues) => {
-    dispatch(createBoardFetch({ title: data.title, owner: user!.id, users: [] }));
+    dispatch(updateBoardFetch({ ...props.board, title: data.title }));
+    setTiyle(data.title);
     reset({ title: '', description: '' });
     props.onClose();
-    navigate(ROUTES.BOARDS_LIST);
-    console.log('новая доска создалась');
   });
 
   return (
-    <Modal open={props.open} title={i18Obj[lang].createBoard} onClose={props.onClose}>
+    <Modal open={props.open} title={i18Obj[lang].updateBoard} onClose={props.onClose}>
       <div className="form-container">
         <form className="create-board__form" onSubmit={onSubmit}>
           <div className="input-body">
             <label className="create-board__label">{i18Obj[lang].title}</label>
             <input
               type="text"
+              defaultValue={title}
               {...register('title', {
                 required: i18Obj[lang].errorModal,
               })}
@@ -61,7 +59,7 @@ function NewBoardModal(props: INewBoardModalProps) {
           </div>
           <div className="create-board__btn-wrapper">
             <button type="submit" className="main-page-btn">
-              {i18Obj[lang].create}
+              {i18Obj[lang].save}
             </button>
           </div>
         </form>
@@ -70,4 +68,4 @@ function NewBoardModal(props: INewBoardModalProps) {
   );
 }
 
-export default NewBoardModal;
+export default UpdateBoardModal;

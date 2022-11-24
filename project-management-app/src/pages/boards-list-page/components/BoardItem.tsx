@@ -1,28 +1,41 @@
-import React from 'react';
-import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
+import React, { useState } from 'react';
 import './board-item.scss';
 import { IBoardItemProps } from './interfaces/IBoardItemProps';
-import { deleteBoardFetch } from '../../../store/actions-creators/boards/boards-action';
+import DeleteBoardModal from './DeleteBoardModal';
+import UpdateBoardModal from './UpdateBoardModal';
 
 const BoardItem = (props: IBoardItemProps) => {
-  const { boards } = useAppSelector((state) => state.boardListSlice);
-  const { user } = useAppSelector((state) => state.signSlice);
-  const dispatch = useAppDispatch();
-
-  const handleDelete = (e: React.MouseEvent<HTMLDivElement>) => {
-    dispatch(deleteBoardFetch({ id: props.board._id }));
-  };
+  const [deleteBoardModal, setDeleteBoardModal] = useState(false);
+  const [updateBoardModal, setUpdateBoardModal] = useState(false);
 
   return (
-    <div className="board-item">
-      <div className="board-item__link">
-        <div className="bord-item__icons">
-          <div className="column__icon column__icon_bin" onClick={handleDelete} />
-          <div className="column__icon column__icon_pen" />
+    <>
+      <div className="board-item">
+        <div className="board-item__link">
+          <div className="bord-item__icons">
+            <div
+              className="column__icon column__icon_bin"
+              onClick={() => setDeleteBoardModal(true)}
+            />
+            <div
+              className="column__icon column__icon_pen"
+              onClick={() => setUpdateBoardModal(true)}
+            />
+          </div>
+          <h3 className="board-item__title">{props.board.title}</h3>
         </div>
-        <h3 className="board-item__title">{props.board.title}</h3>
       </div>
-    </div>
+      <DeleteBoardModal
+        open={deleteBoardModal}
+        onClose={() => setDeleteBoardModal(false)}
+        id={props.board._id}
+      />
+      <UpdateBoardModal
+        open={updateBoardModal}
+        onClose={() => setUpdateBoardModal(false)}
+        board={props.board}
+      />
+    </>
   );
 };
 
