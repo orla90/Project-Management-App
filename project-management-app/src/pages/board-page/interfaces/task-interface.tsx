@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Itasks {
   boardId: string;
   columnId: string;
@@ -15,4 +17,17 @@ export interface TaskProps {
   taskId: string;
   columnId: string;
   order: number;
+  userId: string;
+  users: string[];
+}
+export interface TaskUsersProps {
+  _id: string;
+  name?: string;
+  login: string;
+}
+export interface TaskUsers {
+  users: Array<string>;
+  setTaskOwnerUser: Dispatch<SetStateAction<string>>;
+  setUserList: Dispatch<SetStateAction<boolean>>;
+  task: TaskProps;
 }

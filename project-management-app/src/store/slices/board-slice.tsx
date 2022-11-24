@@ -8,7 +8,10 @@ import {
 import {
   deleteTaskFetch,
   editTaskFetch,
+  getAllUserLoginFetch,
+  getTaskFetch,
   getTasksColumnFetch,
+  getUsersFetch,
 } from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
 
@@ -17,6 +20,7 @@ const initialState = {
   columns: [] as ColumnProps[],
   overlay: false,
   columnOrder: 0,
+  usersLogins: {},
 };
 
 export const boardSlice = createSlice({
@@ -110,6 +114,35 @@ export const boardSlice = createSlice({
     builder.addCase(editTaskFetch.rejected, (state) => {
       console.log('При обновлении задачи произошла ошибка rejected');
       state.overlay = false;
+    });
+    builder.addCase(getTaskFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(getTaskFetch.fulfilled, (state) => {
+      console.log('Задача получена fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(getTaskFetch.rejected, (state) => {
+      console.log('При получении задачи произошла ошибка rejected');
+      state.overlay = false;
+    });
+    builder.addCase(getUsersFetch.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(getUsersFetch.fulfilled, (state) => {
+      console.log('Пользователи получены fulfilled');
+      state.overlay = false;
+    });
+    builder.addCase(getUsersFetch.rejected, (state) => {
+      console.log('При получении пользователей произошла ошибка rejected');
+      state.overlay = false;
+    });
+    builder.addCase(getAllUserLoginFetch.fulfilled, (state, action) => {
+      const { payload } = action;
+      if (payload) state.usersLogins = { ...state.usersLogins, [payload.login]: payload._id };
+    });
+    builder.addCase(getAllUserLoginFetch.rejected, () => {
+      alert('Загрузка пользователей не удалась');
     });
   },
 });

@@ -24,6 +24,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
   const dispatch = useAppDispatch();
   const [tasks, setTasks] = useState<Itasks[]>([]);
   const [order, setOrder] = useState<number>(0);
+
   useEffect(() => {
     console.log('ЭФФЕКТ КОЛОНКИ');
     const getDataTaskas = async () => {
@@ -67,7 +68,9 @@ const Column = ({ props }: { props: ColumnProps }) => {
               description={a.description}
               taskId={a._id}
               columnId={props._id!}
-              order={order}
+              order={a.order}
+              userId={a.userId}
+              users={a.users}
             />
           );
         })}
