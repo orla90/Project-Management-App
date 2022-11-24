@@ -19,8 +19,6 @@ function UpdateBoardModal(props: IUpdateBoardModalProps) {
 
   const dispatch = useAppDispatch();
 
-  const [title, setTiyle] = useState(props.board.title);
-
   const {
     register,
     formState: { errors },
@@ -30,8 +28,7 @@ function UpdateBoardModal(props: IUpdateBoardModalProps) {
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
     dispatch(updateBoardFetch({ ...props.board, title: data.title }));
-    setTiyle(data.title);
-    reset({ title: '', description: '' });
+    reset({ description: '' });
     props.onClose();
   });
 
@@ -43,7 +40,7 @@ function UpdateBoardModal(props: IUpdateBoardModalProps) {
             <label className="create-board__label">{i18Obj[lang].title}</label>
             <input
               type="text"
-              defaultValue={title}
+              defaultValue={props.board.title}
               {...register('title', {
                 required: i18Obj[lang].errorModal,
               })}
