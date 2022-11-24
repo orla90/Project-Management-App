@@ -22,7 +22,7 @@ export const i18ObjSign = {
     questionIn: `Ещё нет аккаунта?`,
     singIn: 'Войти',
     singUp: 'Регистрация',
-    singEdit: 'Изменить профииль',
+    singEdit: 'Изменить профиль',
     change: 'Изменить',
     remove: 'Удалить аккаунт',
     submit: 'Подтвердить',
