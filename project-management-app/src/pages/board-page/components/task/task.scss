@@ -6,6 +6,7 @@
   padding: 10px;
   margin: 10px;
   position: relative;
+  cursor: pointer;
 }
 
 .task__panel,
@@ -53,14 +54,14 @@
     text-align: center;
     padding-bottom: 5px;
     overflow-wrap: break-word;
-    word-break:break-all;
+    word-break: break-all;
   }
   &_description {
     font-size: rem(16);
     font-weight: 500;
     line-height: 1.3;
     color: $lightDarkColor;
-    word-break:break-all;
+    word-break: break-all;
     overflow-wrap: break-word;
     &::first-letter {
       text-transform: capitalize;
