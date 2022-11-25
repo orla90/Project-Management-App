@@ -8,11 +8,24 @@
   padding: 10px;
   margin: 0 auto;
   height: fit-content;
+  @media (max-width: em(375)) {
+    max-width: 290px;
+    min-width: 290px;
+  }
 }
 
 .column__content {
-  max-height: 55vh;
+  max-height: 59vh;
   overflow-y: auto;
+  @media (max-width: em(1600)) {
+    max-height: 47vh;
+  }
+  @media (max-width: em(680)) {
+    max-height: 37vh;
+  }
+  @media (max-width: em(375)) {
+    max-height: 30vh;
+  }
 }
 
 body::-webkit-scrollbar-thumb {

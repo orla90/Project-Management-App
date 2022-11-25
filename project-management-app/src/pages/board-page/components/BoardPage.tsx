@@ -32,6 +32,7 @@ const BoardPage = () => {
   const lang = language.toString() as Language;
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
     const getAllUserLoginst = async () => {
       (board! as IBoard).users.forEach(async (userID: string) => {
         await dispatch(getAllUserLoginFetch({ id: userID }));
@@ -46,6 +47,7 @@ const BoardPage = () => {
       getAllUserLoginst();
     }
     return () => {
+      document.body.style.overflow = 'visible';
       socket.close();
       dispatch(resetBordAndColumns());
     };

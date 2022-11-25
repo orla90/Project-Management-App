@@ -27,8 +27,14 @@
 .board-list__body {
   overflow-x: auto;
   position: relative;
-  height: 70vh;
+  max-height: 75vh;
   background: radial-gradient(circle, $lightPink 0%, $lightBlue 100%);
+  @media (max-width: em(680)) {
+    max-height: 60vh;
+  }
+  @media (max-width: em(375)) {
+    max-height: 52vh;
+  }
 }
 
 .board__list {
@@ -37,6 +43,9 @@
   gap: rem(30);
   overflow-x: auto;
   padding: 10px;
+  @media (max-width: em(375)) {
+    padding: 10px 0;
+  }
 }
 
 .board__panel {
@@ -44,7 +53,15 @@
   gap: 15px;
   flex-wrap: wrap;
   margin: rem(30) 0;
+  @media (max-width: em(1400)) {
+    margin: 0 0 10px;
+    gap: 8px;
+  }
+  @media (max-width: em(540)) {
+    margin-bottom: 5px;
+  }
 }
+
 .board__btn {
   @media (max-width: em(380)) {
     margin: 0 auto;
