@@ -52,7 +52,7 @@ export const getBoardFetch = createAsyncThunk(
 );
 
 export const createColumnFetch = createAsyncThunk(
-  'board/addColumn',
+  'board/createColumn',
   async (props: ColumnProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
