@@ -6,7 +6,7 @@ import './styles/header.scss';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { signSlice } from 'store/slices/sign-slice';
 import { ROUTES } from 'constants/routes';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { languageSlice } from 'store/slices/language-slice';
 import NewBoardModal from '../new-board/NewBoardModal';
 import { i18ObjHeader, key } from 'texts/header/header-text';
@@ -20,6 +20,7 @@ const Header = () => {
   const headerRef = useRef(null);
   const { pathname } = useLocation();
   const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.onscroll = () => {
@@ -58,6 +59,7 @@ const Header = () => {
 
   const signOut = () => {
     localStorage.removeItem('user');
+    navigate(ROUTES.HOME);
     dispatch(removeUser());
   };
   return (
