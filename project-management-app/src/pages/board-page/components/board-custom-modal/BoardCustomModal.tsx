@@ -6,17 +6,33 @@ import { Language } from 'pages/welcome-page/types/types';
 import i18Obj from 'texts/board/board-page';
 import { CustomButton } from 'components/UI/button/CustomButton';
 import { CustomBoardModalProps } from 'pages/board-page/interfaces/modal-interfaces';
-import { deleteColumnFetch } from 'store/actions-creators/board/board-action';
+import { deleteColumnFetch, uppdateOrdersColumns } from 'store/actions-creators/board/board-action';
 import { deleteTaskFetch } from 'store/actions-creators/board/task-actions';
+import { ColumnProps } from 'store/interfaces/board';
+
+const reorderColumns = (id: string, columns: Array<ColumnProps>): Array<ColumnProps> => {
+  return columns
+    .filter((a: ColumnProps) => {
+      return a._id !== id;
+    })
+    .map((a: ColumnProps, i: number) => {
+      return {
+        _id: a._id,
+        order: i,
+      };
+    });
+};
 
 const BoardCustomModal = (props: CustomBoardModalProps) => {
   const dispatch = useAppDispatch();
   const { language } = useAppSelector((state) => state.languageSlice);
+  const { columns } = useAppSelector((state) => state.boardSlice);
   const lang = language.toString() as Language;
-
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     if (props.target === 'deleteColumn') {
-      dispatch(deleteColumnFetch({ columnId: props.columnId! }));
+      props.onClose();
+      await dispatch(uppdateOrdersColumns(reorderColumns(props.columnId, columns)));
+      await dispatch(deleteColumnFetch({ columnId: props.columnId! }));
     } else if (props.target === 'deleteTask') {
       dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId! }));
       props.onClose();

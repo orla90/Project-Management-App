@@ -4,6 +4,7 @@ import {
   deleteColumnFetch,
   getBoardFetch,
   getColumnsFetch,
+  uppdateOrdersColumns,
 } from 'store/actions-creators/board/board-action';
 import { MovingTheTask } from 'store/actions-creators/board/dnd-actions';
 import {
@@ -187,6 +188,9 @@ export const boardSlice = createSlice({
     });
 
     builder.addCase(MovingTheTask.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(uppdateOrdersColumns.pending, (state) => {
       state.overlay = true;
     });
   },

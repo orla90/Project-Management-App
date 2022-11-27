@@ -126,6 +126,8 @@ export const deleteColumnFetch = createAsyncThunk(
   async (props: IdeleteColumn, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    console.log(props);
+
     return axios
       .delete(`${BACK_END_URL}boards/${board._id}/columns/${props.columnId}`, {
         headers: {
@@ -139,5 +141,21 @@ export const deleteColumnFetch = createAsyncThunk(
       .catch((error) => {
         return rejectWithValue(error.response.data.statusCode);
       });
+  }
+);
+
+export const uppdateOrdersColumns = createAsyncThunk(
+  'board/uppdateOrdersColumns',
+  async (props: Array<ColumnProps>, { getState }) => {
+    const state = getState() as RootState;
+    return axios
+      .patch(`${BACK_END_URL}columnsSet`, props, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      })
+      .then((response) => response.data)
+      .catch(() => alert('Что-то пошло не так при обновлении очерёдности колонок'));
   }
 );
