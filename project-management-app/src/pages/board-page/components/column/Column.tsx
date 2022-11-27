@@ -3,9 +3,7 @@ import Modal from 'components/UI/modal/Modal';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
 import React, { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
-import { getTasksColumnFetch } from 'store/actions-creators/board/task-actions';
-import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
+import { useAppSelector } from 'store/custom-hooks';
 import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';
 import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
@@ -14,33 +12,23 @@ import Task from '../task/Task';
 import ColumnTitleConfirmed from './column-title-confirmed/ColumnTitleConfirmed';
 import ColumnTitleEdit from './column-title-edit/ColumnTitleEdit';
 import './column.scss';
+import { Droppable } from 'react-beautiful-dnd';
 
 const Column = ({ props }: { props: ColumnProps }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
   const [deleteColumnModal, setDeleteColumnModal] = useState(false);
   const [addTaskModal, setAddTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
+  const { tasks } = useAppSelector((state) => state.boardSlice);
+  const [taskColumn, setTaskColumn] = useState(
+    tasks[props._id! as keyof typeof tasks] ? tasks[props._id! as keyof typeof tasks] : []
+  );
   const lang = language.toString() as Language;
-  const dispatch = useAppDispatch();
-  const [tasks, setTasks] = useState<Itasks[]>([]);
-  const [order, setOrder] = useState<number>(0);
 
   useEffect(() => {
-    const getDataTaskas = async () => {
-      const data = await dispatch(getTasksColumnFetch({ columnId: props._id! }));
-      setOrder((data.payload as Itasks[]).length);
-      setTasks(data.payload as Itasks[]);
-    };
-    const socket = io('https://react-final-project-production.up.railway.app/');
-    socket.on('tasks', () => {
-      getDataTaskas();
-    });
-    getDataTaskas();
-    return () => {
-      socket.close();
-    };
-  }, [dispatch, props._id]);
-
+    setTaskColumn(tasks[props._id! as keyof typeof tasks] || []);
+    console.log('USEEFFECT COLUMN-PAGE', taskColumn);
+  }, [tasks]);
   return (
     <div className="column">
       <div className="column__info">
@@ -59,11 +47,18 @@ const Column = ({ props }: { props: ColumnProps }) => {
           />
         )}
       </div>
-      <div className="column__content">
-        {tasks.map((task: Itasks) => {
-          return <Task key={task._id} columnId={props._id!} task={task} />;
-        })}
-      </div>
+
+      <Droppable droppableId={props._id!}>
+        {(provided) => (
+          <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
+            {(taskColumn as Array<Itasks>).map((task: Itasks) => {
+              return <Task key={task._id} columnId={props._id!} task={task} />;
+            })}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+
       <div className="column__btn">
         <CustomButton className="main-page-btn" onClick={() => setAddTaskModal(true)}>
           {i18Obj[lang].task}
@@ -75,7 +70,6 @@ const Column = ({ props }: { props: ColumnProps }) => {
         title={i18Obj[lang].deleteColumn}
         columnId={props._id!}
         target={'deleteColumn'}
-        setTasks={setTasks}
       />
       <Modal
         open={addTaskModal}
@@ -88,7 +82,6 @@ const Column = ({ props }: { props: ColumnProps }) => {
             description={true}
             columnId={props._id}
             target={'addTask'}
-            order={order}
           />
         }
       </Modal>

@@ -10,6 +10,10 @@ import {
   IuppdateTitle,
 } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ERRORS_CODE } from 'constants/errors';
+import i18Obj from 'texts/errors-and-warnings/translate';
 
 export const getvFetch = createAsyncThunk(
   'boards/getBoards',
@@ -52,7 +56,7 @@ export const getBoardFetch = createAsyncThunk(
 );
 
 export const createColumnFetch = createAsyncThunk(
-  'board/addColumn',
+  'board/createColumn',
   async (props: ColumnProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
@@ -64,9 +68,16 @@ export const createColumnFetch = createAsyncThunk(
         },
       })
       .then((response) => {
+        if (response.status === 400) {
+          console.log('ooops', response);
+          toast.error('oops!');
+        }
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestColumnAdd}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }

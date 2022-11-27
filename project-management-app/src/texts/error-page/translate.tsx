@@ -5,7 +5,7 @@ const i18Obj = {
     goHome: 'Go to home',
   },
   ru: {
-    ooops: 'Ууупс...',
+    ooops: 'Упс...',
     notFound: 'Страница не найдена',
     goHome: 'Вернуться на главную',
   },

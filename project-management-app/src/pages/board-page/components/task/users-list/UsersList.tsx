@@ -23,7 +23,7 @@ const UsersList = (props: TaskUsers) => {
       props.setUserList(false);
       props.setTaskOwnerUser(user);
     } catch (error) {
-      console.log(error);
+      alert('Что-то пошло не так, попробуй перезагрузить страницу');
     }
   };
 

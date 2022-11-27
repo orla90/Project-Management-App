@@ -1,3 +1,5 @@
+import { Language } from 'pages/welcome-page/types/types';
+
 export interface BoardsProps {
   title?: string;
   owner?: string;
@@ -13,6 +15,7 @@ export interface ColumnProps {
   title?: string;
   order?: number;
   boardId?: string;
+  lang?: Language;
 }
 
 export interface BoardWithColumnsProps {
