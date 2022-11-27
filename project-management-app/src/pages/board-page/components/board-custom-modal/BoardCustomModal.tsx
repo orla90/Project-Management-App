@@ -31,7 +31,8 @@ const BoardCustomModal = (props: CustomBoardModalProps) => {
   const handleOnClick = async () => {
     if (props.target === 'deleteColumn') {
       props.onClose();
-      await dispatch(uppdateOrdersColumns(reorderColumns(props.columnId, columns)));
+      const reorderedCOlumns = reorderColumns(props.columnId, columns);
+      if (reorderedCOlumns.length > 0) await dispatch(uppdateOrdersColumns(reorderedCOlumns));
       await dispatch(deleteColumnFetch({ columnId: props.columnId! }));
     } else if (props.target === 'deleteTask') {
       dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId! }));

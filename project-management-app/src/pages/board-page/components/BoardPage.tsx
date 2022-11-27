@@ -62,8 +62,8 @@ const BoardPage = () => {
         getColumnsAndTasks();
       }
     });
-    socket.on('tasks', () => {
-      console.log('WEBSOCKET TASKS');
+    socket.on('tasks', (message) => {
+      console.log('WEBSOCKET TASKS', message);
       dispatch(getAllBoardTasksFetch({}));
     });
     return () => {

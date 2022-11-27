@@ -12,7 +12,7 @@ import Task from '../task/Task';
 import ColumnTitleConfirmed from './column-title-confirmed/ColumnTitleConfirmed';
 import ColumnTitleEdit from './column-title-edit/ColumnTitleEdit';
 import './column.scss';
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { Droppable } from 'react-beautiful-dnd';
 
 const Column = ({ props }: { props: ColumnProps }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
