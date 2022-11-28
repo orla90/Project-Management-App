@@ -67,12 +67,21 @@ export const createColumnFetch = createAsyncThunk(
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
     return axios
-      .post(`${BACK_END_URL}boards/${board._id}/columns`, props, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${state.signSlice.user!.token}`,
+      .post(
+        `${BACK_END_URL}boards/${board._id}/columns`,
+        {
+          title: props.title,
+          _id: props._id,
+          boardId: props.boardId,
+          order: props.order,
         },
-      })
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${state.signSlice.user!.token}`,
+          },
+        }
+      )
       .then((response) => {
         return response.data;
       })

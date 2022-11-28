@@ -1,3 +1,4 @@
+import { Language } from 'pages/welcome-page/types/types';
 import { AppDispatch } from 'store/types/types-redux';
 
 export interface IeditProfileProps {
@@ -7,4 +8,5 @@ export interface IeditProfileProps {
   id: string;
   token: string;
   dispatch: AppDispatch;
+  lang: Language;
 }

@@ -1,5 +1,3 @@
-import { Language } from 'pages/welcome-page/types/types';
-
 export type dataTasks = {
   _id: string;
   title: string;

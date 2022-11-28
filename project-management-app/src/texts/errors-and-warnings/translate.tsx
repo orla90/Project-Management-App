@@ -14,6 +14,10 @@ const i18Obj = {
     badRequestGetAllUsersLogin: 'Failed to get the users. Please try again later.',
     badRequestCreateBoard: 'Failed to create a board. Please try again later.',
     badRequestDeleteUser: 'Failed to delete a user. Please try again later.',
+    badRequestEditProfile: 'Failed to edit a profile. Please try again later.',
+    badRequestUserSignIn: 'Failed to sign in. Please check that the data entered is correct.',
+    badRequestUserSignUp: 'Failed to sign up. Please try again later.',
+    goodResponseEditProfile: 'Profile data updated successfully.',
   },
   ru: {
     badRequestColumnAdd: 'Не удалось создать список. Пожалуйста, повторите попытку позднее.',
@@ -34,6 +38,12 @@ const i18Obj = {
       'Не удалось получить данные пользователей. Пожалуйста, повторите попытку позднее.',
     badRequestCreateBoard: 'Не удалось создать доску. Пожалуйста, повторите попытку позднее.',
     badRequestDeleteUser: 'Не удалось удалить пользователя. Пожалуйста, повторите попытку позднее.',
+    badRequestEditProfile:
+      'Не удалось отредактировать профиль. Пожалуйста, повторите попытку позднее.',
+    badRequestUserSignIn:
+      'Не удалось авторизоваться. Пожалуйста, убедитесь, что данные введены корректно.',
+    badRequestUserSignUp: 'Не удалось зарегистрироваться. Пожалуйста, повторите попытку позднее.',
+    goodResponseEditProfile: 'Данные профиля успешно обновлены.',
   },
 };
 export default i18Obj;

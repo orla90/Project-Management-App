@@ -1,9 +1,11 @@
 import { CustomLink } from 'components/UI/custom-link/CustomLink';
 import CustomInput from 'components/UI/input/CustomInput';
 import Overlay from 'components/UI/overlay/Overlay';
+import { Language } from 'pages/welcome-page/types/types';
 import React, { useEffect } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { signInFetch } from 'store/actions-creators/sing-in-sing-up/sign-in-action';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { IsignProps } from 'store/interfaces/sign-up-props';
@@ -23,6 +25,7 @@ const SignIn = () => {
   const { setSubmitErrorLogin } = signSlice.actions;
   const { overlay, user } = useAppSelector((state) => state.signSlice);
   const { errorLogin, language } = useAppSelector((state) => state.signSlice);
+  const lang = language.toString() as Language;
 
   useEffect(() => {
     return () => {
@@ -31,7 +34,7 @@ const SignIn = () => {
   }, [dispatch, setSubmitErrorLogin]);
 
   const onSubmit: SubmitHandler<FieldValues> = (e) => {
-    dispatch(signInFetch(e as IsignProps));
+    dispatch(signInFetch({ ...e, lang: lang } as IsignProps));
   };
   return (
     <>
@@ -91,6 +94,7 @@ const SignIn = () => {
             </form>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

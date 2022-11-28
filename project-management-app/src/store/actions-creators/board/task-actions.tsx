@@ -222,7 +222,7 @@ export const createTasksColumnFetch = createAsyncThunk<
       return response.data;
     })
     .catch((error) => {
-      console.log(error);
+      console.log('here', error);
       if (error.code === ERRORS_CODE.BAD_REQUEST) {
         toast.error(`${i18Obj[props.lang!].badRequestTaskAdd}`);
       }

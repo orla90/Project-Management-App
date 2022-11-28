@@ -24,11 +24,19 @@ export const createBoardFetch = createAsyncThunk(
   async (props: ICreateBoardProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     return axios
-      .post(`${BACK_END_URL}boards`, props, {
-        headers: {
-          Authorization: `Bearer ${state.signSlice.user!.token}`,
+      .post(
+        `${BACK_END_URL}boards`,
+        {
+          title: props.title,
+          owner: props.owner,
+          users: props.users,
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${state.signSlice.user!.token}`,
+          },
+        }
+      )
       .then((response) => {
         return response.data;
       })

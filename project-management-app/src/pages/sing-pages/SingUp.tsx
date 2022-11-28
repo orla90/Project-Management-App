@@ -13,6 +13,8 @@ import { key } from 'texts/header/header-text';
 import { i18ObjSign } from 'texts/sign/sing-text';
 import { i18ObjSingFetchResponses } from 'texts/sign/sing-fetch-responses-text';
 import CustomInput from 'components/UI/input/CustomInput';
+import { Language } from 'pages/welcome-page/types/types';
+import { ToastContainer } from 'react-toastify';
 
 const SignUp = () => {
   const {
@@ -24,6 +26,7 @@ const SignUp = () => {
   const dispatch = useAppDispatch();
   const { overlay, user, errorRegistration, language } = useAppSelector((state) => state.signSlice);
   const { setSubmitErrorRegistration } = signSlice.actions;
+  const lang = language.toString() as Language;
 
   useEffect(() => {
     return () => {
@@ -32,7 +35,7 @@ const SignUp = () => {
   }, [dispatch, setSubmitErrorRegistration]);
 
   const onSubmit: SubmitHandler<FieldValues> = (e) => {
-    dispatch(signUpFetch({ ...e, dispatch } as IsignProps));
+    dispatch(signUpFetch({ ...e, dispatch, lang: lang } as IsignProps));
   };
   return (
     <>
@@ -115,6 +118,7 @@ const SignUp = () => {
               </button>
             </form>
           </div>
+          <ToastContainer />
         </div>
       </div>
     </>

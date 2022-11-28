@@ -1,10 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
-import { ERRORS_CODE } from 'constants/errors';
-import { toast } from 'react-toastify';
 import { RootState } from 'store/types/types-redux';
-import i18Obj from 'texts/errors-and-warnings/translate';
 import { dataTask } from './sort-data-all-tasks-fn';
 
 export const MovingTheTask = createAsyncThunk(

@@ -8,7 +8,7 @@ import { IBoard } from './interfaces/IBoard';
 import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 import { Language } from 'pages/welcome-page/types/types';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 
 const BoardList = () => {
   const [boards, setBoards] = useState<IBoard[]>([]);
