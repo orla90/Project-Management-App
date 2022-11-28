@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { useForm } from 'react-hook-form';
 import { Language } from 'pages/welcome-page/types/types';
@@ -9,11 +9,11 @@ import { BoardFormModalProps } from 'pages/board-page/interfaces/modal-interface
 import { FormValues } from 'pages/board-page/types/modal-types';
 import { createColumnFetch } from 'store/actions-creators/board/board-action';
 import { createTasksColumnFetch, editTaskFetch } from 'store/actions-creators/board/task-actions';
+import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 
 const BoardForm = (props: BoardFormModalProps) => {
   const { language } = useAppSelector((state) => state.languageSlice);
-  const { columnOrder } = useAppSelector((state) => state.boardSlice);
-  const user = useAppSelector((state) => state.signSlice.user);
+  const { columnOrder, tasks } = useAppSelector((state) => state.boardSlice);
   const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
   const {
@@ -21,6 +21,9 @@ const BoardForm = (props: BoardFormModalProps) => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>({ mode: 'onChange' });
+
+  const [title, setTitle] = useState(props.task?.title || '');
+  const [description, setDescription] = useState(props.task?.description || '');
 
   const handleOnSubmit = (data: FormValues) => {
     if (props.target === 'addColumn') {
@@ -47,7 +50,7 @@ const BoardForm = (props: BoardFormModalProps) => {
         createTasksColumnFetch({
           title: data.title,
           columnId: props.columnId!,
-          order: props.order || 0,
+          order: (tasks[props.columnId as keyof typeof tasks] as Array<dataTasks>)?.length || 0,
           description: data.description || '',
         })
       ).unwrap();
@@ -62,12 +65,12 @@ const BoardForm = (props: BoardFormModalProps) => {
       await dispatch(
         editTaskFetch({
           title: data.title,
-          columnId: props.columnId!,
-          taskId: props.taskId!,
+          columnId: props.task!.columnId!,
+          taskId: props.task!._id!,
           description: data.description || '',
-          order: props.order || 0,
-          userId: user!.id,
-          users: [user!.id],
+          order: props.task!.order,
+          userId: props.task!.userId,
+          users: props.task!.users,
         })
       ).unwrap();
       props.onClose();
@@ -85,6 +88,8 @@ const BoardForm = (props: BoardFormModalProps) => {
           {...register('title', {
             required: `${i18Obj[lang].required}`,
           })}
+          onChange={(e) => setTitle(e.target.value)}
+          value={title}
         ></input>
         {errors.title?.type === 'required' && (
           <div className="board-form__error">{i18Obj[lang].required}</div>
@@ -93,7 +98,12 @@ const BoardForm = (props: BoardFormModalProps) => {
       {props.description && (
         <div className="input-body">
           <label>{i18Obj[lang].description}</label>
-          <textarea {...register('description')} rows={4}></textarea>
+          <textarea
+            {...register('description')}
+            rows={4}
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
+          ></textarea>
           <div className="form-error"></div>
         </div>
       )}

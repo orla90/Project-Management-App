@@ -3,8 +3,9 @@ import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
-import { TaskDeleteParams, TaskChangeParams, UserProps } from 'store/interfaces/board';
+import { TaskDeleteParams, TaskChangeParams, UserProps, BoardsProps } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
+import { dataTasks, sortArr } from './sort-data-all-tasks-fn';
 
 export const getTasksColumnFetch = createAsyncThunk<
   Itasks,
@@ -30,37 +31,28 @@ export const getTasksColumnFetch = createAsyncThunk<
     });
 });
 
-export const createTasksColumnFetch = createAsyncThunk<
-  Itasks,
-  { columnId: string; title: string; description: string; order: number },
+export const getAllBoardTasksFetch = createAsyncThunk<
+  { [x: string]: Array<dataTasks> },
+  BoardsProps,
   {
-    rejectValue: [];
+    rejectValue: string;
   }
->('board/createTasksColumn', async (props, { getState, rejectWithValue }) => {
+>('board/getAllBoardTasks', async (props: BoardsProps, { getState, rejectWithValue }) => {
   const state = getState() as RootState;
   const board = state.boardSlice.board! as IBoard;
   return axios
-    .post(
-      `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks`,
-      {
-        title: props.title,
-        order: props.order,
-        description: props.description,
-        userId: state.signSlice.user?.id,
-        users: board.users,
+    .get(`${BACK_END_URL}tasksSet/${board._id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${state.signSlice.user!.token}`,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${state.signSlice.user?.token}`,
-          Accept: 'application/json',
-        },
-      }
-    )
+    })
     .then((response) => {
-      return response.data;
+      console.log('all tasks', response.data);
+      return sortArr(response.data);
     })
     .catch(() => {
-      return rejectWithValue([]);
+      return rejectWithValue('error');
     });
 });
 
@@ -136,7 +128,6 @@ export const getTaskFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        console.log(error);
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -157,7 +148,6 @@ export const getUsersFetch = createAsyncThunk(
         return response.data.sort();
       })
       .catch((error) => {
-        console.log(error);
         return rejectWithValue([]);
       });
   }
@@ -178,8 +168,41 @@ export const getAllUserLoginFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        console.log(error);
         return rejectWithValue([]);
       });
   }
 );
+
+export const createTasksColumnFetch = createAsyncThunk<
+  Itasks,
+  { columnId: string; title: string; description: string; order: number },
+  {
+    rejectValue: [];
+  }
+>('board/createTasksColumn', async (props, { getState, rejectWithValue }) => {
+  const state = getState() as RootState;
+  const board = state.boardSlice.board! as IBoard;
+  return axios
+    .post(
+      `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks`,
+      {
+        title: props.title,
+        order: props.order,
+        description: props.description,
+        userId: state.signSlice.user?.id,
+        users: board.users,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${state.signSlice.user?.token}`,
+          Accept: 'application/json',
+        },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    })
+    .catch(() => {
+      return rejectWithValue([]);
+    });
+});

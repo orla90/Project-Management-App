@@ -5,9 +5,11 @@ import {
   getBoardFetch,
   getColumnsFetch,
 } from 'store/actions-creators/board/board-action';
+import { MovingTheTask } from 'store/actions-creators/board/dnd-actions';
 import {
   deleteTaskFetch,
   editTaskFetch,
+  getAllBoardTasksFetch,
   getAllUserLoginFetch,
   getTaskFetch,
   getTasksColumnFetch,
@@ -24,6 +26,7 @@ const initialState = {
   columns: [] as ColumnProps[],
   overlay: false,
   columnOrder: 0,
+  tasks: {},
   inviteUserError: { en: '', ru: '' },
   isErrorOrTrue: false,
   usersLogins: {},
@@ -45,6 +48,9 @@ export const boardSlice = createSlice({
     },
     resetInviteUserError: (state) => {
       state.inviteUserError = { en: '', ru: '' };
+    },
+    setNewOrdersTasks: (state, action) => {
+      state.tasks = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -147,6 +153,7 @@ export const boardSlice = createSlice({
       console.log('При получении задачи произошла ошибка rejected');
       state.overlay = false;
     });
+
     builder.addCase(getUsersFetch.pending, (state) => {
       state.overlay = true;
     });
@@ -158,12 +165,29 @@ export const boardSlice = createSlice({
       console.log('При получении пользователей произошла ошибка rejected');
       state.overlay = false;
     });
+
     builder.addCase(getAllUserLoginFetch.fulfilled, (state, action) => {
       const { payload } = action;
       if (payload) state.usersLogins = { ...state.usersLogins, [payload.login]: payload._id };
     });
     builder.addCase(getAllUserLoginFetch.rejected, () => {
       alert('Загрузка пользователей не удалась');
+    });
+
+    builder.addCase(getAllBoardTasksFetch.pending, (state) => {
+      console.log('получен массив всех задач');
+      state.overlay = true;
+    });
+    builder.addCase(getAllBoardTasksFetch.fulfilled, (state, action) => {
+      state.tasks = action.payload;
+      state.overlay = false;
+    });
+    builder.addCase(getAllBoardTasksFetch.rejected, (state) => {
+      state.overlay = false;
+    });
+
+    builder.addCase(MovingTheTask.pending, (state) => {
+      state.overlay = true;
     });
   },
 });
