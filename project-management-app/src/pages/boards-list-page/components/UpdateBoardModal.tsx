@@ -1,6 +1,6 @@
 import Modal from 'components/UI/modal/Modal';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { updateBoardFetch } from 'store/actions-creators/boards/boards-action';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
