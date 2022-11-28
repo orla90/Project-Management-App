@@ -41,7 +41,8 @@ const BoardItem = (props: IBoardItemProps) => {
               }}
             />
           </div>
-          <h3 className="board-item__title">{props.board.title}</h3>
+          <h3 className="board-item__title">{props.board.title.title}</h3>
+          <p className="board-item__description">{props.board.title.description}</p>
         </div>
       </div>
       <DeleteBoardModal

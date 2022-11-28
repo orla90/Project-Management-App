@@ -1,13 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
+import { IModalProps } from './interfaces/IModalProps';
 import './modal.scss';
-
-interface IModalProps {
-  open: boolean;
-  title: string;
-  children: React.ReactNode;
-  onClose: () => void;
-}
 
 const modalRootElement = document.querySelector('#modal-root')!;
 

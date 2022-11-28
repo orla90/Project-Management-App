@@ -9,7 +9,7 @@ import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 
 const BoardList = () => {
-  const [allBoards, setBoards] = useState<IBoard[]>([]);
+  const [, setBoards] = useState<IBoard[]>([]);
   const [overlay, setOverlay] = useState(false);
   const { user } = useAppSelector((state) => state.signSlice);
   const { boards } = useAppSelector((state) => state.boardListSlice);

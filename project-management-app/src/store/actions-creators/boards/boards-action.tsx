@@ -1,35 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
+import { ICreateBoardProps } from 'store/interfaces/ICreateBoardProps';
+import { IDeleteBoardProps } from 'store/interfaces/IDeleteBoardProps';
+import { IGetBoardsByUserIdProps } from 'store/interfaces/IGetBoardByUserIdProps';
+import { IServerBoard } from 'store/interfaces/IServerBoard';
+import { IUpdateBoardProps } from 'store/interfaces/IUpdateBoardProps';
 import { RootState } from 'store/types/types-redux';
-
-export interface ICreateBoardProps {
-  title: string;
-  owner: string;
-  users: [];
-}
-
-export interface IUpdateBoardProps {
-  _id: string;
-  title: string;
-  owner: string;
-  users: string[];
-}
-
-export interface IGetBoardsByUserIdProps {
-  userId: string;
-}
-
-export interface IDeleteBoardProps {
-  id: string;
-}
 
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
   async (props: ICreateBoardProps, { getState }) => {
     const state = getState() as RootState;
+    const data = { ...props, title: JSON.stringify(props.title) };
 
-    const response = await axios.post(`${BACK_END_URL}boards`, props, {
+    const response = await axios.post(`${BACK_END_URL}boards`, data, {
       headers: {
         Authorization: `Bearer ${state.signSlice.user!.token}`,
       },
@@ -50,6 +35,10 @@ export const getBoardsByUserIdFetch = createAsyncThunk(
       },
     });
 
+    response.data.forEach((board: IServerBoard) => {
+      board.title = JSON.parse(board.title);
+    });
+
     return response.data;
   }
 );
@@ -58,16 +47,20 @@ export const updateBoardFetch = createAsyncThunk(
   'boards/put',
   async (props: IUpdateBoardProps, { getState }) => {
     const state = getState() as RootState;
+    const data = { ...props, title: JSON.stringify(props.title) };
 
     const response = await axios.put(
-      `${BACK_END_URL}boards/${props._id}`,
-      { title: props.title, owner: props.owner, users: props.users },
+      `${BACK_END_URL}boards/${data._id}`,
+      { title: data.title, owner: data.owner, users: data.users },
       {
         headers: {
           Authorization: `Bearer ${state.signSlice.user!.token}`,
         },
       }
     );
+
+    response.data.title = JSON.parse(response.data.title);
+
     return response.data;
   }
 );
