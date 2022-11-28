@@ -27,6 +27,7 @@ import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { dataTask, dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { MovingTheTask } from 'store/actions-creators/board/dnd-actions';
+import { ToastContainer } from 'react-toastify';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
@@ -44,12 +45,12 @@ const BoardPage = () => {
     console.log('USEEFFECT BOARD-PAGE');
     const getAllUserLoginst = async () => {
       (board! as IBoard).users.forEach(async (userID: string) => {
-        await dispatch(getAllUserLoginFetch({ id: userID }));
+        await dispatch(getAllUserLoginFetch({ id: userID, lang: lang }));
       });
     };
     const getColumnsAndTasks = async () => {
-      await dispatch(getAllBoardTasksFetch({}));
-      const data = await dispatch(getColumnsFetch({}));
+      await dispatch(getAllBoardTasksFetch({ lang: lang }));
+      const data = await dispatch(getColumnsFetch({ lang: lang }));
       setColumns(data.payload);
     };
 
@@ -60,10 +61,10 @@ const BoardPage = () => {
 
     const socket = io('https://react-final-project-production.up.railway.app/');
     socket.on('columns', () => {
-      dispatch(getColumnsFetch({}));
+      dispatch(getColumnsFetch({ lang: lang }));
     });
     socket.on('tasks', () => {
-      dispatch(getAllBoardTasksFetch({}));
+      dispatch(getAllBoardTasksFetch({ lang: lang }));
     });
     return () => {
       document.body.style.overflow = 'visible';
@@ -197,14 +198,16 @@ const BoardPage = () => {
             </div>
             <div className="board-list__body">
               <div className="board__list">
-                {columns &&
-                  columns.map((column: ColumnProps) => {
-                    return <Column key={column._id} props={column} />;
-                  })}
+                {columns.length
+                  ? columns.map((column: ColumnProps) => {
+                      return <Column key={column._id} props={column} />;
+                    })
+                  : ''}
               </div>
             </div>
           </div>
         </article>
+        <ToastContainer />
       </DragDropContext>
     </>
   );

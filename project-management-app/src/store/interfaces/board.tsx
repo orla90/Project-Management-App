@@ -4,6 +4,7 @@ export interface BoardsProps {
   title?: string;
   owner?: string;
   users?: [];
+  lang?: Language;
 }
 
 export interface BoardProps extends BoardsProps {
@@ -26,10 +27,12 @@ export interface IuppdateTitle {
   title: string;
   columnId: string;
   order: number;
+  lang: Language;
 }
 
 export interface IdeleteColumn {
   columnId: string;
+  lang: Language;
 }
 
 export interface TaskDeleteParams extends IdeleteColumn {

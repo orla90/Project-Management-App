@@ -30,6 +30,9 @@ export const getvFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetBoards}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -50,6 +53,9 @@ export const getBoardFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetBoard}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -68,10 +74,6 @@ export const createColumnFetch = createAsyncThunk(
         },
       })
       .then((response) => {
-        if (response.status === 400) {
-          console.log('ooops', response);
-          toast.error('oops!');
-        }
         return response.data;
       })
       .catch((error) => {
@@ -99,6 +101,9 @@ export const getColumnsFetch = createAsyncThunk(
         return response.data.sort((a: ColumnProps, b: ColumnProps) => a.order! - b.order!);
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetColumns}`);
+        }
         return rejectWithValue(error);
       });
   }
@@ -127,6 +132,9 @@ export const uppdateColumnTitleFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestUpdateColumnTitle}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -148,6 +156,9 @@ export const deleteColumnFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestDeleteColumn}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }

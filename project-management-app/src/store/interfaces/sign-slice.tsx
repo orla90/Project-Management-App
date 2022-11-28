@@ -1,3 +1,5 @@
+import { Language } from 'pages/welcome-page/types/types';
+
 export interface IsignInitialState {
   user: Iuser | null;
   errorRegistration: { en: string; ru: string };
@@ -14,4 +16,9 @@ export interface Iuser {
   iat: number;
   exp: number;
   token: string;
+}
+
+export interface IuserAndLang {
+  user: Iuser | null;
+  lang: Language;
 }

@@ -1,4 +1,5 @@
 import Modal from 'components/UI/modal/Modal';
+import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { deleteUserFetch } from 'store/actions-creators/edit-profile/delete-user';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
@@ -8,7 +9,9 @@ const DeleteUser = ({ open, onClose }: { open: true | false; onClose: () => void
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.signSlice);
   const { language } = useAppSelector((state) => state.languageSlice);
+  const lang = language.toString() as Language;
   const removeUser = () => {
+    // dispatch(deleteUserFetch({ user, lang: lang }));
     dispatch(deleteUserFetch(user!));
   };
   return (

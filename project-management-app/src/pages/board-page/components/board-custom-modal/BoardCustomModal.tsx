@@ -8,6 +8,7 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import { CustomBoardModalProps } from 'pages/board-page/interfaces/modal-interfaces';
 import { deleteColumnFetch } from 'store/actions-creators/board/board-action';
 import { deleteTaskFetch } from 'store/actions-creators/board/task-actions';
+import { ToastContainer } from 'react-toastify';
 
 const BoardCustomModal = (props: CustomBoardModalProps) => {
   const dispatch = useAppDispatch();
@@ -16,9 +17,9 @@ const BoardCustomModal = (props: CustomBoardModalProps) => {
 
   const handleOnClick = () => {
     if (props.target === 'deleteColumn') {
-      dispatch(deleteColumnFetch({ columnId: props.columnId! }));
+      dispatch(deleteColumnFetch({ columnId: props.columnId!, lang: lang }));
     } else if (props.target === 'deleteTask') {
-      dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId! }));
+      dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId!, lang: lang }));
       props.onClose();
     }
   };
@@ -37,6 +38,7 @@ const BoardCustomModal = (props: CustomBoardModalProps) => {
           {i18Obj[lang].yes}
         </CustomButton>
       </div>
+      <ToastContainer />
     </Modal>
   );
 };

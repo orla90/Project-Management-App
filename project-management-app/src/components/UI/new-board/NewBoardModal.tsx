@@ -8,6 +8,7 @@ import './newBoardModal.scss';
 import { ROUTES } from 'constants/routes';
 import i18Obj from 'texts/board/board-page';
 import { Language } from 'pages/welcome-page/types/types';
+import { ToastContainer } from 'react-toastify';
 
 interface INewBoardModalProps {
   open: boolean;
@@ -36,7 +37,9 @@ function NewBoardModal(props: INewBoardModalProps) {
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
     try {
-      await dispatch(createBoardFetch({ title: data.title, owner: user!.id, users: [] })).unwrap();
+      await dispatch(
+        createBoardFetch({ title: data.title, owner: user!.id, users: [], lang: lang })
+      ).unwrap();
       reset({ title: '', description: '' });
       props.onClose();
       navigate(ROUTES.BOARDS_LIST);
@@ -73,6 +76,7 @@ function NewBoardModal(props: INewBoardModalProps) {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </Modal>
   );
 }

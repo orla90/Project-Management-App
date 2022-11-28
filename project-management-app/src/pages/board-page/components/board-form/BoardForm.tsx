@@ -10,7 +10,7 @@ import { FormValues } from 'pages/board-page/types/modal-types';
 import { createColumnFetch } from 'store/actions-creators/board/board-action';
 import { createTasksColumnFetch, editTaskFetch } from 'store/actions-creators/board/task-actions';
 import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BoardForm = (props: BoardFormModalProps) => {
@@ -26,7 +26,7 @@ const BoardForm = (props: BoardFormModalProps) => {
 
   const [title, setTitle] = useState(props.task?.title || '');
   const [description, setDescription] = useState(props.task?.description || '');
-  const notify = () => toast.success('Wow so easy!');
+  // const notify = () => toast.success('Wow so easy!');
 
   const handleOnSubmit = (data: FormValues) => {
     if (props.target === 'addColumn') {
@@ -57,6 +57,7 @@ const BoardForm = (props: BoardFormModalProps) => {
           columnId: props.columnId!,
           order: (tasks[props.columnId as keyof typeof tasks] as Array<dataTasks>)?.length || 0,
           description: data.description || '',
+          lang: lang,
         })
       ).unwrap();
       props.onClose();
@@ -76,6 +77,7 @@ const BoardForm = (props: BoardFormModalProps) => {
           order: props.task!.order,
           userId: props.task!.userId,
           users: props.task!.users,
+          lang: lang,
         })
       ).unwrap();
       props.onClose();
