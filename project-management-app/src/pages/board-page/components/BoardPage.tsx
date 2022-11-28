@@ -9,7 +9,6 @@ import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
 import BoardForm from './board-form/BoardForm';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
-import { getColumnsFetch } from 'store/actions-creators/board/board-action';
 import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 import { Navigate } from 'react-router-dom';
@@ -19,14 +18,11 @@ import Column from './column/Column';
 import InviteUser from './invite-user/InviteUser';
 import { i18ObjInviteUSer } from 'texts/board/invite-user';
 import { key } from 'texts/footer/footer-text';
-import {
-  getAllBoardTasksFetch,
-  getAllUserLoginFetch,
-} from 'store/actions-creators/board/task-actions';
-import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
+import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { handleDragEnd } from './board-page-functions/dragEnd-functions';
+import { getAllUserLoginst, getColumnsAndTasks } from './board-page-functions/fetch-functions';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
@@ -40,26 +36,15 @@ const BoardPage = () => {
   const lang = language.toString() as Language;
 
   useEffect(() => {
-    const getAllUserLoginst = async () => {
-      (board! as IBoard).users.forEach(async (userID: string) => {
-        await dispatch(getAllUserLoginFetch({ id: userID }));
-      });
-    };
-    const getColumnsAndTasks = async () => {
-      await dispatch(getAllBoardTasksFetch({}));
-      const data = await dispatch(getColumnsFetch({}));
-      setColumns(data.payload);
-    };
-
     if (board) {
-      getColumnsAndTasks();
-      getAllUserLoginst();
+      getColumnsAndTasks(dispatch, setColumns);
+      getAllUserLoginst(board, dispatch);
     }
 
     const socket = io('https://react-final-project-production.up.railway.app/');
     socket.on('columns', (message) => {
       if (message.action !== 'uppdate') {
-        getColumnsAndTasks();
+        getColumnsAndTasks(dispatch, setColumns);
       }
     });
     socket.on('tasks', (message) => {
