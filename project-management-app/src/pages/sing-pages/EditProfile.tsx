@@ -53,10 +53,9 @@ const EditProfile = () => {
       dispatch(setEditMessage(i18ObjSingFetchResponses.empty));
     };
   }, [dispatch, setEditMessage]);
-
+  if (!user) return <Navigate to={`../${ROUTES.HOME}`} />;
   return (
     <>
-      {!user && <Navigate to={ROUTES.HOME} />}
       {overlay && <Overlay />}
       <div className="edite-profile">
         <div className="edite-profile__container">

@@ -9,7 +9,7 @@ import i18Obj from 'texts/board/board-page';
 import './board-page.scss';
 import BoardForm from './board-form/BoardForm';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
-import { getColumnsFetch, uppdateOrdersColumns } from 'store/actions-creators/board/board-action';
+import { getColumnsFetch } from 'store/actions-creators/board/board-action';
 import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 import { Navigate } from 'react-router-dom';
@@ -25,8 +25,8 @@ import {
 } from 'store/actions-creators/board/task-actions';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
-import { dataTask, dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
-import { MovingTheTask } from 'store/actions-creators/board/dnd-actions';
+import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
+import { handleDragEnd } from './board-page-functions/dragEnd-functions';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
@@ -36,7 +36,7 @@ const BoardPage = () => {
   const { resetBordAndColumns } = boardSlice.actions;
   const { overlay, board, tasks } = useAppSelector((state) => state.boardSlice);
   const { setNewOrdersTasks } = boardSlice.actions;
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState<Array<ColumnProps> | []>([]);
   const lang = language.toString() as Language;
 
   useEffect(() => {
@@ -73,93 +73,14 @@ const BoardPage = () => {
   }, [dispatch, resetBordAndColumns, board]);
 
   const dragEnd = (result: DropResult) => {
-    console.log(result);
-    function createResultArr(arr: Array<dataTasks>): Array<dataTask> {
-      return arr.map((task: dataTasks, i: number): dataTask => {
-        return {
-          _id: task._id,
-          order: i,
-          columnId: task.columnId,
-        };
-      });
-    }
-    function copyArr(arr: Array<dataTasks>, key: string): Array<dataTasks> {
-      return JSON.parse(JSON.stringify(arr[key as keyof typeof arr]));
-    }
-    function setOrderNewTasks(arr: Array<dataTasks>): Array<dataTasks> {
-      return arr.map((a: dataTasks, i: number) => {
-        return { ...a, order: i };
-      });
-    }
-    const { destination, source, type } = result;
-    if (!destination) return;
-    if (destination.droppableId === source.droppableId && destination.index === source.index)
-      return;
-    const sourceColumnID = source.droppableId;
-    const sourceOrder = source.index;
-
-    const destinationColumnID = destination?.droppableId;
-    const destinationOrder = destination!.index;
-    if (type === 'Tasks') {
-      const sourceTasksColumn = copyArr(tasks as Array<dataTasks>, sourceColumnID);
-      const temp = sourceTasksColumn[sourceOrder];
-      sourceTasksColumn.splice(sourceOrder, 1);
-      if (sourceColumnID === destinationColumnID) {
-        sourceTasksColumn.splice(destinationOrder, 0, temp);
-        const result = createResultArr(sourceTasksColumn);
-        const newTasks = setOrderNewTasks(sourceTasksColumn);
-        const resultNewTasks = { ...tasks, [sourceColumnID]: newTasks };
-        dispatch(setNewOrdersTasks(resultNewTasks));
-        dispatch(MovingTheTask(result));
-      } else {
-        temp.columnId = destinationColumnID;
-        if (tasks[destinationColumnID as keyof typeof tasks]) {
-          const destinationTasksColumn = copyArr(tasks as Array<dataTasks>, destinationColumnID);
-          destinationTasksColumn.splice(destinationOrder, 0, temp);
-          const result = [
-            ...createResultArr(sourceTasksColumn),
-            ...createResultArr(destinationTasksColumn),
-          ];
-          const sourceColum = setOrderNewTasks(sourceTasksColumn);
-          const destinationColumn = setOrderNewTasks(destinationTasksColumn);
-          const resultNewTasks = {
-            ...tasks,
-            [sourceColumnID]: sourceColum,
-            [destinationColumnID]: destinationColumn,
-          };
-          dispatch(setNewOrdersTasks(resultNewTasks));
-          dispatch(MovingTheTask(result));
-        } else {
-          const newColumnTasks = temp;
-          newColumnTasks.order = 0;
-          const result = [
-            ...createResultArr(sourceTasksColumn),
-            ...createResultArr([newColumnTasks]),
-          ];
-          const resultNewTasks = {
-            ...tasks,
-            [sourceColumnID]: setOrderNewTasks(sourceTasksColumn),
-            [destinationColumnID]: [newColumnTasks],
-          };
-          dispatch(setNewOrdersTasks(resultNewTasks));
-          dispatch(MovingTheTask(result));
-        }
-      }
-    } else if (type === 'Columns') {
-      console.log(sourceColumnID);
-      const columnsArr = JSON.parse(JSON.stringify(columns));
-      const temp = columnsArr[sourceOrder];
-      columnsArr.splice(sourceOrder, 1);
-      columnsArr.splice(destinationOrder, 0, temp);
-      setColumns(columnsArr);
-      const result = columnsArr.map((a: ColumnProps, i: number) => {
-        return {
-          _id: a._id,
-          order: i,
-        };
-      });
-      dispatch(uppdateOrdersColumns(result));
-    }
+    handleDragEnd(
+      result,
+      dispatch,
+      tasks as dataTasks[],
+      setNewOrdersTasks,
+      columns as ColumnProps,
+      setColumns
+    );
   };
 
   return (
