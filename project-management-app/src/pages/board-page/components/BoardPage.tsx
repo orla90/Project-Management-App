@@ -196,7 +196,7 @@ const BoardPage = () => {
                 {i18ObjInviteUSer[language as key].generalButton}
               </CustomButton>
             </div>
-            <div className="board-list__body">
+            <div className="board__list-body">
               <div className="board__list">
                 {columns.length
                   ? columns.map((column: ColumnProps) => {
