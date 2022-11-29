@@ -10,6 +10,10 @@ import {
   IuppdateTitle,
 } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ERRORS_CODE } from 'constants/errors';
+import i18Obj from 'texts/errors-and-warnings/translate';
 
 export const getvFetch = createAsyncThunk(
   'boards/getBoards',
@@ -26,6 +30,9 @@ export const getvFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetBoards}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -46,6 +53,9 @@ export const getBoardFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetBoard}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -57,16 +67,28 @@ export const createColumnFetch = createAsyncThunk(
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
     return axios
-      .post(`${BACK_END_URL}boards/${board._id}/columns`, props, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${state.signSlice.user!.token}`,
+      .post(
+        `${BACK_END_URL}boards/${board._id}/columns`,
+        {
+          title: props.title,
+          _id: props._id,
+          boardId: props.boardId,
+          order: props.order,
         },
-      })
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${state.signSlice.user!.token}`,
+          },
+        }
+      )
       .then((response) => {
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestColumnAdd}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -88,6 +110,9 @@ export const getColumnsFetch = createAsyncThunk(
         return response.data.sort((a: ColumnProps, b: ColumnProps) => a.order! - b.order!);
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetColumns}`);
+        }
         return rejectWithValue(error);
       });
   }
@@ -116,6 +141,9 @@ export const uppdateColumnTitleFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestUpdateColumnTitle}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -139,6 +167,9 @@ export const deleteColumnFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestDeleteColumn}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }

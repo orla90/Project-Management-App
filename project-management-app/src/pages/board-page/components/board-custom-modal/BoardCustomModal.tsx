@@ -9,6 +9,7 @@ import { CustomBoardModalProps } from 'pages/board-page/interfaces/modal-interfa
 import { deleteColumnFetch, uppdateOrdersColumns } from 'store/actions-creators/board/board-action';
 import { deleteTaskFetch } from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
+import { ToastContainer } from 'react-toastify';
 
 const reorderColumns = (id: string, columns: Array<ColumnProps>): Array<ColumnProps> => {
   return columns
@@ -33,9 +34,9 @@ const BoardCustomModal = (props: CustomBoardModalProps) => {
       props.onClose();
       const reorderedCOlumns = reorderColumns(props.columnId, columns);
       if (reorderedCOlumns.length > 0) await dispatch(uppdateOrdersColumns(reorderedCOlumns));
-      await dispatch(deleteColumnFetch({ columnId: props.columnId! }));
+      await dispatch(deleteColumnFetch({ columnId: props.columnId!, lang: lang }));
     } else if (props.target === 'deleteTask') {
-      dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId! }));
+      dispatch(deleteTaskFetch({ columnId: props.columnId!, taskId: props.taskId!, lang: lang }));
       props.onClose();
     }
   };
@@ -54,6 +55,7 @@ const BoardCustomModal = (props: CustomBoardModalProps) => {
           {i18Obj[lang].yes}
         </CustomButton>
       </div>
+      <ToastContainer />
     </Modal>
   );
 };

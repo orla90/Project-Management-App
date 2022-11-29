@@ -8,16 +8,9 @@ import './newBoardModal.scss';
 import { ROUTES } from 'constants/routes';
 import i18Obj from 'texts/board/board-page';
 import { Language } from 'pages/welcome-page/types/types';
-
-interface INewBoardModalProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-type FormValues = {
-  title: string;
-  description: string;
-};
+import { ToastContainer } from 'react-toastify';
+import { FormValues } from 'pages/board-page/types/modal-types';
+import { INewBoardModalProps } from './interfaces/INewBoardModalProps';
 
 function NewBoardModal(props: INewBoardModalProps) {
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -35,14 +28,18 @@ function NewBoardModal(props: INewBoardModalProps) {
   const navigate = useNavigate();
 
   const onSubmit = handleSubmit(async (data: FormValues) => {
-    try {
-      await dispatch(createBoardFetch({ title: data.title, owner: user!.id, users: [] })).unwrap();
-      reset({ title: '', description: '' });
-      props.onClose();
-      navigate(ROUTES.BOARDS_LIST);
-    } catch (error) {
-      alert(error);
-    }
+    dispatch(
+      createBoardFetch({
+        title: { title: data.title, description: data.description ?? '' },
+        owner: user!.id,
+        users: [],
+        lang: lang,
+      })
+    );
+    reset({ title: '', description: '' });
+    props.onClose();
+    navigate(ROUTES.BOARDS_LIST);
+    console.log('новая доска создалась');
   });
 
   return (
@@ -73,6 +70,7 @@ function NewBoardModal(props: INewBoardModalProps) {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </Modal>
   );
 }

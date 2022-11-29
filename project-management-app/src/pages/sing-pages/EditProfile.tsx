@@ -6,9 +6,11 @@ import {
   showError,
   setErrorPassword,
 } from 'pages/sing-pages/validation-functions';
+import { Language } from 'pages/welcome-page/types/types';
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler, FieldValues } from 'react-hook-form';
 import { Navigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import { editProfileFetch } from 'store/actions-creators/edit-profile/edit-user';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { IeditProfileProps } from 'store/interfaces/edit-profile';
@@ -33,6 +35,7 @@ const EditProfile = () => {
           dispatch,
           id: user.id,
           token: user.token,
+          lang: lang,
         } as IeditProfileProps)
       );
   };
@@ -40,6 +43,7 @@ const EditProfile = () => {
   const { user, editMessage, overlay, language, trueOrfalseEdit } = useAppSelector(
     (state) => state.signSlice
   );
+  const lang = language.toString() as Language;
   const { setEditMessage } = signSlice.actions;
   const dispatch = useAppDispatch();
 
@@ -67,6 +71,7 @@ const EditProfile = () => {
               <span>{`${i18ObjSign[language as key].login}: `}</span>
               {user!.login}
             </div>
+
             <div className="edite-profile__id">
               <span>{`ID: `}</span>
               {user!.id}
@@ -147,6 +152,7 @@ const EditProfile = () => {
             </button>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </>
   );

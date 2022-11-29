@@ -23,25 +23,28 @@ const i18Obj = {
       {
         name: 'Artiom Savchuk',
         title: 'Mentor',
-        description: 'Code review',
+        description: 'Tips for organizing the structure of the application, code review.',
         img: ArtiomFoto,
       },
       {
         name: 'Alena Staskevich',
         title: 'Web-developer',
-        description: 'Developed...',
+        description:
+          'Deployed the Backend, made up a page with a list of boards and developed its functionality, developed the basis of the modal window.',
         img: LenaFoto,
       },
       {
         name: 'Dmitry Ostapchuk',
         title: 'Web-developer',
-        description: 'Developed...',
+        description:
+          'Implemented the header, footer, Welcome section on the main page, fully developed pages with authorization, registration and profile editing. Participated in the development of the functionality of the board, implemented the drag and drop of columns and tasks on the board page.',
         img: DimaFoto,
       },
       {
         name: 'Olga Andrievich',
         title: 'Web-developer, Teamlead',
-        description: 'Developed...',
+        description:
+          'Built the basic structure of the application with routes, layout of the section with the characteristics of the project and the section with developers, layout of the page with the board and development of the board functionality. Implemented the display of errors from the Backend in the toast format.',
         img: OlyaFoto,
       },
     ],
@@ -65,25 +68,28 @@ const i18Obj = {
       {
         name: 'Артем Савчук',
         title: 'Ментор',
-        description: 'Ревью кода',
+        description: 'Советы по организации структуры приложения, ревью кода.',
         img: ArtiomFoto,
       },
       {
         name: 'Алена Стаскевич',
         title: 'Web-разработчик',
-        description: 'Разработала...',
+        description:
+          'Задеплоила Backend, занималась версткой страницы со списком досок и разработкой ее функционала, разработала основу модального окна.',
         img: LenaFoto,
       },
       {
         name: 'Дмитрий Остапчук',
         title: 'Web-разработчик',
-        description: 'Разработал...',
+        description:
+          'Реализовал header, footer, раздел Welcome на главной странице, полностью разработал страницы с авторизацией, регистрацией и редактированием профиля. Участвовал в разработке функционала доски, реализовал перетаскивание колонок и задач на странице доски.',
         img: DimaFoto,
       },
       {
         name: 'Ольга Андриевич',
         title: 'Web-разработчик, Тимлид',
-        description: 'Разработала...',
+        description:
+          'Занималась построением базовой структуры приложения c маршрутами, версткой раздела с характеристиками проекта и раздела с разработчиками, версткой страницы с доской и разработкой функционала доски. Реализовала отображение ошибок со стороны BE в формате toast.',
         img: OlyaFoto,
       },
     ],

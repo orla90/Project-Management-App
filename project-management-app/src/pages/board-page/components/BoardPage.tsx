@@ -18,22 +18,23 @@ import Column from './column/Column';
 import InviteUser from './invite-user/InviteUser';
 import { i18ObjInviteUSer } from 'texts/board/invite-user';
 import { key } from 'texts/footer/footer-text';
-import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
-import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { handleDragEnd } from './board-page-functions/dragEnd-functions';
 import { getAllUserLoginst, getColumnsAndTasks } from './board-page-functions/fetch-functions';
+import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
+import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
+import { ToastContainer } from 'react-toastify';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
   const [inviteUser, setInviteUser] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
+  const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
   const { resetBordAndColumns } = boardSlice.actions;
   const { overlay, board, tasks } = useAppSelector((state) => state.boardSlice);
   const { setNewOrdersTasks } = boardSlice.actions;
   const [columns, setColumns] = useState<Array<ColumnProps> | []>([]);
-  const lang = language.toString() as Language;
 
   useEffect(() => {
     if (board) {
@@ -42,6 +43,7 @@ const BoardPage = () => {
     }
 
     const socket = io('https://react-final-project-production.up.railway.app/');
+
     socket.on('columns', (message) => {
       if (message.action !== 'uppdate') {
         getColumnsAndTasks(dispatch, setColumns);
@@ -49,9 +51,10 @@ const BoardPage = () => {
     });
     socket.on('tasks', (message) => {
       console.log('WEBSOCKET TASKS', message);
-      dispatch(getAllBoardTasksFetch({}));
+      dispatch(getAllBoardTasksFetch({ lang: lang }));
     });
     return () => {
+      document.body.style.overflow = 'visible';
       socket.close();
       dispatch(resetBordAndColumns());
     };
@@ -72,7 +75,6 @@ const BoardPage = () => {
     <>
       {board === null && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}
       {overlay && <Overlay />}
-
       <article className="board">
         <div className="board__container">
           <div className="board__panel">
@@ -142,6 +144,7 @@ const BoardPage = () => {
                 )}
               </Droppable>
             </div>
+            <ToastContainer />
           </DragDropContext>
         </div>
       </article>
