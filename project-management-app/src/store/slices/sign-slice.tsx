@@ -33,6 +33,7 @@ function getUserData() {
       return JSON.parse(userData);
     } else {
       localStorage.removeItem('user');
+
       return null;
     }
   } else {

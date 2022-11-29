@@ -27,28 +27,30 @@ import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import { dataTask, dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { MovingTheTask } from 'store/actions-creators/board/dnd-actions';
+import { ToastContainer } from 'react-toastify';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
   const [inviteUser, setInviteUser] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
+  const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
   const { resetBordAndColumns } = boardSlice.actions;
   const { overlay, board, tasks } = useAppSelector((state) => state.boardSlice);
   const { setNewOrdersTasks } = boardSlice.actions;
   const [columns, setColumns] = useState([]);
-  const lang = language.toString() as Language;
 
   useEffect(() => {
+    document.body.style.overflow = 'hidden';
     console.log('USEEFFECT BOARD-PAGE');
     const getAllUserLoginst = async () => {
       (board! as IBoard).users.forEach(async (userID: string) => {
-        await dispatch(getAllUserLoginFetch({ id: userID }));
+        await dispatch(getAllUserLoginFetch({ id: userID, lang: lang }));
       });
     };
     const getColumnsAndTasks = async () => {
-      await dispatch(getAllBoardTasksFetch({}));
-      const data = await dispatch(getColumnsFetch({}));
+      await dispatch(getAllBoardTasksFetch({ lang: lang }));
+      const data = await dispatch(getColumnsFetch({ lang: lang }));
       setColumns(data.payload);
     };
 
@@ -59,12 +61,13 @@ const BoardPage = () => {
 
     const socket = io('https://react-final-project-production.up.railway.app/');
     socket.on('columns', () => {
-      dispatch(getColumnsFetch({}));
+      dispatch(getColumnsFetch({ lang: lang }));
     });
     socket.on('tasks', () => {
-      dispatch(getAllBoardTasksFetch({}));
+      dispatch(getAllBoardTasksFetch({ lang: lang }));
     });
     return () => {
+      document.body.style.overflow = 'visible';
       socket.close();
       dispatch(resetBordAndColumns());
     };
@@ -193,16 +196,18 @@ const BoardPage = () => {
                 {i18ObjInviteUSer[language as key].generalButton}
               </CustomButton>
             </div>
-            <div className="board-list__body">
+            <div className="board__list-body">
               <div className="board__list">
-                {columns &&
-                  columns.map((column: ColumnProps) => {
-                    return <Column key={column._id} props={column} />;
-                  })}
+                {columns.length
+                  ? columns.map((column: ColumnProps) => {
+                      return <Column key={column._id} props={column} />;
+                    })
+                  : ''}
               </div>
             </div>
           </div>
         </article>
+        <ToastContainer />
       </DragDropContext>
     </>
   );

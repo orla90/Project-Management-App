@@ -1,7 +1,10 @@
+import { Language } from 'pages/welcome-page/types/types';
+
 export interface BoardsProps {
   title?: string;
   owner?: string;
   users?: [];
+  lang?: Language;
 }
 
 export interface BoardProps extends BoardsProps {
@@ -13,6 +16,7 @@ export interface ColumnProps {
   title?: string;
   order?: number;
   boardId?: string;
+  lang?: Language;
 }
 
 export interface BoardWithColumnsProps {
@@ -23,10 +27,12 @@ export interface IuppdateTitle {
   title: string;
   columnId: string;
   order: number;
+  lang: Language;
 }
 
 export interface IdeleteColumn {
   columnId: string;
+  lang: Language;
 }
 
 export interface TaskDeleteParams extends IdeleteColumn {

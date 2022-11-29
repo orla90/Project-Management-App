@@ -1,3 +1,5 @@
+import { Language } from 'pages/welcome-page/types/types';
+
 export interface ICreateBoardProps {
   title: {
     title: string;
@@ -5,4 +7,5 @@ export interface ICreateBoardProps {
   };
   owner: string;
   users: [];
+  lang: Language;
 }

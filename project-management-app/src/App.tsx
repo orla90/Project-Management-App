@@ -3,7 +3,7 @@ import { ROUTES } from 'constants/routes';
 import WelcomePage from 'pages/welcome-page/components/WelcomePage';
 import BoardPage from 'pages/board-page/components/BoardPage';
 import BoardList from 'pages/boards-list-page/components/BoardList';
-import ErrorPage from 'pages/error-page/components/Error';
+import ErrorPage from 'pages/error-page/components/ErrorPage';
 import EditProfile from 'pages/sing-pages/EditProfile';
 import SignIn from 'pages/sing-pages/SingIn';
 import SignUp from 'pages/sing-pages/SingUp';

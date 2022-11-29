@@ -1,12 +1,16 @@
 import { ColumnTitleEditProps } from 'pages/board-page/interfaces/column-interface';
+import { Language } from 'pages/welcome-page/types/types';
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import { uppdateColumnTitleFetch } from 'store/actions-creators/board/board-action';
-import { useAppDispatch } from 'store/custom-hooks';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import './column-title-edit.scss';
 
 const ColumnTitleEdit = (props: ColumnTitleEditProps) => {
   const [inputValue, setInputValue] = useState(props.title);
   const dispatch = useAppDispatch();
+  const { language } = useAppSelector((state) => state.languageSlice);
+  const lang = language.toString() as Language;
 
   return (
     <>
@@ -25,6 +29,7 @@ const ColumnTitleEdit = (props: ColumnTitleEditProps) => {
                 title: inputValue,
                 columnId: props.columnId,
                 order: props.order,
+                lang: lang,
               })
             );
             props.setTitleEditMode(false);
@@ -33,6 +38,7 @@ const ColumnTitleEdit = (props: ColumnTitleEditProps) => {
         <div className="column__icon_cross" onClick={() => props.setTitleEditMode(false)}>
           &times;
         </div>
+        <ToastContainer />
       </div>
     </>
   );

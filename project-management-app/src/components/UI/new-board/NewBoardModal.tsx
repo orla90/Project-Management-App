@@ -8,6 +8,7 @@ import './newBoardModal.scss';
 import { ROUTES } from 'constants/routes';
 import i18Obj from 'texts/board/board-page';
 import { Language } from 'pages/welcome-page/types/types';
+import { ToastContainer } from 'react-toastify';
 import { FormValues } from 'pages/board-page/types/modal-types';
 import { INewBoardModalProps } from './interfaces/INewBoardModalProps';
 
@@ -32,6 +33,7 @@ function NewBoardModal(props: INewBoardModalProps) {
         title: { title: data.title, description: data.description ?? '' },
         owner: user!.id,
         users: [],
+        lang: lang,
       })
     );
     reset({ title: '', description: '' });
@@ -68,6 +70,7 @@ function NewBoardModal(props: INewBoardModalProps) {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </Modal>
   );
 }

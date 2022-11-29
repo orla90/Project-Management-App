@@ -25,6 +25,7 @@ function UpdateBoardModal(props: IUpdateBoardModalProps) {
       updateBoardFetch({
         ...props.board,
         title: { title: data.title, description: data.description },
+        lang: lang,
       })
     );
     props.onClose();

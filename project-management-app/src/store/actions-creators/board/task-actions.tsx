@@ -1,10 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
+import { ERRORS_CODE } from 'constants/errors';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
+import { Language } from 'pages/welcome-page/types/types';
+import { toast } from 'react-toastify';
 import { TaskDeleteParams, TaskChangeParams, UserProps, BoardsProps } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
+import i18Obj from 'texts/errors-and-warnings/translate';
 import { dataTasks, sortArr } from './sort-data-all-tasks-fn';
 
 export const getTasksColumnFetch = createAsyncThunk<
@@ -51,8 +55,11 @@ export const getAllBoardTasksFetch = createAsyncThunk<
       console.log('all tasks', response.data);
       return sortArr(response.data);
     })
-    .catch(() => {
-      return rejectWithValue('error');
+    .catch((error) => {
+      if (error.code === ERRORS_CODE.BAD_REQUEST) {
+        toast.error(`${i18Obj[props.lang!].badRequestGetAllBoardTasks}`);
+      }
+      return rejectWithValue(error.response.data.statusCode);
     });
 });
 
@@ -75,6 +82,9 @@ export const deleteTaskFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestDeleteTask}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -107,6 +117,9 @@ export const editTaskFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestEditTask}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -128,6 +141,9 @@ export const getTaskFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetTask}`);
+        }
         return rejectWithValue(error.response.data.statusCode);
       });
   }
@@ -155,7 +171,7 @@ export const getUsersFetch = createAsyncThunk(
 
 export const getAllUserLoginFetch = createAsyncThunk(
   'board/getLoginAndIDUser',
-  async (props: { id: string }, { getState, rejectWithValue }) => {
+  async (props: { id: string; lang: Language }, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     return axios
       .get(`${BACK_END_URL}users/${props.id}`, {
@@ -168,6 +184,9 @@ export const getAllUserLoginFetch = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].badRequestGetAllUsersLogin}`);
+        }
         return rejectWithValue([]);
       });
   }
@@ -175,7 +194,7 @@ export const getAllUserLoginFetch = createAsyncThunk(
 
 export const createTasksColumnFetch = createAsyncThunk<
   Itasks,
-  { columnId: string; title: string; description: string; order: number },
+  { columnId: string; title: string; description: string; order: number; lang: Language },
   {
     rejectValue: [];
   }
@@ -202,7 +221,11 @@ export const createTasksColumnFetch = createAsyncThunk<
     .then((response) => {
       return response.data;
     })
-    .catch(() => {
-      return rejectWithValue([]);
+    .catch((error) => {
+      console.log('here', error);
+      if (error.code === ERRORS_CODE.BAD_REQUEST) {
+        toast.error(`${i18Obj[props.lang!].badRequestTaskAdd}`);
+      }
+      return rejectWithValue(error.response.data.statusCode);
     });
 });
