@@ -9,9 +9,10 @@ import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 
 const BoardList = () => {
-  const [boards, setBoards] = useState<IBoard[]>([]);
+  const [, setBoards] = useState<IBoard[]>([]);
   const [overlay, setOverlay] = useState(false);
   const { user } = useAppSelector((state) => state.signSlice);
+  const { boards } = useAppSelector((state) => state.boardListSlice);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -20,10 +21,10 @@ const BoardList = () => {
       try {
         const userBoards = await dispatch(getBoardsByUserIdFetch({ userId: user!.id })).unwrap();
         setBoards(userBoards);
-        setOverlay(false);
       } catch (error) {
-        setOverlay(false);
         alert(error);
+      } finally {
+        setOverlay(false);
       }
     };
     const socket = io('https://react-final-project-production.up.railway.app/');
