@@ -1,5 +1,5 @@
+import { DraggableProvided } from 'react-beautiful-dnd';
 import { Language } from 'pages/welcome-page/types/types';
-
 export interface BoardsProps {
   title?: string;
   owner?: string;
@@ -12,6 +12,7 @@ export interface BoardProps extends BoardsProps {
 }
 
 export interface ColumnProps {
+  provided?: DraggableProvided;
   _id?: string;
   title?: string;
   order?: number;

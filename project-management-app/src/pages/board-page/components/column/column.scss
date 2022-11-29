@@ -3,14 +3,12 @@
 .column {
   max-width: 300px;
   min-width: 300px;
-  background-color: $logoBlueColor;
-  border-radius: 5px;
-  padding: 10px;
   margin: 0 auto;
-  height: fit-content;
-  @media (max-width: em(375)) {
-    max-width: 290px;
-    min-width: 290px;
+  height: auto;
+  &__inner {
+    background-color: $logoBlueColor;
+    border-radius: 5px;
+    padding: 10px;
   }
 }
 
@@ -47,5 +45,5 @@ body::-webkit-scrollbar-thumb {
 }
 
 .column__body {
-  min-height:1px
+  min-height: 1px;
 }

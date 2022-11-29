@@ -171,7 +171,7 @@ export const getUsersFetch = createAsyncThunk(
 
 export const getAllUserLoginFetch = createAsyncThunk(
   'board/getLoginAndIDUser',
-  async (props: { id: string; lang: Language }, { getState, rejectWithValue }) => {
+  async (props: { id: string; lang?: Language }, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     return axios
       .get(`${BACK_END_URL}users/${props.id}`, {

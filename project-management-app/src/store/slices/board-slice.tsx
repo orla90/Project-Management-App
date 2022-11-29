@@ -1,11 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   createColumnFetch,
   deleteColumnFetch,
   getBoardFetch,
   getColumnsFetch,
+  uppdateOrdersColumns,
 } from 'store/actions-creators/board/board-action';
 import { MovingTheTask } from 'store/actions-creators/board/dnd-actions';
+import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import {
   deleteTaskFetch,
   editTaskFetch,
@@ -49,7 +51,7 @@ export const boardSlice = createSlice({
     resetInviteUserError: (state) => {
       state.inviteUserError = { en: '', ru: '' };
     },
-    setNewOrdersTasks: (state, action) => {
+    setNewOrdersTasks: (state, action: PayloadAction<{ [x: string]: Array<dataTasks> }>) => {
       state.tasks = action.payload;
     },
   },
@@ -187,6 +189,9 @@ export const boardSlice = createSlice({
     });
 
     builder.addCase(MovingTheTask.pending, (state) => {
+      state.overlay = true;
+    });
+    builder.addCase(uppdateOrdersColumns.pending, (state) => {
       state.overlay = true;
     });
   },

@@ -24,67 +24,73 @@ const Column = ({ props }: { props: ColumnProps }) => {
     tasks[props._id! as keyof typeof tasks] ? tasks[props._id! as keyof typeof tasks] : []
   );
   const lang = language.toString() as Language;
-
   useEffect(() => {
     setTaskColumn(tasks[props._id! as keyof typeof tasks] || []);
     console.log('USEEFFECT COLUMN-PAGE', taskColumn);
   }, [tasks]);
   return (
-    <div className="column">
-      <div className="column__info">
-        {titleEditMode ? (
-          <ColumnTitleEdit
-            setTitleEditMode={setTitleEditMode}
-            columnId={props._id!}
-            order={props.order!}
-            title={props.title!}
-          />
-        ) : (
-          <ColumnTitleConfirmed
-            title={props.title!}
-            setDeleteColumnModal={setDeleteColumnModal}
-            setTitleEditMode={setTitleEditMode}
-          />
-        )}
-      </div>
+    <div
+      className="column"
+      ref={props.provided!.innerRef}
+      {...props.provided!.draggableProps}
+      {...props.provided!.dragHandleProps}
+    >
+      <div className="column__inner">
+        <div className="column__info">
+          {titleEditMode ? (
+            <ColumnTitleEdit
+              setTitleEditMode={setTitleEditMode}
+              columnId={props._id!}
+              order={props.order!}
+              title={props.title!}
+            />
+          ) : (
+            <ColumnTitleConfirmed
+              title={props.title!}
+              setDeleteColumnModal={setDeleteColumnModal}
+              setTitleEditMode={setTitleEditMode}
+            />
+          )}
+        </div>
 
-      <Droppable droppableId={props._id!}>
-        {(provided) => (
-          <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
-            {(taskColumn as Array<Itasks>).map((task: Itasks) => {
-              return <Task key={task._id} columnId={props._id!} task={task} />;
-            })}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
+        <Droppable droppableId={props._id!} type={'Tasks'} direction={'vertical'}>
+          {(provided) => (
+            <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
+              {(taskColumn as Array<Itasks>).map((task: Itasks) => {
+                return <Task key={task._id} columnId={props._id!} task={task} />;
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
 
-      <div className="column__btn">
-        <CustomButton className="main-page-btn" onClick={() => setAddTaskModal(true)}>
-          {i18Obj[lang].task}
-        </CustomButton>
+        <div className="column__btn">
+          <CustomButton className="main-page-btn" onClick={() => setAddTaskModal(true)}>
+            {i18Obj[lang].task}
+          </CustomButton>
+        </div>
+        <BoardCustomModal
+          open={deleteColumnModal}
+          onClose={() => setDeleteColumnModal(false)}
+          title={i18Obj[lang].deleteColumn}
+          columnId={props._id!}
+          target={'deleteColumn'}
+        />
+        <Modal
+          open={addTaskModal}
+          onClose={() => setAddTaskModal(false)}
+          title={i18Obj[lang].addTask}
+        >
+          {
+            <BoardForm
+              onClose={() => setAddTaskModal(false)}
+              description={true}
+              columnId={props._id}
+              target={'addTask'}
+            />
+          }
+        </Modal>
       </div>
-      <BoardCustomModal
-        open={deleteColumnModal}
-        onClose={() => setDeleteColumnModal(false)}
-        title={i18Obj[lang].deleteColumn}
-        columnId={props._id!}
-        target={'deleteColumn'}
-      />
-      <Modal
-        open={addTaskModal}
-        onClose={() => setAddTaskModal(false)}
-        title={i18Obj[lang].addTask}
-      >
-        {
-          <BoardForm
-            onClose={() => setAddTaskModal(false)}
-            description={true}
-            columnId={props._id}
-            target={'addTask'}
-          />
-        }
-      </Modal>
     </div>
   );
 };
