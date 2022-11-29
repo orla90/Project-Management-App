@@ -4,20 +4,13 @@ import { BACK_END_URL } from 'constants/back-end-link';
 import { ERRORS_CODE } from 'constants/errors';
 import { Language } from 'pages/welcome-page/types/types';
 import { toast } from 'react-toastify';
+import { ICreateBoardProps } from 'store/interfaces/ICreateBoardProps';
+import { IDeleteBoardProps } from 'store/interfaces/IDeleteBoardProps';
+import { IGetBoardsByUserIdProps } from 'store/interfaces/IGetBoardByUserIdProps';
+import { IServerBoard } from 'store/interfaces/IServerBoard';
+import { IUpdateBoardProps } from 'store/interfaces/IUpdateBoardProps';
 import { RootState } from 'store/types/types-redux';
 import i18Obj from 'texts/errors-and-warnings/translate';
-
-export interface ICreateBoardProps {
-  title: string;
-  owner: string;
-  users: [];
-  lang: Language;
-}
-
-export interface IGetBoardsByUserIdProps {
-  userId: string;
-  lang: Language;
-}
 
 export const createBoardFetch = createAsyncThunk(
   'boards/create',
@@ -27,7 +20,7 @@ export const createBoardFetch = createAsyncThunk(
       .post(
         `${BACK_END_URL}boards`,
         {
-          title: props.title,
+          title: JSON.stringify(props.title),
           owner: props.owner,
           users: props.users,
         },
@@ -51,16 +44,41 @@ export const createBoardFetch = createAsyncThunk(
 
 export const getBoardsByUserIdFetch = createAsyncThunk(
   'boards/get',
-  async (props: IGetBoardsByUserIdProps, { getState, rejectWithValue }) => {
+  async (props: IGetBoardsByUserIdProps, { getState }) => {
     const state = getState() as RootState;
 
-    return axios
-      .get(`${BACK_END_URL}boardsSet/${props.userId}`, {
-        headers: {
-          Authorization: `Bearer ${state.signSlice.user!.token}`,
-        },
-      })
+    const response = await axios.get(`${BACK_END_URL}boardsSet/${props.userId}`, {
+      headers: {
+        Authorization: `Bearer ${state.signSlice.user!.token}`,
+      },
+    });
+
+    response.data.forEach((board: IServerBoard) => {
+      board.title = JSON.parse(board.title);
+    });
+
+    return response.data;
+  }
+);
+
+export const updateBoardFetch = createAsyncThunk(
+  'boards/put',
+  async (props: IUpdateBoardProps, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const data = { ...props, title: JSON.stringify(props.title) };
+
+    const response = await axios
+      .put(
+        `${BACK_END_URL}boards/${data._id}`,
+        { title: data.title, owner: data.owner, users: data.users },
+        {
+          headers: {
+            Authorization: `Bearer ${state.signSlice.user!.token}`,
+          },
+        }
+      )
       .then((response) => {
+        response.data.title = JSON.parse(response.data.title);
         return response.data;
       })
       .catch((error) => {
@@ -69,5 +87,20 @@ export const getBoardsByUserIdFetch = createAsyncThunk(
         }
         return rejectWithValue(error.response.data.statusCode);
       });
+  }
+);
+
+export const deleteBoardFetch = createAsyncThunk(
+  'boards/delete',
+  async (props: IDeleteBoardProps, { getState }) => {
+    const state = getState() as RootState;
+
+    const response = await axios.delete(`${BACK_END_URL}boards/${props.id}`, {
+      headers: {
+        Authorization: `Bearer ${state.signSlice.user!.token}`,
+      },
+    });
+
+    return response.data;
   }
 );

@@ -6,6 +6,7 @@
   box-shadow: 2px 2px 5px #c1c9cf;
   height: 150px;
   margin: 10px 0;
+  min-width: 0;
   cursor: pointer;
   .board-item__link {
     display: flex;
@@ -19,9 +20,15 @@
       font-size: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .board-item__description {
-      color: $lightGreyColor;
+      padding: 10px;
+      color: #EBF2F8;
+      font-size: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .bord-item__icons {
       display: flex;
