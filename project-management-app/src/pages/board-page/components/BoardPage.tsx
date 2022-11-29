@@ -120,7 +120,7 @@ const BoardPage = () => {
             </CustomButton>
           </div>
           <DragDropContext onDragEnd={dragEnd}>
-            <div className="board-list__body">
+            <div className="board__list-body">
               <Droppable droppableId="Columns" type="Columns" direction={'horizontal'}>
                 {(provided) => (
                   <div className="board__list" ref={provided.innerRef} {...provided.droppableProps}>
