@@ -60,7 +60,7 @@ export const uppdateUsersInBoard = createAsyncThunk<
     .put(
       `${BACK_END_URL}boards/${board._id}`,
       {
-        title: board.title,
+        title: JSON.stringify(board.title),
         owner: board.owner,
         users: [...board.users, props.id],
       },
