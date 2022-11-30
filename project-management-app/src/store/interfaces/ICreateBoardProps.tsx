@@ -6,6 +6,6 @@ export interface ICreateBoardProps {
     description: string;
   };
   owner: string;
-  users: [];
+  users: string[];
   lang: Language;
 }

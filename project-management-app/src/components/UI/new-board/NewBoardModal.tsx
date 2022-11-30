@@ -32,7 +32,7 @@ function NewBoardModal(props: INewBoardModalProps) {
       createBoardFetch({
         title: { title: data.title, description: data.description ?? '' },
         owner: user!.id,
-        users: [],
+        users: [user!.id],
         lang: lang,
       })
     );
