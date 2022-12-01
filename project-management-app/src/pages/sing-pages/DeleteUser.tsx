@@ -1,5 +1,7 @@
 import Modal from 'components/UI/modal/Modal';
+import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
 import { deleteUserFetch } from 'store/actions-creators/edit-profile/delete-user';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { key } from 'texts/header/header-text';
@@ -9,8 +11,9 @@ const DeleteUser = ({ open, onClose }: { open: true | false; onClose: () => void
   const { user } = useAppSelector((state) => state.signSlice);
   const { language } = useAppSelector((state) => state.languageSlice);
   const removeUser = () => {
-    dispatch(deleteUserFetch(user!));
+    dispatch(deleteUserFetch({ user: user, lang: lang }));
   };
+  const lang = language.toString() as Language;
   return (
     <Modal open={open} title={i18ObjSign[language as key].deleteUserTitle} onClose={onClose}>
       <div className="delete-user-modal">
@@ -21,6 +24,7 @@ const DeleteUser = ({ open, onClose }: { open: true | false; onClose: () => void
           {i18ObjSign[language as key].close}
         </button>
       </div>
+      <ToastContainer />
     </Modal>
   );
 };
