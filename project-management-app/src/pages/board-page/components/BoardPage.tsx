@@ -84,7 +84,7 @@ const BoardPage = () => {
       <article className="board">
         <div className="board__container">
           {board !== null && (
-            <div className="board__descriprion">
+            <div className="board__description">
               <div className="board__title-wrapper">
                 {i18Obj[lang].board}: <h2 className="board__title">{board.title.title}</h2>
               </div>
