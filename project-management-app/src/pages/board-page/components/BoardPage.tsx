@@ -20,7 +20,7 @@ import { i18ObjInviteUSer } from 'texts/board/invite-user';
 import { key } from 'texts/footer/footer-text';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { handleDragEnd } from './board-page-functions/dragEnd-functions';
-import { getAllUserLoginst, getColumnsAndTasks } from './board-page-functions/fetch-functions';
+import { getAllUserLoginst, getColumns } from './board-page-functions/fetch-functions';
 import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
 import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { ToastContainer } from 'react-toastify';
@@ -37,26 +37,28 @@ const BoardPage = () => {
   const [columns, setColumns] = useState<Array<ColumnProps> | []>([]);
 
   useEffect(() => {
+    console.log('USEEFFECT BOARD_PAGE');
     if (!document.body.classList.contains('_lock')) {
       document.body.classList.add('_lock');
     }
     if (board) {
-      console.log(board);
-      getColumnsAndTasks(dispatch, setColumns);
+      dispatch(getAllBoardTasksFetch({}));
+      getColumns(dispatch, setColumns);
       getAllUserLoginst(board, dispatch);
     }
 
     const socket = io('https://react-final-project-production.up.railway.app/');
-
     socket.on('columns', (message) => {
-      if (message.action !== 'uppdate') {
-        getColumnsAndTasks(dispatch, setColumns);
+      console.log('WEBSOCKET COLUMNS', message);
+      if (message.guid !== 'uppdate_orders_from_delete_column') {
+        getColumns(dispatch, setColumns);
       }
     });
     socket.on('tasks', (message) => {
       console.log('WEBSOCKET TASKS', message);
-      dispatch(getAllBoardTasksFetch({ lang: lang }));
+      dispatch(getAllBoardTasksFetch({}));
     });
+
     return () => {
       if (document.body.classList.contains('_lock')) {
         document.body.classList.remove('_lock');
@@ -79,8 +81,9 @@ const BoardPage = () => {
 
   return (
     <>
-      {board === null && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}
       {overlay && <Overlay />}
+      {board === null && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}
+
       <article className="board">
         <div className="board__container">
           {board !== null && (
@@ -147,7 +150,7 @@ const BoardPage = () => {
                             index={column.order!}
                           >
                             {(provided) => (
-                              <Column key={column._id} props={{ ...column, provided }} />
+                              <Column key={column._id} props={{ ...column, provided, columns }} />
                             )}
                           </Draggable>
                         );

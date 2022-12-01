@@ -150,7 +150,7 @@ export const uppdateColumnTitleFetch = createAsyncThunk(
 );
 
 export const deleteColumnFetch = createAsyncThunk(
-  'board/deleteColumnTitle',
+  'board/deleteColumn',
   async (props: IdeleteColumn, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
@@ -159,6 +159,7 @@ export const deleteColumnFetch = createAsyncThunk(
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${state.signSlice.user!.token}`,
+          Guid: props.guid || '',
         },
       })
       .then((response) => {
@@ -175,16 +176,20 @@ export const deleteColumnFetch = createAsyncThunk(
 
 export const uppdateOrdersColumns = createAsyncThunk(
   'board/uppdateOrdersColumns',
-  async (props: Array<ColumnProps>, { getState }) => {
+  async (props: { guid?: string; result: Array<ColumnProps> }, { getState }) => {
     const state = getState() as RootState;
     return axios
-      .patch(`${BACK_END_URL}columnsSet`, props, {
+      .patch(`${BACK_END_URL}columnsSet`, props.result, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${state.signSlice.user!.token}`,
+          Guid: props.guid || '',
         },
       })
       .then((response) => response.data)
-      .catch(() => alert('Что-то пошло не так при обновлении очерёдности колонок'));
+      .catch((err) => {
+        console.log(err);
+        alert('Что-то пошло не так при обновлении очерёдности колонок');
+      });
   }
 );
