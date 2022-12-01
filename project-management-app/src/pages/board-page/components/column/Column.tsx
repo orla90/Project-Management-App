@@ -2,7 +2,7 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';
@@ -13,7 +13,7 @@ import ColumnTitleEdit from './column-title-edit/ColumnTitleEdit';
 import './column.scss';
 import { Droppable } from 'react-beautiful-dnd';
 import { ToastContainer } from 'react-toastify';
-import { deleteColumnFetch } from 'store/actions-creators/board/board-action';
+import { deleteColumn } from '../board-page-functions/fetch-functions';
 
 const Column = ({ props }: { props: ColumnProps }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
@@ -29,12 +29,12 @@ const Column = ({ props }: { props: ColumnProps }) => {
 
   useEffect(() => {
     setTaskColumn(tasks[props._id! as keyof typeof tasks] || []);
-    console.log('USEEFFECT COLUMN-PAGE', taskColumn);
-  }, [tasks]);
+    console.log('USEEFFECT COLUMN-PAGE');
+  }, [tasks, props._id]);
 
-  const handleOnDeleteColumnClick = () => {
-    dispatch(deleteColumnFetch({ columnId: props._id!, lang: lang }));
-  };
+  const handleOnClick = useCallback(async () => {
+    deleteColumn(lang, dispatch, props.columns!, props._id!);
+  }, [lang, props.columns, dispatch, props._id]);
 
   return (
     <div
@@ -84,7 +84,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
         >
           <div className="column__btn-wrapper">
             <CustomButton
-              onClick={() => handleOnDeleteColumnClick()}
+              onClick={() => handleOnClick()}
               className="main-page-btn column__btn_confirm"
             >
               {i18Obj[lang].confirm}

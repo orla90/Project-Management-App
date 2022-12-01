@@ -18,6 +18,7 @@ export interface ColumnProps {
   order?: number;
   boardId?: string;
   lang?: Language;
+  columns?: ColumnProps[] | [];
 }
 
 export interface BoardWithColumnsProps {
@@ -34,6 +35,7 @@ export interface IuppdateTitle {
 export interface IdeleteColumn {
   columnId: string;
   lang: Language;
+  guid?: string;
 }
 
 export interface TaskDeleteParams extends IdeleteColumn {
