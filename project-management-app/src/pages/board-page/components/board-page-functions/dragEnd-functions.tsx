@@ -139,5 +139,5 @@ export const reorderedColumns = (
       order: i,
     };
   });
-  dispatch(uppdateOrdersColumns(result));
+  dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND' }));
 };

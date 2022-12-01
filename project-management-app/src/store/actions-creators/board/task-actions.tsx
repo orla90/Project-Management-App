@@ -56,7 +56,11 @@ export const getAllBoardTasksFetch = createAsyncThunk<
     })
     .catch((error) => {
       if (error.code === ERRORS_CODE.BAD_REQUEST) {
-        toast.error(`${i18Obj[props.lang!].badRequestGetAllBoardTasks}`);
+        toast.error(
+          `${
+            i18Obj[state.languageSlice.language as keyof typeof i18Obj].badRequestGetAllBoardTasks
+          }`
+        );
       }
       return rejectWithValue(error.response.data.statusCode);
     });
@@ -162,7 +166,7 @@ export const getUsersFetch = createAsyncThunk(
       .then((response) => {
         return response.data.sort();
       })
-      .catch((error) => {
+      .catch(() => {
         return rejectWithValue([]);
       });
   }
