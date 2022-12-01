@@ -52,7 +52,6 @@ export const getAllBoardTasksFetch = createAsyncThunk<
       },
     })
     .then((response) => {
-      console.log('all tasks', response.data);
       return sortArr(response.data);
     })
     .catch((error) => {
@@ -222,7 +221,7 @@ export const createTasksColumnFetch = createAsyncThunk<
       return response.data;
     })
     .catch((error) => {
-      console.log('here', error);
+      console.log(error);
       if (error.code === ERRORS_CODE.BAD_REQUEST) {
         toast.error(`${i18Obj[props.lang!].badRequestTaskAdd}`);
       }

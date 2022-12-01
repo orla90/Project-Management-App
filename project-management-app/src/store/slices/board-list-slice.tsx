@@ -34,8 +34,6 @@ export const boardListSlice = createSlice({
       }
     );
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     builder.addCase(
       updateBoardFetch.fulfilled,
       (state: IBoardListState, action: PayloadAction<IBoard>) => {

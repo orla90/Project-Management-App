@@ -14,7 +14,7 @@ function DeleteBoardModal(props: IDeleteBoardModalProps) {
   const dispatch = useAppDispatch();
 
   const onConfirm = () => {
-    dispatch(deleteBoardFetch({ id: props.id }));
+    dispatch(deleteBoardFetch({ id: props.id, lang: lang }));
     props.onClose();
     console.log('доска удаляется');
   };

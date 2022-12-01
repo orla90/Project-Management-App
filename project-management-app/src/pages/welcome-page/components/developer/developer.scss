@@ -10,31 +10,31 @@
   background-color: $whiteColor;
   &__intro {
     display: flex;
-    @media (max-width: em(600)){
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    @media (max-width: em(600)) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
   }
   &__name {
     font-family: 'Manrope', sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: rem(36);
+    font-size: rem(32);
     line-height: rem(49);
     color: $primaryBlackColor;
-    @media (max-width: em(600)){
-      font-size: rem(30);  
+    @media (max-width: em(600)) {
+      font-size: rem(30);
     }
   }
   &__title {
     font-family: 'Noto Serif', serif;
     font-weight: 400;
-    font-size: rem(32);
+    font-size: rem(30);
     line-height: 48px;
-    color: #5b616e;
-    @media (max-width: em(600)){
-      font-size: rem(26);  
+    color: $lightDarkColor;
+    @media (max-width: em(600)) {
+      font-size: rem(26);
     }
   }
   &__img {
@@ -47,18 +47,21 @@
     border-radius: 50%;
   }
   &__description {
-    margin-top: 44px;
-    @media (max-width: em(1000)){
-        margin-top: adaptivSize(44,15,1420,320);
-    }
+    margin-top: 30px;
     font-family: 'Noto Serif', serif;
     font-weight: 400;
-    font-size: rem(32);
-    line-height: rem(48);
+    font-size: rem(26);
+    line-height: 1.4;
     color: $blackColor;
+    @media (max-width: em(1000)) {
+      margin-top: adaptivSize(44, 15, 1420, 320);
+    }
+    @media (max-width: em(600)) {
+      font-size: rem(20);
+    }
   }
   &__info {
-    @media (min-width:em(600.98)){
+    @media (min-width: em(600.98)) {
       margin-left: 16px;
     }
   }

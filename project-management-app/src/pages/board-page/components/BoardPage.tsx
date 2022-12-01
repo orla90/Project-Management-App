@@ -37,7 +37,11 @@ const BoardPage = () => {
   const [columns, setColumns] = useState<Array<ColumnProps> | []>([]);
 
   useEffect(() => {
+    if (!document.body.classList.contains('_lock')) {
+      document.body.classList.add('_lock');
+    }
     if (board) {
+      console.log(board);
       getColumnsAndTasks(dispatch, setColumns);
       getAllUserLoginst(board, dispatch);
     }
@@ -54,7 +58,9 @@ const BoardPage = () => {
       dispatch(getAllBoardTasksFetch({ lang: lang }));
     });
     return () => {
-      document.body.style.overflow = 'visible';
+      if (document.body.classList.contains('_lock')) {
+        document.body.classList.remove('_lock');
+      }
       socket.close();
       dispatch(resetBordAndColumns());
     };
@@ -77,6 +83,14 @@ const BoardPage = () => {
       {overlay && <Overlay />}
       <article className="board">
         <div className="board__container">
+          {board !== null && (
+            <div className="board__description">
+              <div className="board__title-wrapper">
+                {i18Obj[lang].board}: <h2 className="board__title">{board.title.title}</h2>
+              </div>
+              <p className="board__subtitle">{board.title.description}</p>
+            </div>
+          )}
           <div className="board__panel">
             <CustomLink className="board__btn main-page-btn" to={`../${ROUTES.BOARDS_LIST}`}>
               {i18Obj[lang].back}
@@ -137,7 +151,6 @@ const BoardPage = () => {
                             )}
                           </Draggable>
                         );
-                        //;
                       })}
                     {provided.placeholder}
                   </div>

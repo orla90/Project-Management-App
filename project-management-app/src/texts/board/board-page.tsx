@@ -19,6 +19,8 @@ const i18Obj = {
     task: '+ add task',
     title: 'Title',
     yes: 'yes',
+    confirm: 'confirm',
+    board: 'board',
   },
   ru: {
     addColumn: 'Добавить список',
@@ -40,6 +42,8 @@ const i18Obj = {
     task: '+ добавить задачу',
     title: 'Название',
     yes: 'да',
+    confirm: 'подтвердить',
+    board: 'доска',
   },
 };
 
