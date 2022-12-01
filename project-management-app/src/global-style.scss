@@ -39,6 +39,7 @@ input,
 button,
 textarea {
   font-size: inherit;
+  font-family: inherit;
 }
 
 button {
@@ -130,6 +131,9 @@ h6 {
   }
   &:active {
     transform: scale(0.95);
+  }
+  &_pink {
+    background-color: $pinkColor;
   }
 }
 

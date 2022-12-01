@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import { FieldErrors } from 'react-hook-form/dist/types/errors';
 
 export interface IcustomInput {

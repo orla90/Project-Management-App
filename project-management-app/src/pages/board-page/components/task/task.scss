@@ -76,3 +76,16 @@
     color: $primaryBlackColor;
   }
 }
+
+.task__btn {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  &_confirm {
+    min-width: 30%;
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}

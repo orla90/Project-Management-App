@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 import {
   createColumnFetch,
   deleteColumnFetch,
@@ -24,7 +25,7 @@ import {
 import { ColumnProps } from 'store/interfaces/board';
 
 const initialState = {
-  board: null,
+  board: null as IBoard | null,
   columns: [] as ColumnProps[],
   overlay: false,
   columnOrder: 0,
@@ -57,7 +58,6 @@ export const boardSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getBoardFetch.fulfilled, (state, action) => {
-      console.log('Получение борда fulfilled', action.payload);
       state.board = action.payload;
     });
 
@@ -65,13 +65,11 @@ export const boardSlice = createSlice({
       state.overlay = true;
     });
     builder.addCase(getColumnsFetch.fulfilled, (state, action) => {
-      console.log('получение колонки fulfilled', action.payload);
       state.columnOrder = action.payload.length;
       state.columns = action.payload;
       state.overlay = false;
     });
     builder.addCase(getColumnsFetch.rejected, (state, action) => {
-      console.log('Ошибка при получении всех колонок', action.payload);
       state.overlay = false;
     });
 
@@ -99,7 +97,6 @@ export const boardSlice = createSlice({
       state.overlay = true;
     });
     builder.addCase(getTasksColumnFetch.fulfilled, (state, action) => {
-      console.log('Получении заданий колонки fulfilled', action.payload);
       state.overlay = false;
     });
     builder.addCase(getTasksColumnFetch.rejected, (state) => {
@@ -148,11 +145,9 @@ export const boardSlice = createSlice({
       state.overlay = true;
     });
     builder.addCase(getTaskFetch.fulfilled, (state) => {
-      console.log('Задача получена fulfilled');
       state.overlay = false;
     });
     builder.addCase(getTaskFetch.rejected, (state) => {
-      console.log('При получении задачи произошла ошибка rejected');
       state.overlay = false;
     });
 

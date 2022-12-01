@@ -17,6 +17,7 @@ const i18Obj = {
     badRequestEditProfile: 'Failed to edit a profile. Please try again later.',
     badRequestUserSignIn: 'Failed to sign in. Please check that the data entered is correct.',
     badRequestUserSignUp: 'Failed to sign up. Please try again later.',
+    badRequestDeleteBoard: 'Failed to delete the board. Please try again later.',
     goodResponseEditProfile: 'Profile data updated successfully.',
   },
   ru: {
@@ -43,6 +44,7 @@ const i18Obj = {
     badRequestUserSignIn:
       'Не удалось авторизоваться. Пожалуйста, убедитесь, что данные введены корректно.',
     badRequestUserSignUp: 'Не удалось зарегистрироваться. Пожалуйста, повторите попытку позднее.',
+    badRequestDeleteBoard: 'Не удалось удалить доску. Пожалуйста, повторите попытку позднее.',
     goodResponseEditProfile: 'Данные профиля успешно обновлены.',
   },
 };

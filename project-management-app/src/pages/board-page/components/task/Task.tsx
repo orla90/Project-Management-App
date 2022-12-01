@@ -5,10 +5,10 @@ import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import {} from 'store/actions-creators/board/task-actions';
-import { useAppSelector } from 'store/custom-hooks';
+import { ToastContainer } from 'react-toastify';
+import { deleteTaskFetch } from 'store/actions-creators/board/task-actions';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
-import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import TaskDetailed from '../task-detailed/TaskDetailed';
 import './task.scss';
@@ -25,6 +25,7 @@ const Task = (props: TaskWithProps) => {
     findUserLogin(props.task.userId, usersLogins)
   );
   const [taskDetailedWindow, setTaskDetailedWindow] = useState(false);
+  const dispatch = useAppDispatch();
 
   function findUserLogin(userID: string, obj: { [x: string]: string }): string {
     const newArr = Object.entries(obj);
@@ -45,6 +46,13 @@ const Task = (props: TaskWithProps) => {
       setTaskDetailedWindow(false);
     }
   };
+
+  const handleOnDeleteTaskClick = () => {
+    dispatch(
+      deleteTaskFetch({ columnId: props.task.columnId, taskId: props.task._id, lang: lang })
+    );
+  };
+
   return (
     <Draggable draggableId={props.task._id} index={props.task.order}>
       {(provided) => (
@@ -91,14 +99,20 @@ const Task = (props: TaskWithProps) => {
               />
             )}
           </div>
-          <BoardCustomModal
+          <Modal
             open={deleteTaskModal}
-            onClose={() => setDeleteTaskModal(false)}
             title={i18Obj[lang].deleteTask}
-            columnId={props.task.columnId}
-            taskId={props.task._id}
-            target={'deleteTask'}
-          />
+            onClose={() => setDeleteTaskModal(false)}
+          >
+            <div className="task__btn-wrapper">
+              <CustomButton
+                onClick={() => handleOnDeleteTaskClick()}
+                className="main-page-btn task__btn_confirm"
+              >
+                {i18Obj[lang].confirm}
+              </CustomButton>
+            </div>
+          </Modal>
           <Modal
             open={editTaskModal}
             onClose={() => setEditTaskModal(false)}
@@ -126,6 +140,7 @@ const Task = (props: TaskWithProps) => {
               findUserLogin={findUserLogin}
             />
           </Modal>
+          <ToastContainer />
         </div>
       )}
     </Draggable>

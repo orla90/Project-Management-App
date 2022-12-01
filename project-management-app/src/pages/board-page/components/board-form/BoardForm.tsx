@@ -25,8 +25,7 @@ const BoardForm = (props: BoardFormModalProps) => {
   } = useForm<FormValues>({ mode: 'onChange' });
 
   const [title, setTitle] = useState(props.task?.title || '');
-  const [description, setDescription] = useState(props.task?.description || '');
-  // const notify = () => toast.success('Wow so easy!');
+  const [description, setDescription] = useState(props.task?.description.trim() || '');
 
   const handleOnSubmit = (data: FormValues) => {
     if (props.target === 'addColumn') {
@@ -39,56 +38,45 @@ const BoardForm = (props: BoardFormModalProps) => {
   };
 
   const handleAddColumn = async (data: FormValues) => {
-    try {
-      await dispatch(
-        createColumnFetch({ title: data.title, order: columnOrder, lang: lang })
-      ).unwrap();
-      props.onClose();
-    } catch (error) {
-      alert(error);
-    }
+    await dispatch(
+      createColumnFetch({ title: data.title, order: columnOrder, lang: lang })
+    ).unwrap();
+    props.onClose();
   };
 
   const handleAddTask = async (data: FormValues) => {
-    try {
-      await dispatch(
-        createTasksColumnFetch({
-          title: data.title,
-          columnId: props.columnId!,
-          order: (tasks[props.columnId as keyof typeof tasks] as Array<dataTasks>)?.length || 0,
-          description: data.description || '',
-          lang: lang,
-        })
-      ).unwrap();
-      props.onClose();
-    } catch (error) {
-      alert(error);
-    }
+    console.log(data.description);
+    await dispatch(
+      createTasksColumnFetch({
+        title: data.title,
+        columnId: props.columnId!,
+        order: (tasks[props.columnId as keyof typeof tasks] as Array<dataTasks>)?.length || 0,
+        description: data.description || ' ',
+        lang: lang,
+      })
+    ).unwrap();
+    props.onClose();
   };
 
   const handleEditTask = async (data: FormValues) => {
-    try {
-      await dispatch(
-        editTaskFetch({
-          title: data.title,
-          columnId: props.task!.columnId!,
-          taskId: props.task!._id!,
-          description: data.description || '',
-          order: props.task!.order,
-          userId: props.task!.userId,
-          users: props.task!.users,
-          lang: lang,
-        })
-      ).unwrap();
-      props.onClose();
-    } catch (error) {
-      alert(error);
-    }
+    await dispatch(
+      editTaskFetch({
+        title: data.title,
+        columnId: props.task!.columnId!,
+        taskId: props.task!._id!,
+        description: data.description || '',
+        order: props.task!.order,
+        userId: props.task!.userId,
+        users: props.task!.users,
+        lang: lang,
+      })
+    ).unwrap();
+    props.onClose();
   };
 
   return (
     <form className="board-form__body" onSubmit={handleSubmit(handleOnSubmit)}>
-      <div className="input-body">
+      <div className="board-form__wrapper">
         <label className="board-form__label">{i18Obj[lang].title}</label>
         <input
           type="text"
@@ -103,9 +91,10 @@ const BoardForm = (props: BoardFormModalProps) => {
         )}
       </div>
       {props.description && (
-        <div className="input-body">
+        <div className="board-form__wrapper">
           <label>{i18Obj[lang].description}</label>
           <textarea
+            className="board-form__textarea"
             {...register('description')}
             rows={4}
             onChange={(e) => setDescription(e.target.value)}
@@ -114,12 +103,9 @@ const BoardForm = (props: BoardFormModalProps) => {
           <div className="form-error"></div>
         </div>
       )}
-      <div className="btn-container">
-        <CustomButton className="main-page-btn board-form__btn" onClick={props.onClose}>
-          {i18Obj[lang].no}
-        </CustomButton>
-        <CustomButton className="main-page-btn board-form__btn board-form__btn_pink" type="submit">
-          {i18Obj[lang].yes}
+      <div className="board-form__btn-container">
+        <CustomButton className="main-page-btn board-form__btn" type="submit">
+          {i18Obj[lang].confirm}
         </CustomButton>
       </div>
       <ToastContainer />

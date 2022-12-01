@@ -3,16 +3,17 @@ import Modal from 'components/UI/modal/Modal';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
 import React, { useEffect, useState } from 'react';
-import { useAppSelector } from 'store/custom-hooks';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';
-import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import Task from '../task/Task';
 import ColumnTitleConfirmed from './column-title-confirmed/ColumnTitleConfirmed';
 import ColumnTitleEdit from './column-title-edit/ColumnTitleEdit';
 import './column.scss';
 import { Droppable } from 'react-beautiful-dnd';
+import { ToastContainer } from 'react-toastify';
+import { deleteColumnFetch } from 'store/actions-creators/board/board-action';
 
 const Column = ({ props }: { props: ColumnProps }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
@@ -24,10 +25,17 @@ const Column = ({ props }: { props: ColumnProps }) => {
     tasks[props._id! as keyof typeof tasks] ? tasks[props._id! as keyof typeof tasks] : []
   );
   const lang = language.toString() as Language;
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     setTaskColumn(tasks[props._id! as keyof typeof tasks] || []);
     console.log('USEEFFECT COLUMN-PAGE', taskColumn);
   }, [tasks]);
+
+  const handleOnDeleteColumnClick = () => {
+    dispatch(deleteColumnFetch({ columnId: props._id!, lang: lang }));
+  };
+
   return (
     <div
       className="column"
@@ -69,13 +77,20 @@ const Column = ({ props }: { props: ColumnProps }) => {
             {i18Obj[lang].task}
           </CustomButton>
         </div>
-        <BoardCustomModal
+        <Modal
           open={deleteColumnModal}
-          onClose={() => setDeleteColumnModal(false)}
           title={i18Obj[lang].deleteColumn}
-          columnId={props._id!}
-          target={'deleteColumn'}
-        />
+          onClose={() => setDeleteColumnModal(false)}
+        >
+          <div className="column__btn-wrapper">
+            <CustomButton
+              onClick={() => handleOnDeleteColumnClick()}
+              className="main-page-btn column__btn_confirm"
+            >
+              {i18Obj[lang].confirm}
+            </CustomButton>
+          </div>
+        </Modal>
         <Modal
           open={addTaskModal}
           onClose={() => setAddTaskModal(false)}
@@ -91,6 +106,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
           }
         </Modal>
       </div>
+      <ToastContainer />
     </div>
   );
 };
