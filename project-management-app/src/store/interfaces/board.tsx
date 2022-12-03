@@ -37,7 +37,6 @@ export interface IuppdateTitle {
 
 export interface IdeleteColumn {
   columnId: string;
-  lang: Language;
   guid?: string;
 }
 

@@ -14,12 +14,13 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ERRORS_CODE } from 'constants/errors';
 import i18Obj from 'texts/errors-and-warnings/translate';
-import { Dispatch } from 'react';
+import { Language } from 'pages/welcome-page/types/types';
 
 export const getvFetch = createAsyncThunk(
   'boards/getBoards',
   async (props: BoardsProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
+    const lang = state.languageSlice.language as Language;
     return axios
       .get(`${BACK_END_URL}boards`, {
         headers: {
@@ -32,7 +33,7 @@ export const getvFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestGetBoards}`);
+          toast.error(`${i18Obj[lang].badRequestGetBoards}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -43,6 +44,7 @@ export const getBoardFetch = createAsyncThunk(
   'board/getBoard',
   async (props: BoardProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
+    const lang = state.languageSlice.language as Language;
     return axios
       .get(`${BACK_END_URL}boards/${props._id}`, {
         headers: {
@@ -55,7 +57,7 @@ export const getBoardFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestGetBoard}`);
+          toast.error(`${i18Obj[lang].badRequestGetBoard}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -67,6 +69,7 @@ export const createColumnFetch = createAsyncThunk(
   async (props: ColumnProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    const lang = state.languageSlice.language as Language;
     return axios
       .post(
         `${BACK_END_URL}boards/${board._id}/columns`,
@@ -88,7 +91,7 @@ export const createColumnFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestColumnAdd}`);
+          toast.error(`${i18Obj[lang].badRequestColumnAdd}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -100,6 +103,7 @@ export const getColumnsFetch = createAsyncThunk(
   async (props: ColumnProps, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    const lang = state.languageSlice.language as Language;
     return axios
       .get(`${BACK_END_URL}boards/${board._id}/columns`, {
         headers: {
@@ -112,7 +116,7 @@ export const getColumnsFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestGetColumns}`);
+          toast.error(`${i18Obj[lang].badRequestGetColumns}`);
         }
         return rejectWithValue(error);
       });
@@ -124,6 +128,7 @@ export const uppdateColumnTitleFetch = createAsyncThunk(
   async (props: IuppdateTitle, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    const lang = state.languageSlice.language as Language;
     return axios
       .put(
         `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}`,
@@ -143,7 +148,7 @@ export const uppdateColumnTitleFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestUpdateColumnTitle}`);
+          toast.error(`${i18Obj[lang].badRequestUpdateColumnTitle}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -154,6 +159,7 @@ export const deleteColumnFetch = createAsyncThunk(
   'board/deleteColumn',
   async (props: IdeleteColumn, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
+    const lang = state.languageSlice.language as Language;
     const board = state.boardSlice.board! as IBoard;
     return axios
       .delete(`${BACK_END_URL}boards/${board._id}/columns/${props.columnId}`, {
@@ -168,7 +174,7 @@ export const deleteColumnFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestDeleteColumn}`);
+          toast.error(`${i18Obj[lang].badRequestDeleteColumn}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -185,6 +191,7 @@ export const uppdateOrdersColumns = createAsyncThunk(
     { getState }
   ) => {
     const state = getState() as RootState;
+    const lang = state.languageSlice.language as Language;
     return axios
       .patch(`${BACK_END_URL}columnsSet`, props.result, {
         headers: {
@@ -196,8 +203,9 @@ export const uppdateOrdersColumns = createAsyncThunk(
       })
       .then((response) => response.data)
       .catch((err) => {
-        console.log(err);
-        alert('Что-то пошло не так при обновлении очерёдности колонок');
+        if (err.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[lang].wrongColumnOrder}`);
+        }
       });
   }
 );

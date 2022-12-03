@@ -54,9 +54,10 @@ export const deleteColumn = async (
   const reorderedColumns = reorderColumns(columnId, columns);
   if (reorderedColumns.length > 0)
     await dispatch(
-      uppdateOrdersColumns({ guid: 'uppdate_orders_from_delete_column', result: reorderedColumns })
+      uppdateOrdersColumns({
+        guid: 'uppdate_orders_from_delete_column',
+        result: reorderedColumns,
+      })
     );
-  await dispatch(
-    deleteColumnFetch({ columnId: columnId, lang: lang, guid: 'uppdate_from_delete_column' })
-  );
+  await dispatch(deleteColumnFetch({ columnId: columnId, guid: 'uppdate_from_delete_column' }));
 };

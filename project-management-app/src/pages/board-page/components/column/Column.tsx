@@ -77,7 +77,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
           <div className="column__btn-wrapper">
             <CustomButton
               onClick={() => handleOnClick()}
-              className="main-page-btn column__btn_confirm"
+              className="main-page-btn-accent  column__btn_confirm"
             >
               {i18Obj[lang].confirm}
             </CustomButton>

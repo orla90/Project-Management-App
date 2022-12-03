@@ -94,53 +94,56 @@ const BoardPage = () => {
         <div className="board__container">
           {board !== null && (
             <div className="board__description">
-              <div className="board__title-wrapper">
-                {i18Obj[lang].board}: <h2 className="board__title">{board.title.title}</h2>
-              </div>
+              <h2 className="board__title">
+                <span className="board__title_annotation">{i18Obj[lang].board}:</span>
+                <span className="board__title_name">{board.title.title}</span>
+              </h2>
               <p className="board__subtitle">{board.title.description}</p>
             </div>
           )}
           <div className="board__panel">
-            <CustomLink className="board__btn main-page-btn" to={`../${ROUTES.BOARDS_LIST}`}>
-              {i18Obj[lang].back}
-            </CustomLink>
-            <Modal
-              open={addColumnModal}
-              onClose={() => setAddColumnModal(false)}
-              title={i18Obj[lang].addColumn}
-            >
-              {
-                <BoardForm
-                  onClose={() => setAddColumnModal(false)}
-                  description={false}
-                  target={'addColumn'}
-                />
-              }
-            </Modal>
-            <CustomButton
-              className="board__add-column-btn"
-              onClick={() => {
-                setAddColumnModal(true);
-              }}
-            >
-              {i18Obj[lang].column}
-            </CustomButton>
+            <div className="board__btn-container">
+              <CustomLink className="board__btn main-page-btn" to={`../${ROUTES.BOARDS_LIST}`}>
+                {i18Obj[lang].back}
+              </CustomLink>
+              <Modal
+                open={addColumnModal}
+                onClose={() => setAddColumnModal(false)}
+                title={i18Obj[lang].addColumn}
+              >
+                {
+                  <BoardForm
+                    onClose={() => setAddColumnModal(false)}
+                    description={false}
+                    target={'addColumn'}
+                  />
+                }
+              </Modal>
+              <CustomButton
+                className="board__add-column-btn"
+                onClick={() => {
+                  setAddColumnModal(true);
+                }}
+              >
+                {i18Obj[lang].column}
+              </CustomButton>
 
-            <Modal
-              open={inviteUser}
-              onClose={() => setInviteUser(false)}
-              title={i18ObjInviteUSer[language as key].title}
-            >
-              {<InviteUser />}
-            </Modal>
-            <CustomButton
-              className="board__add-column-btn"
-              onClick={() => {
-                setInviteUser(true);
-              }}
-            >
-              {i18ObjInviteUSer[language as key].generalButton}
-            </CustomButton>
+              <Modal
+                open={inviteUser}
+                onClose={() => setInviteUser(false)}
+                title={i18ObjInviteUSer[language as key].title}
+              >
+                {<InviteUser />}
+              </Modal>
+              <CustomButton
+                className="board__add-column-btn"
+                onClick={() => {
+                  setInviteUser(true);
+                }}
+              >
+                {i18ObjInviteUSer[language as key].generalButton}
+              </CustomButton>
+            </div>
           </div>
           <DragDropContext onDragEnd={dragEnd}>
             <div className="board__list-body">
