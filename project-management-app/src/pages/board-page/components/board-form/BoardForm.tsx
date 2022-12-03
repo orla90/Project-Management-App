@@ -85,6 +85,7 @@ const BoardForm = (props: BoardFormModalProps) => {
           })}
           onChange={(e) => setTitle(e.target.value)}
           value={title}
+          autoFocus
         ></input>
         {errors.title?.type === 'required' && (
           <div className="board-form__error">{i18Obj[lang].required}</div>

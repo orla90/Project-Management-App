@@ -1,3 +1,4 @@
+import { Language } from 'pages/welcome-page/types/types';
 import { Dispatch } from 'react';
 import { DropResult } from 'react-beautiful-dnd';
 import { uppdateOrdersColumns } from 'store/actions-creators/board/board-action';
@@ -37,7 +38,8 @@ export const handleDragEnd = (
     type: 'board/setNewOrdersTasks';
   },
   columns: ColumnProps,
-  setColumns: Dispatch<Array<ColumnProps> | []>
+  setColumns: Dispatch<Array<ColumnProps> | []>,
+  lang: Language
 ) => {
   const { destination, source, type } = result;
   if (!destination) return;
@@ -57,7 +59,7 @@ export const handleDragEnd = (
       setNewOrdersTasks
     );
   } else if (type === 'Columns') {
-    reorderedColumns(columns, setColumns, sourceOrder, destinationOrder, dispatch);
+    reorderedColumns(columns, setColumns, sourceOrder, destinationOrder, dispatch, lang);
   }
 };
 
@@ -126,7 +128,8 @@ export const reorderedColumns = (
   setColumns: Dispatch<Array<ColumnProps> | []>,
   sourceOrder: number,
   destinationOrder: number,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
+  lang: Language
 ) => {
   const columnsArr = JSON.parse(JSON.stringify(columns));
   const temp = columnsArr[sourceOrder];
@@ -139,5 +142,5 @@ export const reorderedColumns = (
       order: i,
     };
   });
-  dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND' }));
+  dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND', lang: lang }));
 };

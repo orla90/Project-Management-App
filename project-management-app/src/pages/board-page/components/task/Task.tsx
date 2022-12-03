@@ -36,8 +36,8 @@ const Task = (props: TaskWithProps) => {
     setUserList(!userList);
   }, []);
 
-  const handleTaskOnClick = useCallback((detalis: boolean) => {
-    if (!detalis) {
+  const handleTaskOnClick = useCallback((details: boolean) => {
+    if (!details) {
       setTaskDetailedWindow(true);
     } else {
       setTaskDetailedWindow(false);

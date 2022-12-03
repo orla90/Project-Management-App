@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ERRORS_CODE } from 'constants/errors';
 import i18Obj from 'texts/errors-and-warnings/translate';
+import { Language } from 'pages/welcome-page/types/types';
 
 export const getvFetch = createAsyncThunk(
   'boards/getBoards',
@@ -176,7 +177,7 @@ export const deleteColumnFetch = createAsyncThunk(
 
 export const uppdateOrdersColumns = createAsyncThunk(
   'board/uppdateOrdersColumns',
-  async (props: { guid?: string; result: Array<ColumnProps> }, { getState }) => {
+  async (props: { guid?: string; result: Array<ColumnProps>; lang: Language }, { getState }) => {
     const state = getState() as RootState;
     return axios
       .patch(`${BACK_END_URL}columnsSet`, props.result, {
@@ -188,8 +189,9 @@ export const uppdateOrdersColumns = createAsyncThunk(
       })
       .then((response) => response.data)
       .catch((err) => {
-        console.log(err);
-        alert('Что-то пошло не так при обновлении очерёдности колонок');
+        if (err.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(`${i18Obj[props.lang!].wrongColumnOrder}`);
+        }
       });
   }
 );
