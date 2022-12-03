@@ -45,14 +45,12 @@ const BoardForm = (props: BoardFormModalProps) => {
   };
 
   const handleAddTask = async (data: FormValues) => {
-    console.log(data.description);
     await dispatch(
       createTasksColumnFetch({
         title: data.title,
         columnId: props.columnId!,
         order: (tasks[props.columnId as keyof typeof tasks] as Array<dataTasks>)?.length || 0,
         description: data.description || ' ',
-        lang: lang,
       })
     ).unwrap();
     props.onClose();
@@ -68,7 +66,6 @@ const BoardForm = (props: BoardFormModalProps) => {
         order: props.task!.order,
         userId: props.task!.userId,
         users: props.task!.users,
-        lang: lang,
       })
     ).unwrap();
     props.onClose();

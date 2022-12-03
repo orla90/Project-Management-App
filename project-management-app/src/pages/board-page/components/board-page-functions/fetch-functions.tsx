@@ -47,10 +47,7 @@ export const deleteColumn = async (
       uppdateOrdersColumns({
         guid: 'uppdate_orders_from_delete_column',
         result: reorderedColumns,
-        lang: lang,
       })
     );
-  await dispatch(
-    deleteColumnFetch({ columnId: columnId, lang: lang, guid: 'uppdate_from_delete_column' })
-  );
+  await dispatch(deleteColumnFetch({ columnId: columnId, guid: 'uppdate_from_delete_column' }));
 };

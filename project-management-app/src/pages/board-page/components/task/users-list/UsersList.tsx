@@ -1,6 +1,6 @@
 import { TaskUsers } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import { editTaskFetch } from 'store/actions-creators/board/task-actions';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
@@ -24,7 +24,6 @@ const UsersList = (props: TaskUsers) => {
           order: props.task.order || 0,
           userId: usersLogins[user as keyof typeof usersLogins],
           users: [...props.users],
-          lang: lang,
         })
       ).unwrap();
       props.setUserList(false);

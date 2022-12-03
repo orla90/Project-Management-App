@@ -26,9 +26,7 @@ const TaskDetailed = (props: TaskWithProps) => {
   const dispatch = useAppDispatch();
 
   const handleOnDeleteTaskClick = () => {
-    dispatch(
-      deleteTaskFetch({ columnId: props.task.columnId, taskId: props.task._id, lang: lang })
-    );
+    dispatch(deleteTaskFetch({ columnId: props.task.columnId, taskId: props.task._id }));
   };
 
   return (

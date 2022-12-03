@@ -75,8 +75,7 @@ const BoardPage = () => {
       tasks as dataTasks[],
       setNewOrdersTasks,
       columns as ColumnProps,
-      setColumns,
-      lang
+      setColumns
     );
   };
 

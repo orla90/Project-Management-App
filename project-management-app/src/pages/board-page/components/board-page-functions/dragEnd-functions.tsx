@@ -38,8 +38,7 @@ export const handleDragEnd = (
     type: 'board/setNewOrdersTasks';
   },
   columns: ColumnProps,
-  setColumns: Dispatch<Array<ColumnProps> | []>,
-  lang: Language
+  setColumns: Dispatch<Array<ColumnProps> | []>
 ) => {
   const { destination, source, type } = result;
   if (!destination) return;
@@ -59,7 +58,7 @@ export const handleDragEnd = (
       setNewOrdersTasks
     );
   } else if (type === 'Columns') {
-    reorderedColumns(columns, setColumns, sourceOrder, destinationOrder, dispatch, lang);
+    reorderedColumns(columns, setColumns, sourceOrder, destinationOrder, dispatch);
   }
 };
 
@@ -128,8 +127,7 @@ export const reorderedColumns = (
   setColumns: Dispatch<Array<ColumnProps> | []>,
   sourceOrder: number,
   destinationOrder: number,
-  dispatch: AppDispatch,
-  lang: Language
+  dispatch: AppDispatch
 ) => {
   const columnsArr = JSON.parse(JSON.stringify(columns));
   const temp = columnsArr[sourceOrder];
@@ -142,5 +140,5 @@ export const reorderedColumns = (
       order: i,
     };
   });
-  dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND', lang: lang }));
+  dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND' }));
 };

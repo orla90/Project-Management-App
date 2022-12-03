@@ -45,10 +45,8 @@ const Task = (props: TaskWithProps) => {
   }, []);
 
   const handleOnDeleteTaskClick = useCallback(() => {
-    dispatch(
-      deleteTaskFetch({ columnId: props.task.columnId, taskId: props.task._id, lang: lang })
-    );
-  }, [dispatch, props.task.columnId, props.task._id, lang]);
+    dispatch(deleteTaskFetch({ columnId: props.task.columnId, taskId: props.task._id }));
+  }, [dispatch, props.task.columnId, props.task._id]);
 
   return (
     <Draggable draggableId={props.task._id} index={props.task.order}>
@@ -107,7 +105,7 @@ const Task = (props: TaskWithProps) => {
             <div className="task__btn-wrapper">
               <CustomButton
                 onClick={() => handleOnDeleteTaskClick()}
-                className="main-page-btn task__btn_confirm"
+                className="main-page-btn-accent task__btn_confirm"
               >
                 {i18Obj[lang].confirm}
               </CustomButton>
