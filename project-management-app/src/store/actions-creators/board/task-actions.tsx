@@ -35,36 +35,33 @@ export const getTasksColumnFetch = createAsyncThunk<
     });
 });
 
-export const getAllBoardTasksFetch = createAsyncThunk<
-  { [x: string]: Array<dataTasks> },
-  BoardsProps,
-  {
-    rejectValue: string;
+export const getAllBoardTasksFetch = createAsyncThunk(
+  'board/getAllBoardTasks',
+  async (props: BoardsProps, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const board = state.boardSlice.board! as IBoard;
+    return axios
+      .get(`${BACK_END_URL}tasksSet/${board._id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      })
+      .then((response) => {
+        return sortArr(response.data);
+      })
+      .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(
+            `${
+              i18Obj[state.languageSlice.language as keyof typeof i18Obj].badRequestGetAllBoardTasks
+            }`
+          );
+        }
+        return rejectWithValue(error.response.data.statusCode);
+      });
   }
->('board/getAllBoardTasks', async (props: BoardsProps, { getState, rejectWithValue }) => {
-  const state = getState() as RootState;
-  const board = state.boardSlice.board! as IBoard;
-  return axios
-    .get(`${BACK_END_URL}tasksSet/${board._id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${state.signSlice.user!.token}`,
-      },
-    })
-    .then((response) => {
-      return sortArr(response.data);
-    })
-    .catch((error) => {
-      if (error.code === ERRORS_CODE.BAD_REQUEST) {
-        toast.error(
-          `${
-            i18Obj[state.languageSlice.language as keyof typeof i18Obj].badRequestGetAllBoardTasks
-          }`
-        );
-      }
-      return rejectWithValue(error.response.data.statusCode);
-    });
-});
+);
 
 export const deleteTaskFetch = createAsyncThunk(
   'board/deleteTask',

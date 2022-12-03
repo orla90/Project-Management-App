@@ -1,5 +1,4 @@
 import Modal from 'components/UI/modal/Modal';
-import { FormValues } from 'pages/board-page/types/modal-types';
 import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { deleteBoardFetch } from 'store/actions-creators/boards/boards-action';

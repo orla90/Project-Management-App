@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ERRORS_CODE } from 'constants/errors';
 import i18Obj from 'texts/errors-and-warnings/translate';
+import { Dispatch } from 'react';
 
 export const getvFetch = createAsyncThunk(
   'boards/getBoards',
@@ -176,7 +177,13 @@ export const deleteColumnFetch = createAsyncThunk(
 
 export const uppdateOrdersColumns = createAsyncThunk(
   'board/uppdateOrdersColumns',
-  async (props: { guid?: string; result: Array<ColumnProps> }, { getState }) => {
+  async (
+    props: {
+      guid?: string;
+      result: Array<ColumnProps>;
+    },
+    { getState }
+  ) => {
     const state = getState() as RootState;
     return axios
       .patch(`${BACK_END_URL}columnsSet`, props.result, {
@@ -184,6 +191,7 @@ export const uppdateOrdersColumns = createAsyncThunk(
           'Content-Type': 'application/json',
           Authorization: `Bearer ${state.signSlice.user!.token}`,
           Guid: props.guid || '',
+          initUser: state.signSlice.user!.id,
         },
       })
       .then((response) => response.data)
