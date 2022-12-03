@@ -2,16 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { ERRORS_CODE } from 'constants/errors';
-import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 import { toast } from 'react-toastify';
 import { ICreateBoardProps } from 'store/interfaces/ICreateBoardProps';
 import { IDeleteBoardProps } from 'store/interfaces/IDeleteBoardProps';
 import { IGetBoardsByUserIdProps } from 'store/interfaces/IGetBoardByUserIdProps';
 import { IServerBoard } from 'store/interfaces/IServerBoard';
-import {
-  IUpdateBoardProps,
-  IUpdateBoardPropsWithoutDescription,
-} from 'store/interfaces/IUpdateBoardProps';
+import { IUpdateBoardProps } from 'store/interfaces/IUpdateBoardProps';
 import { RootState } from 'store/types/types-redux';
 import i18Obj from 'texts/errors-and-warnings/translate';
 

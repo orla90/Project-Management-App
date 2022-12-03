@@ -24,6 +24,8 @@ import { getAllUserLoginst, getColumns } from './board-page-functions/fetch-func
 import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
 import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { ToastContainer } from 'react-toastify';
+import { getTasks } from './board-page-functions/fetch-functions';
+import { Itasks } from '../interfaces/task-interface';
 
 const BoardPage = () => {
   const [addColumnModal, setAddColumnModal] = useState(false);
@@ -35,6 +37,7 @@ const BoardPage = () => {
   const { overlay, board, tasks } = useAppSelector((state) => state.boardSlice);
   const { setNewOrdersTasks } = boardSlice.actions;
   const [columns, setColumns] = useState<Array<ColumnProps> | []>([]);
+  const [allTasks, setAllTasks] = useState<{ [x: string]: Itasks[] }>({});
 
   useEffect(() => {
     console.log('USEEFFECT BOARD_PAGE');
@@ -42,7 +45,7 @@ const BoardPage = () => {
       document.body.classList.add('_lock');
     }
     if (board) {
-      dispatch(getAllBoardTasksFetch({}));
+      getTasks(dispatch, setAllTasks);
       getColumns(dispatch, setColumns);
       getAllUserLoginst(board, dispatch);
     }
@@ -50,13 +53,15 @@ const BoardPage = () => {
     const socket = io('https://react-final-project-production.up.railway.app/');
     socket.on('columns', (message) => {
       console.log('WEBSOCKET COLUMNS', message);
-      if (message.guid !== 'uppdate_orders_from_delete_column') {
-        getColumns(dispatch, setColumns);
+      if (message.guid === 'uppdate_orders_from_delete_column') {
+        return;
       }
+      console.log('I"M WORKiNG');
+      getColumns(dispatch, setColumns);
     });
     socket.on('tasks', (message) => {
       console.log('WEBSOCKET TASKS', message);
-      dispatch(getAllBoardTasksFetch({}));
+      getTasks(dispatch, setAllTasks);
     });
 
     return () => {
@@ -75,7 +80,8 @@ const BoardPage = () => {
       tasks as dataTasks[],
       setNewOrdersTasks,
       columns as ColumnProps,
-      setColumns
+      setColumns,
+      setAllTasks
     );
   };
 
@@ -150,7 +156,17 @@ const BoardPage = () => {
                             index={column.order!}
                           >
                             {(provided) => (
-                              <Column key={column._id} props={{ ...column, provided, columns }} />
+                              <Column
+                                key={column._id}
+                                props={{
+                                  ...column,
+                                  provided,
+                                  columns,
+                                  tasks: allTasks[column._id as keyof typeof column]
+                                    ? allTasks[column._id as keyof typeof column]
+                                    : [],
+                                }}
+                              />
                             )}
                           </Draggable>
                         );

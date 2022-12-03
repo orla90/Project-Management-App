@@ -69,7 +69,7 @@ export const boardSlice = createSlice({
       state.columns = action.payload;
       state.overlay = false;
     });
-    builder.addCase(getColumnsFetch.rejected, (state, action) => {
+    builder.addCase(getColumnsFetch.rejected, (state) => {
       state.overlay = false;
     });
 
@@ -96,7 +96,7 @@ export const boardSlice = createSlice({
     builder.addCase(getTasksColumnFetch.pending, (state) => {
       state.overlay = true;
     });
-    builder.addCase(getTasksColumnFetch.fulfilled, (state, action) => {
+    builder.addCase(getTasksColumnFetch.fulfilled, (state) => {
       state.overlay = false;
     });
     builder.addCase(getTasksColumnFetch.rejected, (state) => {
@@ -188,6 +188,12 @@ export const boardSlice = createSlice({
     });
     builder.addCase(uppdateOrdersColumns.pending, (state) => {
       state.overlay = true;
+    });
+    builder.addCase(uppdateOrdersColumns.fulfilled, (state) => {
+      state.overlay = false;
+    });
+    builder.addCase(uppdateOrdersColumns.rejected, (state) => {
+      state.overlay = false;
     });
   },
 });
