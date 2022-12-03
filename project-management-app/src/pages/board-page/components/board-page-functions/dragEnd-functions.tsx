@@ -1,4 +1,5 @@
 import { Language } from 'pages/welcome-page/types/types';
+import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Dispatch } from 'react';
 import { DropResult } from 'react-beautiful-dnd';
 import { uppdateOrdersColumns } from 'store/actions-creators/board/board-action';
@@ -38,7 +39,8 @@ export const handleDragEnd = (
     type: 'board/setNewOrdersTasks';
   },
   columns: ColumnProps,
-  setColumns: Dispatch<Array<ColumnProps> | []>
+  setColumns: Dispatch<Array<ColumnProps> | []>,
+  setAllTasks: Dispatch<{ [x: string]: Itasks[] }>
 ) => {
   const { destination, source, type } = result;
   if (!destination) return;
@@ -55,14 +57,15 @@ export const handleDragEnd = (
       destinationColumnID,
       destinationOrder,
       dispatch,
-      setNewOrdersTasks
+      setNewOrdersTasks,
+      setAllTasks
     );
   } else if (type === 'Columns') {
     reorderedColumns(columns, setColumns, sourceOrder, destinationOrder, dispatch);
   }
 };
 
-export const reorderedTasks = (
+export const reorderedTasks = async (
   tasks: Array<dataTasks>,
   sourceID: string,
   sourceOrder: number,
@@ -74,7 +77,8 @@ export const reorderedTasks = (
       [x: string]: dataTasks[];
     };
     type: 'board/setNewOrdersTasks';
-  }
+  },
+  setAllTasks: Dispatch<{ [x: string]: Itasks[] }>
 ) => {
   const sourceTasksColumn = copyArr(tasks, sourceID);
   const temp = sourceTasksColumn[sourceOrder];
@@ -83,12 +87,16 @@ export const reorderedTasks = (
     sourceTasksColumn.splice(destinationOrder, 0, temp);
     const result = createResultArr(sourceTasksColumn);
     const newTasks = setOrderNewTasks(sourceTasksColumn);
-    const resultNewTasks: { [x: number]: dataTasks[] } = {
+    const resultNewTasks: { [x: number]: Itasks[] } = {
       ...tasks,
       [sourceID]: newTasks,
     };
-    dispatch(setNewOrdersTasks(resultNewTasks));
-    dispatch(MovingTheTask(result));
+    console.log(resultNewTasks);
+    setAllTasks(resultNewTasks);
+    //dispatch(setNewOrdersTasks(resultNewTasks));
+    setTimeout(() => {
+      dispatch(MovingTheTask(result));
+    }, 0);
   } else {
     temp.columnId = destinationID;
     if (tasks[destinationID as keyof typeof tasks]) {
@@ -100,29 +108,33 @@ export const reorderedTasks = (
       ];
       const sourceColum = setOrderNewTasks(sourceTasksColumn);
       const destinationColumn = setOrderNewTasks(destinationTasksColumn);
-      const resultNewTasks: { [x: number]: dataTasks[] } = {
+      const resultNewTasks: { [x: number]: Itasks[] } = {
         ...tasks,
         [sourceID]: sourceColum,
         [destinationID]: destinationColumn,
       };
-      dispatch(setNewOrdersTasks(resultNewTasks));
-      dispatch(MovingTheTask(result));
+      setAllTasks(resultNewTasks);
+      setTimeout(() => {
+        dispatch(MovingTheTask(result));
+      }, 0);
     } else {
       const newColumnTasks = temp;
       newColumnTasks.order = 0;
       const result = [...createResultArr(sourceTasksColumn), ...createResultArr([newColumnTasks])];
-      const resultNewTasks: { [x: number]: dataTasks[] } = {
+      const resultNewTasks: { [x: number]: Itasks[] } = {
         ...tasks,
         [sourceID]: setOrderNewTasks(sourceTasksColumn),
         [destinationID]: [newColumnTasks],
       };
-      dispatch(setNewOrdersTasks(resultNewTasks));
-      dispatch(MovingTheTask(result));
+      setAllTasks(resultNewTasks);
+      setTimeout(() => {
+        dispatch(MovingTheTask(result));
+      }, 0);
     }
   }
 };
 
-export const reorderedColumns = (
+export const reorderedColumns = async (
   columns: ColumnProps,
   setColumns: Dispatch<Array<ColumnProps> | []>,
   sourceOrder: number,
@@ -133,12 +145,18 @@ export const reorderedColumns = (
   const temp = columnsArr[sourceOrder];
   columnsArr.splice(sourceOrder, 1);
   columnsArr.splice(destinationOrder, 0, temp);
-  setColumns(columnsArr);
+  const columnsToState = columnsArr.map((a: ColumnProps, i: number) => {
+    return { ...a, order: i };
+  });
   const result = columnsArr.map((a: ColumnProps, i: number) => {
     return {
       _id: a._id,
       order: i,
     };
   });
-  dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND' }));
+
+  setColumns(columnsToState);
+  setTimeout(() => {
+    dispatch(uppdateOrdersColumns({ result: result, guid: 'UPDATE_FROM_DND' }));
+  }, 0);
 };

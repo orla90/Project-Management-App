@@ -1,3 +1,4 @@
+import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { IBoard } from 'pages/boards-list-page/components/interfaces/IBoard';
 import { Dispatch } from 'react';
 import {
@@ -5,7 +6,10 @@ import {
   getColumnsFetch,
   uppdateOrdersColumns,
 } from 'store/actions-creators/board/board-action';
-import { getAllUserLoginFetch } from 'store/actions-creators/board/task-actions';
+import {
+  getAllBoardTasksFetch,
+  getAllUserLoginFetch,
+} from 'store/actions-creators/board/task-actions';
 import { ColumnProps } from 'store/interfaces/board';
 import { AppDispatch } from 'store/types/types-redux';
 
@@ -20,6 +24,12 @@ export const getColumns = async (
   setColumns: Dispatch<Array<ColumnProps> | []>
 ) => {
   setColumns((await dispatch(getColumnsFetch({}))).payload);
+};
+export const getTasks = async (
+  dispatch: AppDispatch,
+  setAllTasks: Dispatch<{ [x: string]: Itasks[] }>
+) => {
+  setAllTasks((await dispatch(getAllBoardTasksFetch({}))).payload as { [x: string]: Itasks[] });
 };
 
 const reorderColumns = (id: string, columns: Array<ColumnProps>): Array<ColumnProps> => {

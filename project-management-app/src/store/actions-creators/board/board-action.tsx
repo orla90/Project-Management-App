@@ -183,7 +183,13 @@ export const deleteColumnFetch = createAsyncThunk(
 
 export const uppdateOrdersColumns = createAsyncThunk(
   'board/uppdateOrdersColumns',
-  async (props: { guid?: string; result: Array<ColumnProps> }, { getState }) => {
+  async (
+    props: {
+      guid?: string;
+      result: Array<ColumnProps>;
+    },
+    { getState }
+  ) => {
     const state = getState() as RootState;
     const lang = state.languageSlice.language as Language;
     return axios
@@ -192,6 +198,7 @@ export const uppdateOrdersColumns = createAsyncThunk(
           'Content-Type': 'application/json',
           Authorization: `Bearer ${state.signSlice.user!.token}`,
           Guid: props.guid || '',
+          initUser: state.signSlice.user!.id,
         },
       })
       .then((response) => response.data)

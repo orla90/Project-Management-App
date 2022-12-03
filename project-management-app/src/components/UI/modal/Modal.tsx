@@ -26,7 +26,7 @@ function Modal(props: IModalProps) {
 
   if (open) {
     return createPortal(
-      <div className="modal" onClick={closeModal}>
+      <div className="modal" onMouseDown={closeModal}>
         <div className="modal__content">
           <div className="modal__title">
             <h2>{props.title}</h2>

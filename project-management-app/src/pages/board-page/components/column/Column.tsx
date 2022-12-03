@@ -20,17 +20,9 @@ const Column = ({ props }: { props: ColumnProps }) => {
   const [deleteColumnModal, setDeleteColumnModal] = useState(false);
   const [addTaskModal, setAddTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
-  const { tasks } = useAppSelector((state) => state.boardSlice);
-  const [taskColumn, setTaskColumn] = useState(
-    tasks[props._id! as keyof typeof tasks] ? tasks[props._id! as keyof typeof tasks] : []
-  );
+
   const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    setTaskColumn(tasks[props._id! as keyof typeof tasks] || []);
-    console.log('USEEFFECT COLUMN-PAGE');
-  }, [tasks, props._id]);
 
   const handleOnClick = useCallback(async () => {
     deleteColumn(lang, dispatch, props.columns!, props._id!);
@@ -64,7 +56,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
         <Droppable droppableId={props._id!} type={'Tasks'} direction={'vertical'}>
           {(provided) => (
             <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
-              {(taskColumn as Array<Itasks>).map((task: Itasks) => {
+              {props.tasks!.map((task: Itasks) => {
                 return <Task key={task._id} columnId={props._id!} task={task} />;
               })}
               {provided.placeholder}
