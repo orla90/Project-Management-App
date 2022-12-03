@@ -12,17 +12,20 @@
   }
 }
 
-.column__content {
-  max-height: 59vh;
+.column__body {
+  max-height: 45vh;
   overflow-y: auto;
   @media (max-width: em(1600)) {
-    max-height: 47vh;
+    max-height: 33vh;
   }
   @media (max-width: em(680)) {
-    max-height: 37vh;
+    max-height: 31vh;
   }
-  @media (max-width: em(375)) {
-    max-height: 30vh;
+  @media (max-width: em(600)) {
+    max-height: 29vh;
+  }
+  @media (max-width: em(480)) {
+    max-height: 25vh;
   }
 }
 
