@@ -41,9 +41,9 @@ const BoardPage = () => {
 
   useEffect(() => {
     console.log('USEEFFECT BOARD_PAGE');
-    if (!document.body.classList.contains('_lock')) {
-      document.body.classList.add('_lock');
-    }
+    // if (!document.body.classList.contains('_lock')) {
+    //   document.body.classList.add('_lock');
+    // }
     if (board) {
       getTasks(dispatch, setAllTasks);
       getColumns(dispatch, setColumns);
@@ -65,9 +65,9 @@ const BoardPage = () => {
     });
 
     return () => {
-      if (document.body.classList.contains('_lock')) {
-        document.body.classList.remove('_lock');
-      }
+      // if (document.body.classList.contains('_lock')) {
+      //   document.body.classList.remove('_lock');
+      // }
       socket.close();
       dispatch(resetBordAndColumns());
     };

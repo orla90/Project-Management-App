@@ -1,41 +1,44 @@
 @import '../../../../mixins.scss';
 
 .column {
-  max-width: 300px;
   min-width: 300px;
-  margin: 0 auto;
+  max-width: 300px;
+  @media (max-width: em(400)){
+    min-width: 270px;
+    max-width: 270px;
+  }
   height: auto;
   &__inner {
     background-color: $logoBlueColor;
     border-radius: 5px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
   }
 }
 
 .column__body {
-  max-height: 53vh;
-  overflow-y: auto;
-  @media (max-width: em(1600)) {
-    max-height: 43vh;
-  }
-  @media (max-width: em(680)) {
-    max-height: 36vh;
-  }
-  @media (max-width: em(480)) {
-    max-height: 30vh;
-  }
-}
-
-body::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+  }
 }
+.tasks__scroll-container{
+max-height: calc(100vh - 450px);
+@media (max-width: em(600)){
+  max-height: calc(100vh - 490px);
+}
+  overflow-y: auto;
+}
+
 
 .column__info {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   margin: 10px;
+  height: fit-content;
 }
 
 .column__btn {
