@@ -16,6 +16,10 @@
     flex-direction: column;
     overflow-y: auto;
   }
+  @media (max-width: em(375)) {
+    max-width: 270px;
+    min-width: 270px;
+  }
 }
 
 .column__body {

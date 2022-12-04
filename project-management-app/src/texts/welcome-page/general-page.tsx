@@ -1,13 +1,14 @@
 export const i18ObjGeneral = {
   en: {
     title: 'Let us handle your project with precision and speed',
-    subTitle: 'We take the burden off your shoulders so you can focus on the more',
+    subTitle: `This application was developed by students of the React 2022 Q1 course from RS School. We've tried to take the burden off your shoulders so you can focus on the more`,
     buttonWithoutAuthorization: 'Get start',
     buttonWithAuthorization: 'Boards-list',
   },
   ru: {
-    title: 'Позвольте нам справиться с вашим проектом с точностью и скоростью',
-    subTitle: 'Мы снимаем бремя с ваших плеч, чтобы вы могли сосредоточиться на большем',
+    title: 'Позвольте нам с точностью и скоростью сопровождать ваш проект',
+    subTitle:
+      'Данное приложение разработано студентами курса React 2022 Q1 от RS School.  Мы постарались снять бремя с ваших плеч, чтобы вы могли сосредоточиться на большем.',
     buttonWithoutAuthorization: 'Начать',
     buttonWithAuthorization: 'Список досок',
   },
