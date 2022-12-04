@@ -6,6 +6,7 @@ export const i18ObjHeader = {
     signIn: 'Sign in',
     signUp: 'Sign up',
     signOut: 'Sign out',
+    boardsList: 'Boards-list',
   },
   ru: {
     editProfile: 'Редактировать профиль',
@@ -14,6 +15,7 @@ export const i18ObjHeader = {
     signIn: 'Войти',
     signUp: 'Регистрация',
     signOut: 'Выйти',
+    boardsList: 'Список досок',
   },
 };
 
