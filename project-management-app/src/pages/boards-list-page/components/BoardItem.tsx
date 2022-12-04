@@ -19,6 +19,7 @@ const BoardItem = (props: IBoardItemProps) => {
   const getBoard = (board: IBoardItemProps) => {
     dispatch(setBoard(board));
     navigate(`../${ROUTES.BOARD}`);
+    // navigate(ROUTES.BOARD);
   };
 
   return (

@@ -48,9 +48,6 @@
   gap: rem(30);
   overflow-x: auto;
   padding: 10px;
-  @media (max-width: em(375)) {
-    padding: 10px 0;
-  }
 }
 
 .board__panel {
