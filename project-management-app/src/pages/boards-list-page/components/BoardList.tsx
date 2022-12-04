@@ -9,6 +9,7 @@ import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 import { Language } from 'pages/welcome-page/types/types';
 import { ToastContainer } from 'react-toastify';
+import i18Obj from 'texts/board/board-page';
 
 const BoardList = () => {
   const [, setBoards] = useState<IBoard[]>([]);
@@ -43,12 +44,15 @@ const BoardList = () => {
   return (
     <>
       {overlay && <Overlay />}
-      <div className="board-list-container">
-        {boards.map((board) => (
-          <BoardItem board={board} key={board._id} />
-        ))}
-        <BoardItemAdd />
-        <ToastContainer />
+      <div className="board-list">
+        <h2 className="board-list__title">{i18Obj[lang].boardList}</h2>
+        <div className="board-list-container">
+          {boards.map((board) => (
+            <BoardItem board={board} key={board._id} />
+          ))}
+          <BoardItemAdd />
+          <ToastContainer />
+        </div>
       </div>
     </>
   );
