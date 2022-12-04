@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BACK_END_URL } from 'constants/back-end-link';
 import { ERRORS_CODE } from 'constants/errors';
-import { Language } from 'pages/welcome-page/types/types';
 import { toast } from 'react-toastify';
 import { ICreateBoardProps } from 'store/interfaces/ICreateBoardProps';
 import { IDeleteBoardProps } from 'store/interfaces/IDeleteBoardProps';
@@ -63,30 +62,20 @@ export const getBoardsByUserIdFetch = createAsyncThunk(
 
 export const updateBoardFetch = createAsyncThunk(
   'boards/put',
-  async (props: IUpdateBoardProps, { getState, rejectWithValue }) => {
+  async (props: IUpdateBoardProps, { getState }) => {
     const state = getState() as RootState;
     const data = { ...props, title: JSON.stringify(props.title) };
-
-    const response = await axios
-      .put(
-        `${BACK_END_URL}boards/${data._id}`,
-        { title: data.title, owner: data.owner, users: data.users },
-        {
-          headers: {
-            Authorization: `Bearer ${state.signSlice.user!.token}`,
-          },
-        }
-      )
-      .then((response) => {
-        response.data.title = JSON.parse(response.data.title);
-        return response.data;
-      })
-      .catch((error) => {
-        if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestGetBoards}`);
-        }
-        return rejectWithValue(error.response.data.statusCode);
-      });
+    const response = await axios.put(
+      `${BACK_END_URL}boards/${data._id}`,
+      { title: data.title, owner: data.owner, users: data.users },
+      {
+        headers: {
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      }
+    );
+    response.data.title = JSON.parse(response.data.title);
+    return response.data;
   }
 );
 

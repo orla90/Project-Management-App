@@ -1,5 +1,4 @@
 import Modal from 'components/UI/modal/Modal';
-import { FormValues } from 'pages/board-page/types/modal-types';
 import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { deleteBoardFetch } from 'store/actions-creators/boards/boards-action';
@@ -14,7 +13,7 @@ function DeleteBoardModal(props: IDeleteBoardModalProps) {
   const dispatch = useAppDispatch();
 
   const onConfirm = () => {
-    dispatch(deleteBoardFetch({ id: props.id }));
+    dispatch(deleteBoardFetch({ id: props.id, lang: lang }));
     props.onClose();
     console.log('доска удаляется');
   };
@@ -25,9 +24,6 @@ function DeleteBoardModal(props: IDeleteBoardModalProps) {
         <div className="delete-board__btn-wrapper">
           <button className="main-page-btn btn-yes" onClick={onConfirm}>
             {i18Obj[lang].yes}
-          </button>
-          <button className="main-page-btn btn-no" onClick={props.onClose}>
-            {i18Obj[lang].no}
           </button>
         </div>
       </div>

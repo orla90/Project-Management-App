@@ -35,39 +35,40 @@ export const getTasksColumnFetch = createAsyncThunk<
     });
 });
 
-export const getAllBoardTasksFetch = createAsyncThunk<
-  { [x: string]: Array<dataTasks> },
-  BoardsProps,
-  {
-    rejectValue: string;
+export const getAllBoardTasksFetch = createAsyncThunk(
+  'board/getAllBoardTasks',
+  async (props: BoardsProps, { getState, rejectWithValue }) => {
+    const state = getState() as RootState;
+    const board = state.boardSlice.board! as IBoard;
+    return axios
+      .get(`${BACK_END_URL}tasksSet/${board._id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${state.signSlice.user!.token}`,
+        },
+      })
+      .then((response) => {
+        return sortArr(response.data);
+      })
+      .catch((error) => {
+        if (error.code === ERRORS_CODE.BAD_REQUEST) {
+          toast.error(
+            `${
+              i18Obj[state.languageSlice.language as keyof typeof i18Obj].badRequestGetAllBoardTasks
+            }`
+          );
+        }
+        return rejectWithValue(error.response.data.statusCode);
+      });
   }
->('board/getAllBoardTasks', async (props: BoardsProps, { getState, rejectWithValue }) => {
-  const state = getState() as RootState;
-  const board = state.boardSlice.board! as IBoard;
-  return axios
-    .get(`${BACK_END_URL}tasksSet/${board._id}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${state.signSlice.user!.token}`,
-      },
-    })
-    .then((response) => {
-      console.log('all tasks', response.data);
-      return sortArr(response.data);
-    })
-    .catch((error) => {
-      if (error.code === ERRORS_CODE.BAD_REQUEST) {
-        toast.error(`${i18Obj[props.lang!].badRequestGetAllBoardTasks}`);
-      }
-      return rejectWithValue(error.response.data.statusCode);
-    });
-});
+);
 
 export const deleteTaskFetch = createAsyncThunk(
   'board/deleteTask',
   async (props: TaskDeleteParams, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    const lang = state.languageSlice.language as Language;
     return axios
       .delete(
         `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks/${props.taskId}`,
@@ -83,7 +84,7 @@ export const deleteTaskFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestDeleteTask}`);
+          toast.error(`${i18Obj[lang].badRequestDeleteTask}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -95,6 +96,7 @@ export const editTaskFetch = createAsyncThunk(
   async (props: TaskChangeParams, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    const lang = state.languageSlice.language as Language;
     return axios
       .put(
         `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks/${props.taskId}`,
@@ -118,7 +120,7 @@ export const editTaskFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestEditTask}`);
+          toast.error(`${i18Obj[lang].badRequestEditTask}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -130,6 +132,7 @@ export const getTaskFetch = createAsyncThunk(
   async (props: TaskChangeParams, { getState, rejectWithValue }) => {
     const state = getState() as RootState;
     const board = state.boardSlice.board! as IBoard;
+    const lang = state.languageSlice.language as Language;
     return axios
       .get(`${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks/${props.taskId}`, {
         headers: {
@@ -142,7 +145,7 @@ export const getTaskFetch = createAsyncThunk(
       })
       .catch((error) => {
         if (error.code === ERRORS_CODE.BAD_REQUEST) {
-          toast.error(`${i18Obj[props.lang!].badRequestGetTask}`);
+          toast.error(`${i18Obj[lang].badRequestGetTask}`);
         }
         return rejectWithValue(error.response.data.statusCode);
       });
@@ -163,7 +166,7 @@ export const getUsersFetch = createAsyncThunk(
       .then((response) => {
         return response.data.sort();
       })
-      .catch((error) => {
+      .catch(() => {
         return rejectWithValue([]);
       });
   }
@@ -194,13 +197,14 @@ export const getAllUserLoginFetch = createAsyncThunk(
 
 export const createTasksColumnFetch = createAsyncThunk<
   Itasks,
-  { columnId: string; title: string; description: string; order: number; lang: Language },
+  { columnId: string; title: string; description: string; order: number },
   {
     rejectValue: [];
   }
 >('board/createTasksColumn', async (props, { getState, rejectWithValue }) => {
   const state = getState() as RootState;
   const board = state.boardSlice.board! as IBoard;
+  const lang = state.languageSlice.language as Language;
   return axios
     .post(
       `${BACK_END_URL}boards/${board._id}/columns/${props.columnId}/tasks`,
@@ -222,9 +226,8 @@ export const createTasksColumnFetch = createAsyncThunk<
       return response.data;
     })
     .catch((error) => {
-      console.log('here', error);
       if (error.code === ERRORS_CODE.BAD_REQUEST) {
-        toast.error(`${i18Obj[props.lang!].badRequestTaskAdd}`);
+        toast.error(`${i18Obj[lang].badRequestTaskAdd}`);
       }
       return rejectWithValue(error.response.data.statusCode);
     });

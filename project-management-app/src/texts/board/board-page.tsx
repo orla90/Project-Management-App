@@ -20,6 +20,8 @@ const i18Obj = {
     title: 'Title',
     yes: 'yes',
     boardList: 'Board List',
+    confirm: 'confirm',
+    board: 'board',
   },
   ru: {
     addColumn: 'Добавить список',
@@ -42,6 +44,8 @@ const i18Obj = {
     title: 'Название',
     yes: 'да',
     boardList: 'Список досок',
+    confirm: 'подтвердить',
+    board: 'доска',
   },
 };
 

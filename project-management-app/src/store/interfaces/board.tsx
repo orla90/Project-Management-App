@@ -1,5 +1,7 @@
-import { DraggableProvided } from 'react-beautiful-dnd';
+import { DraggableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd';
 import { Language } from 'pages/welcome-page/types/types';
+import { Itasks } from 'pages/board-page/interfaces/task-interface';
+import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 export interface BoardsProps {
   title?: string;
   owner?: string;
@@ -18,6 +20,8 @@ export interface ColumnProps {
   order?: number;
   boardId?: string;
   lang?: Language;
+  columns?: ColumnProps[] | [];
+  tasks?: Itasks[];
 }
 
 export interface BoardWithColumnsProps {
@@ -33,7 +37,7 @@ export interface IuppdateTitle {
 
 export interface IdeleteColumn {
   columnId: string;
-  lang: Language;
+  guid?: string;
 }
 
 export interface TaskDeleteParams extends IdeleteColumn {

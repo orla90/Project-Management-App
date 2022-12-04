@@ -34,7 +34,6 @@ export const editProfileFetch = createAsyncThunk<
       if (response.status === ERRORS_CODE.GOOD_RESPONSE_CODE) {
         toast.success(`${i18Obj[props.lang!].goodResponseEditProfile}`);
       }
-      console.log(response);
       return response.data;
     })
     .catch((error) => {

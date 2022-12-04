@@ -2,8 +2,12 @@
 
 .form-container {
   width: 50vw;
+  position: relative;
+  @media (max-width: em(640)){
+    width: 100%;
+   }
 
   .create-board__btn-wrapper {
-    text-align: right;
+    text-align: center;
   }
 }

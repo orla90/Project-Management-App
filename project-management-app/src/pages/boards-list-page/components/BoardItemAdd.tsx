@@ -1,8 +1,14 @@
 import NewBoardModal from 'components/UI/new-board/NewBoardModal';
+import { Language } from 'pages/welcome-page/types/types';
 import React, { useState } from 'react';
+import { useAppSelector } from 'store/custom-hooks';
+import i18Obj from 'texts/board/board-page';
 import './board-item.scss';
 
 const BoardItemAdd = () => {
+  const { language } = useAppSelector((state) => state.languageSlice);
+  const lang = language.toString() as Language;
+
   const [newBoardModal, setNewBoardModal] = useState(false);
 
   return (
@@ -26,7 +32,7 @@ const BoardItemAdd = () => {
               ></path>{' '}
             </svg>
           </div>
-          <div className="board-item-add__text">Create board</div>
+          <div className="board-item-add__text">{i18Obj[lang].createBoard}</div>
         </div>
       </div>
       <NewBoardModal open={newBoardModal} onClose={() => setNewBoardModal(false)} />

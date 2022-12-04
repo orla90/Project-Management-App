@@ -4,13 +4,14 @@ import { TaskWithProps } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
 import React from 'react';
 import { useState } from 'react';
-import {} from 'store/actions-creators/board/task-actions';
-import { useAppSelector } from 'store/custom-hooks';
+import { deleteTaskFetch } from 'store/actions-creators/board/task-actions';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
-import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import UsersList from '../task/users-list/UsersList';
 import './task-detailed.scss';
+import '../task/task.scss';
+import { ToastContainer } from 'react-toastify';
 
 const TaskDetailed = (props: TaskWithProps) => {
   const [deleteTaskModal, setDeleteTaskModal] = useState(false);
@@ -22,6 +23,11 @@ const TaskDetailed = (props: TaskWithProps) => {
   const [taskOwnerUser, setTaskOwnerUser] = useState<string>(
     props.findUserLogin!(props.task.userId, usersLogins)
   );
+  const dispatch = useAppDispatch();
+
+  const handleOnDeleteTaskClick = () => {
+    dispatch(deleteTaskFetch({ columnId: props.task.columnId, taskId: props.task._id }));
+  };
 
   return (
     <div className="task-detailed">
@@ -59,14 +65,20 @@ const TaskDetailed = (props: TaskWithProps) => {
           />
         )}
       </div>
-      <BoardCustomModal
+      <Modal
         open={deleteTaskModal}
         onClose={() => setDeleteTaskModal(false)}
         title={i18Obj[lang].deleteTask}
-        columnId={props.task.columnId}
-        taskId={props.task._id}
-        target={'deleteTask'}
-      />
+      >
+        <div className="task__btn-wrapper">
+          <CustomButton
+            onClick={() => handleOnDeleteTaskClick()}
+            className="main-page-btn task__btn_confirm"
+          >
+            {i18Obj[lang].confirm}
+          </CustomButton>
+        </div>
+      </Modal>
       <Modal
         open={editTaskModal}
         onClose={() => setEditTaskModal(false)}
@@ -81,6 +93,7 @@ const TaskDetailed = (props: TaskWithProps) => {
           />
         }
       </Modal>
+      <ToastContainer />
     </div>
   );
 };

@@ -12,7 +12,7 @@ export const i18ObjSign = {
     remove: 'Delete account',
     submit: 'Submit',
     close: 'Close',
-    deleteUserTitle: 'Are you sure want delet youre accoutn?',
+    deleteUserTitle: 'Are you sure you want to delete your account?',
   },
   ru: {
     login: 'Логин',

@@ -2,32 +2,32 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from 'store/custom-hooks';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';
-import BoardCustomModal from '../board-custom-modal/BoardCustomModal';
 import BoardForm from '../board-form/BoardForm';
 import Task from '../task/Task';
 import ColumnTitleConfirmed from './column-title-confirmed/ColumnTitleConfirmed';
 import ColumnTitleEdit from './column-title-edit/ColumnTitleEdit';
 import './column.scss';
 import { Droppable } from 'react-beautiful-dnd';
+import { ToastContainer } from 'react-toastify';
+import { deleteColumn } from '../board-page-functions/fetch-functions';
 
 const Column = ({ props }: { props: ColumnProps }) => {
   const [titleEditMode, setTitleEditMode] = useState(false);
   const [deleteColumnModal, setDeleteColumnModal] = useState(false);
   const [addTaskModal, setAddTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
-  const { tasks } = useAppSelector((state) => state.boardSlice);
-  const [taskColumn, setTaskColumn] = useState(
-    tasks[props._id! as keyof typeof tasks] ? tasks[props._id! as keyof typeof tasks] : []
-  );
+
   const lang = language.toString() as Language;
-  useEffect(() => {
-    setTaskColumn(tasks[props._id! as keyof typeof tasks] || []);
-    console.log('USEEFFECT COLUMN-PAGE', taskColumn);
-  }, [tasks]);
+  const dispatch = useAppDispatch();
+
+  const handleOnClick = useCallback(async () => {
+    deleteColumn(lang, dispatch, props.columns!, props._id!);
+  }, [lang, props.columns, dispatch, props._id]);
+
   return (
     <div
       className="column"
@@ -56,7 +56,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
         <Droppable droppableId={props._id!} type={'Tasks'} direction={'vertical'}>
           {(provided) => (
             <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
-              {(taskColumn as Array<Itasks>).map((task: Itasks) => {
+              {props.tasks!.map((task: Itasks) => {
                 return <Task key={task._id} columnId={props._id!} task={task} />;
               })}
               {provided.placeholder}
@@ -69,13 +69,20 @@ const Column = ({ props }: { props: ColumnProps }) => {
             {i18Obj[lang].task}
           </CustomButton>
         </div>
-        <BoardCustomModal
+        <Modal
           open={deleteColumnModal}
-          onClose={() => setDeleteColumnModal(false)}
           title={i18Obj[lang].deleteColumn}
-          columnId={props._id!}
-          target={'deleteColumn'}
-        />
+          onClose={() => setDeleteColumnModal(false)}
+        >
+          <div className="column__btn-wrapper">
+            <CustomButton
+              onClick={() => handleOnClick()}
+              className="main-page-btn-accent  column__btn_confirm"
+            >
+              {i18Obj[lang].confirm}
+            </CustomButton>
+          </div>
+        </Modal>
         <Modal
           open={addTaskModal}
           onClose={() => setAddTaskModal(false)}
@@ -91,6 +98,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
           }
         </Modal>
       </div>
+      <ToastContainer />
     </div>
   );
 };
