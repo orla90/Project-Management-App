@@ -91,6 +91,11 @@ const Header = () => {
                   </CustomLink>
                 </li>
                 <li onClick={closeHeaderMenuInLink} className="header__menu-item">
+                  <CustomLink className="header__menu-item-link" to={ROUTES.BOARDS_LIST}>
+                    {i18ObjHeader[language as key].boardsList}
+                  </CustomLink>
+                </li>
+                <li onClick={closeHeaderMenuInLink} className="header__menu-item">
                   <CustomLink className="header__menu-item-link" to={ROUTES.HOME}>
                     {i18ObjHeader[language as key].home}
                   </CustomLink>
