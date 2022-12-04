@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/Project-Management-App/static/css/main.0cb3b15b.css",
-    "main.js": "/Project-Management-App/static/js/main.567b7b98.js",
-    "static/js/787.6ccdce3c.chunk.js": "/Project-Management-App/static/js/787.6ccdce3c.chunk.js",
-    "static/media/artiom.png": "/Project-Management-App/static/media/artiom.584630bfef35302bedf5.png",
-    "static/media/welcome-page-bg.png": "/Project-Management-App/static/media/welcome-page-bg.b46e88f7eeea81d06fb4.png",
-    "static/media/loading-overlay.gif": "/Project-Management-App/static/media/loading-overlay.f986ff886da42f12fb56.gif",
-    "static/media/olya.jpg": "/Project-Management-App/static/media/olya.b1fe2956e3acb78ed01f.jpg",
-    "static/media/cry.svg": "/Project-Management-App/static/media/cry.98fe09f3210655f6a76b.svg",
-    "static/media/404.svg": "/Project-Management-App/static/media/404.dd058ce2c7b9dc56bffc.svg",
-    "static/media/lena.jpeg": "/Project-Management-App/static/media/lena.97708bb21e3e8f908f0d.jpeg",
-    "static/media/dima.jpeg": "/Project-Management-App/static/media/dima.b1c4de54509e569612d2.jpeg",
-    "static/media/edit.svg": "/Project-Management-App/static/media/edit.47592b9d9b51a312d35f.svg",
-    "static/media/bin.svg": "/Project-Management-App/static/media/bin.ea9d71335629fa67dfd9.svg",
-    "static/media/pen.svg": "/Project-Management-App/static/media/pen.f4b33a8f9b348a0b153f.svg",
-    "static/media/done-icon.svg": "/Project-Management-App/static/media/done-icon.8672a1b34efc1c82f319.svg",
-    "static/media/assign.svg": "/Project-Management-App/static/media/assign.4ef8f8528300e15e6fcd.svg",
-    "static/media/done.svg": "/Project-Management-App/static/media/done.ee644333588e15f87bbd.svg",
-    "index.html": "/Project-Management-App/index.html",
-    "main.0cb3b15b.css.map": "/Project-Management-App/static/css/main.0cb3b15b.css.map",
-    "main.567b7b98.js.map": "/Project-Management-App/static/js/main.567b7b98.js.map",
-    "787.6ccdce3c.chunk.js.map": "/Project-Management-App/static/js/787.6ccdce3c.chunk.js.map"
+    "main.css": "/project-management-app/static/css/main.091c99cd.css",
+    "main.js": "/project-management-app/static/js/main.69529f1d.js",
+    "static/js/787.6ccdce3c.chunk.js": "/project-management-app/static/js/787.6ccdce3c.chunk.js",
+    "static/media/artiom.png": "/project-management-app/static/media/artiom.584630bfef35302bedf5.png",
+    "static/media/welcome-page-bg.png": "/project-management-app/static/media/welcome-page-bg.b46e88f7eeea81d06fb4.png",
+    "static/media/loading-overlay.gif": "/project-management-app/static/media/loading-overlay.f986ff886da42f12fb56.gif",
+    "static/media/olya.jpg": "/project-management-app/static/media/olya.b1fe2956e3acb78ed01f.jpg",
+    "static/media/cry.svg": "/project-management-app/static/media/cry.98fe09f3210655f6a76b.svg",
+    "static/media/404.svg": "/project-management-app/static/media/404.dd058ce2c7b9dc56bffc.svg",
+    "static/media/lena.jpeg": "/project-management-app/static/media/lena.97708bb21e3e8f908f0d.jpeg",
+    "static/media/dima.jpeg": "/project-management-app/static/media/dima.b1c4de54509e569612d2.jpeg",
+    "static/media/edit.svg": "/project-management-app/static/media/edit.47592b9d9b51a312d35f.svg",
+    "static/media/bin.svg": "/project-management-app/static/media/bin.ea9d71335629fa67dfd9.svg",
+    "static/media/pen.svg": "/project-management-app/static/media/pen.f4b33a8f9b348a0b153f.svg",
+    "static/media/done-icon.svg": "/project-management-app/static/media/done-icon.8672a1b34efc1c82f319.svg",
+    "static/media/assign.svg": "/project-management-app/static/media/assign.4ef8f8528300e15e6fcd.svg",
+    "static/media/done.svg": "/project-management-app/static/media/done.ee644333588e15f87bbd.svg",
+    "index.html": "/project-management-app/index.html",
+    "main.091c99cd.css.map": "/project-management-app/static/css/main.091c99cd.css.map",
+    "main.69529f1d.js.map": "/project-management-app/static/js/main.69529f1d.js.map",
+    "787.6ccdce3c.chunk.js.map": "/project-management-app/static/js/787.6ccdce3c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0cb3b15b.css",
-    "static/js/main.567b7b98.js"
+    "static/css/main.091c99cd.css",
+    "static/js/main.69529f1d.js"
   ]
 }
