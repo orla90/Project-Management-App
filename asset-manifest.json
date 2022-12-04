@@ -1,29 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.664aed98.css",
-    "main.js": "/static/js/main.a7b02bbf.js",
-    "static/js/787.6ccdce3c.chunk.js": "/static/js/787.6ccdce3c.chunk.js",
-    "static/media/artiom.png": "/static/media/artiom.584630bfef35302bedf5.png",
-    "static/media/welcome-page-bg.png": "/static/media/welcome-page-bg.b46e88f7eeea81d06fb4.png",
-    "static/media/loading-overlay.gif": "/static/media/loading-overlay.f986ff886da42f12fb56.gif",
-    "static/media/olya.jpg": "/static/media/olya.b1fe2956e3acb78ed01f.jpg",
-    "static/media/cry.svg": "/static/media/cry.98fe09f3210655f6a76b.svg",
-    "static/media/404.svg": "/static/media/404.dd058ce2c7b9dc56bffc.svg",
-    "static/media/lena.jpeg": "/static/media/lena.97708bb21e3e8f908f0d.jpeg",
-    "static/media/dima.jpeg": "/static/media/dima.b1c4de54509e569612d2.jpeg",
-    "static/media/edit.svg": "/static/media/edit.47592b9d9b51a312d35f.svg",
-    "static/media/bin.svg": "/static/media/bin.ea9d71335629fa67dfd9.svg",
-    "static/media/pen.svg": "/static/media/pen.f4b33a8f9b348a0b153f.svg",
-    "static/media/done-icon.svg": "/static/media/done-icon.8672a1b34efc1c82f319.svg",
-    "static/media/assign.svg": "/static/media/assign.4ef8f8528300e15e6fcd.svg",
-    "static/media/done.svg": "/static/media/done.ee644333588e15f87bbd.svg",
-    "index.html": "/index.html",
-    "main.664aed98.css.map": "/static/css/main.664aed98.css.map",
-    "main.a7b02bbf.js.map": "/static/js/main.a7b02bbf.js.map",
-    "787.6ccdce3c.chunk.js.map": "/static/js/787.6ccdce3c.chunk.js.map"
+    "main.css": "/Project-Management-App/board-list/static/css/main.6ad5d427.css",
+    "main.js": "/Project-Management-App/board-list/static/js/main.b5bb03e6.js",
+    "static/js/787.6ccdce3c.chunk.js": "/Project-Management-App/board-list/static/js/787.6ccdce3c.chunk.js",
+    "static/media/artiom.png": "/Project-Management-App/board-list/static/media/artiom.584630bfef35302bedf5.png",
+    "static/media/welcome-page-bg.png": "/Project-Management-App/board-list/static/media/welcome-page-bg.b46e88f7eeea81d06fb4.png",
+    "static/media/loading-overlay.gif": "/Project-Management-App/board-list/static/media/loading-overlay.f986ff886da42f12fb56.gif",
+    "static/media/olya.jpg": "/Project-Management-App/board-list/static/media/olya.b1fe2956e3acb78ed01f.jpg",
+    "static/media/cry.svg": "/Project-Management-App/board-list/static/media/cry.98fe09f3210655f6a76b.svg",
+    "static/media/404.svg": "/Project-Management-App/board-list/static/media/404.dd058ce2c7b9dc56bffc.svg",
+    "static/media/lena.jpeg": "/Project-Management-App/board-list/static/media/lena.97708bb21e3e8f908f0d.jpeg",
+    "static/media/dima.jpeg": "/Project-Management-App/board-list/static/media/dima.b1c4de54509e569612d2.jpeg",
+    "static/media/edit.svg": "/Project-Management-App/board-list/static/media/edit.47592b9d9b51a312d35f.svg",
+    "static/media/bin.svg": "/Project-Management-App/board-list/static/media/bin.ea9d71335629fa67dfd9.svg",
+    "static/media/pen.svg": "/Project-Management-App/board-list/static/media/pen.f4b33a8f9b348a0b153f.svg",
+    "static/media/done-icon.svg": "/Project-Management-App/board-list/static/media/done-icon.8672a1b34efc1c82f319.svg",
+    "static/media/assign.svg": "/Project-Management-App/board-list/static/media/assign.4ef8f8528300e15e6fcd.svg",
+    "static/media/done.svg": "/Project-Management-App/board-list/static/media/done.ee644333588e15f87bbd.svg",
+    "index.html": "/Project-Management-App/board-list/index.html",
+    "main.6ad5d427.css.map": "/Project-Management-App/board-list/static/css/main.6ad5d427.css.map",
+    "main.b5bb03e6.js.map": "/Project-Management-App/board-list/static/js/main.b5bb03e6.js.map",
+    "787.6ccdce3c.chunk.js.map": "/Project-Management-App/board-list/static/js/787.6ccdce3c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.664aed98.css",
-    "static/js/main.a7b02bbf.js"
+    "static/css/main.6ad5d427.css",
+    "static/js/main.b5bb03e6.js"
   ]
 }
