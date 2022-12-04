@@ -23,7 +23,7 @@
     opacity: 0;
     pointer-events: none;
     transition: all 0.3s ease 0s;
-    @media (max-width: em(980)){
+    @media (max-width: em(1060)){
         position: fixed;
         top: 0;
         left: 0;
@@ -40,7 +40,7 @@
     & .logo {
       display: none;
     }
-    @media (max-width: em(980)){
+    @media (max-width: em(1060)){
       position: fixed;
       top: 0;
       left: -100%;
@@ -66,19 +66,19 @@
     align-items: center;
     flex-wrap: wrap;
     row-gap: 3px;
-    @media (max-width: em(980)){
+    @media (max-width: em(1060)){
         flex-direction: column;
         align-items: start;
         margin-bottom: 20px;
     }
   }
   &__menu-item {
-    @media (min-width:em(980)){
+    @media (min-width:em(1060)){
       &:not(:last-child){
         margin-right: 10px;
       }
     }
-    @media (max-width: em(980)){
+    @media (max-width: em(1060)){
         &:not(:last-child) {
           margin-bottom: 15px;
         }
@@ -135,7 +135,7 @@
     flex-wrap: wrap;
     column-gap: 10px;
     margin-left: auto;
-    @media (max-width: em(980)){
+    @media (max-width: em(1060)){
         flex-direction: column;
         text-align: center;
         row-gap: 15px;
@@ -154,7 +154,7 @@
 .icon-menu {
   display: none;
   user-select: none;
-  @media (max-width: em(980)) {
+  @media (max-width: em(1060)) {
      display: block;
      position: relative;
      width: 40px;

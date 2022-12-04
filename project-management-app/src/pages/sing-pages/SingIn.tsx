@@ -1,6 +1,7 @@
 import { CustomLink } from 'components/UI/custom-link/CustomLink';
 import CustomInput from 'components/UI/input/CustomInput';
 import Overlay from 'components/UI/overlay/Overlay';
+import { ROUTES } from 'constants/routes';
 import { Language } from 'pages/welcome-page/types/types';
 import React, { useEffect } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
@@ -38,7 +39,7 @@ const SignIn = () => {
   };
   return (
     <>
-      {user && <Navigate to="/" />}
+      {user && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}
       {overlay && <Overlay />}
       <div className="sign-in">
         <div className="sign-in__container">
