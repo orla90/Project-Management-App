@@ -29,9 +29,9 @@
   }
 }
 .tasks__scroll-container{
-max-height: calc(100vh - 450px);
+max-height: calc(100vh - 470px);
 @media (max-width: em(600)){
-  max-height: calc(100vh - 490px);
+  max-height: calc(100vh - 500px);
 }
   overflow-y: auto;
 }
