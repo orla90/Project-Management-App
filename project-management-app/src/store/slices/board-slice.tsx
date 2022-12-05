@@ -155,11 +155,9 @@ export const boardSlice = createSlice({
       state.overlay = true;
     });
     builder.addCase(getUsersFetch.fulfilled, (state) => {
-      console.log('Пользователи получены fulfilled');
       state.overlay = false;
     });
     builder.addCase(getUsersFetch.rejected, (state) => {
-      console.log('При получении пользователей произошла ошибка rejected');
       state.overlay = false;
     });
 
@@ -167,12 +165,8 @@ export const boardSlice = createSlice({
       const { payload } = action;
       if (payload) state.usersLogins = { ...state.usersLogins, [payload.login]: payload._id };
     });
-    builder.addCase(getAllUserLoginFetch.rejected, () => {
-      alert('Загрузка пользователей не удалась');
-    });
 
     builder.addCase(getAllBoardTasksFetch.pending, (state) => {
-      console.log('получен массив всех задач');
       state.overlay = true;
     });
     builder.addCase(getAllBoardTasksFetch.fulfilled, (state, action) => {

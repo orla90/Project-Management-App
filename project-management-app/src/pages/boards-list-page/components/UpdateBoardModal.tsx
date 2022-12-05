@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/board/board-page';
 import { FormValues } from '../types/FormValues';
 import { IUpdateBoardModalProps } from './interfaces/IUpdateBoardModal';
+import './delete-board-modal.scss';
 
 function UpdateBoardModal(props: IUpdateBoardModalProps) {
   const { language } = useAppSelector((state) => state.languageSlice);
@@ -58,7 +59,7 @@ function UpdateBoardModal(props: IUpdateBoardModalProps) {
             <div className="form-error"></div>
           </div>
           <div className="create-board__btn-wrapper">
-            <button type="submit" className="main-page-btn">
+            <button type="submit" className="main-page-btn btn_save">
               {i18Obj[lang].save}
             </button>
           </div>

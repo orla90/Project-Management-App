@@ -22,9 +22,6 @@ export const deleteUserFetch = createAsyncThunk<
       },
     })
     .then((response) => {
-      if (response.status === ERRORS_CODE.GOOD_RESPONSE_CODE) {
-        toast.success(`${i18Obj[props.lang!].goodResponseDeleteProfile}`);
-      }
       return response.data;
     })
     .catch((error) => {

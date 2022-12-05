@@ -4,11 +4,17 @@
   display: flex;
   justify-content: center;
   .btn-yes {
-    width: 64px;
+    max-width: 300px;
+    width: 100%;
     margin: 10px;
   }
   .btn-no {
     margin: 10px;
     background-color: $pinkColor;
   }
+}
+
+.btn_save {
+  max-width: 300px;
+  width: 100%;
 }

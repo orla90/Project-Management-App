@@ -91,9 +91,7 @@ export const reorderedTasks = async (
       ...tasks,
       [sourceID]: newTasks,
     };
-    console.log(resultNewTasks);
     setAllTasks(resultNewTasks);
-    //dispatch(setNewOrdersTasks(resultNewTasks));
     setTimeout(() => {
       dispatch(MovingTheTask(result));
     }, 0);

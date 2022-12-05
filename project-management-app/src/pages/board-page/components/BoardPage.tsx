@@ -48,15 +48,12 @@ const BoardPage = () => {
 
     const socket = io('wss://react-final-project-production.up.railway.app/');
     socket.on('columns', (message) => {
-      console.log('WEBSOCKET COLUMNS', message);
       if (message.guid === 'uppdate_orders_from_delete_column') {
         return;
       }
-      console.log('I"M WORKiNG');
       getColumns(dispatch, setColumns);
     });
-    socket.on('tasks', (message) => {
-      console.log('WEBSOCKET TASKS', message);
+    socket.on('tasks', () => {
       getTasks(dispatch, setAllTasks);
     });
 
