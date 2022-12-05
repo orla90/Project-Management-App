@@ -10,8 +10,11 @@ const Footer = () => {
         <div className="footer__body">
           <div className="footer__item">
             <a rel="noreferrer" target={'_blank'} href="https://rs.school/react/">
-              RsSchool 2022
+              <span className="footer__logo"></span>
             </a>
+          </div>
+          <div className="footer__item">
+            <span>© 2022</span>
           </div>
           <div className="footer__item">
             <ul className="footer__list">

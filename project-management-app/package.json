@@ -1,6 +1,7 @@
 {
   "name": "project-management-app",
   "version": "0.1.0",
+  "homepage": "https://orla90.github.io/Project-Management-App/",
   "private": true,
   "dependencies": {
     "@hookform/error-message": "^2.0.0",
@@ -41,7 +42,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jest": "jest"
+    "jest": "jest",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -75,6 +78,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^4.0.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1"

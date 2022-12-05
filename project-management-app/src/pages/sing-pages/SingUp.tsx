@@ -15,6 +15,7 @@ import { i18ObjSingFetchResponses } from 'texts/sign/sing-fetch-responses-text';
 import CustomInput from 'components/UI/input/CustomInput';
 import { Language } from 'pages/welcome-page/types/types';
 import { ToastContainer } from 'react-toastify';
+import { ROUTES } from 'constants/routes';
 
 const SignUp = () => {
   const {
@@ -39,7 +40,7 @@ const SignUp = () => {
   };
   return (
     <>
-      {user && <Navigate to="/" />}
+      {user && <Navigate to={`../${ROUTES.BOARDS_LIST}`} />}
       {overlay && <Overlay />}
       <div className="sign-up">
         <div className="sign-up__container">

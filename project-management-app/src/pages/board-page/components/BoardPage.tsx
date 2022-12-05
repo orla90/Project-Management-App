@@ -40,17 +40,13 @@ const BoardPage = () => {
   const [allTasks, setAllTasks] = useState<{ [x: string]: Itasks[] }>({});
 
   useEffect(() => {
-    console.log('USEEFFECT BOARD_PAGE');
-    if (!document.body.classList.contains('_lock')) {
-      document.body.classList.add('_lock');
-    }
     if (board) {
       getTasks(dispatch, setAllTasks);
       getColumns(dispatch, setColumns);
       getAllUserLoginst(board, dispatch);
     }
 
-    const socket = io('https://react-final-project-production.up.railway.app/');
+    const socket = io('wss://react-final-project-production.up.railway.app/');
     socket.on('columns', (message) => {
       console.log('WEBSOCKET COLUMNS', message);
       if (message.guid === 'uppdate_orders_from_delete_column') {
@@ -65,9 +61,6 @@ const BoardPage = () => {
     });
 
     return () => {
-      if (document.body.classList.contains('_lock')) {
-        document.body.classList.remove('_lock');
-      }
       socket.close();
       dispatch(resetBordAndColumns());
     };

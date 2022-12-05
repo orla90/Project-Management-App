@@ -17,11 +17,11 @@ const DeleteUser = ({ open, onClose }: { open: true | false; onClose: () => void
   return (
     <Modal open={open} title={i18ObjSign[language as key].deleteUserTitle} onClose={onClose}>
       <div className="delete-user-modal">
-        <button onClick={removeUser} className="delete-user-modal__button-sybmit main-page-btn">
+        <button
+          onClick={removeUser}
+          className="delete-user-modal__button-sybmit main-page-btn-accent"
+        >
           {i18ObjSign[language as key].submit}
-        </button>
-        <button onClick={onClose} className="delete-user-modal__button-close main-page-btn-accent">
-          {i18ObjSign[language as key].close}
         </button>
       </div>
       <ToastContainer />

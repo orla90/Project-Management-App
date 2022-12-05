@@ -52,17 +52,18 @@ const Column = ({ props }: { props: ColumnProps }) => {
             />
           )}
         </div>
-
-        <Droppable droppableId={props._id!} type={'Tasks'} direction={'vertical'}>
-          {(provided) => (
-            <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
-              {props.tasks!.map((task: Itasks) => {
-                return <Task key={task._id} columnId={props._id!} task={task} />;
-              })}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+        <div className="tasks__scroll-container">
+          <Droppable droppableId={props._id!} type={'Tasks'} direction={'vertical'}>
+            {(provided) => (
+              <div className="column__body" ref={provided.innerRef} {...provided.droppableProps}>
+                {props.tasks!.map((task: Itasks) => {
+                  return <Task key={task._id} columnId={props._id!} task={task} />;
+                })}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
 
         <div className="column__btn">
           <CustomButton className="main-page-btn" onClick={() => setAddTaskModal(true)}>
