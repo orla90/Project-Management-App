@@ -11,7 +11,6 @@ import { Language } from 'pages/welcome-page/types/types';
 import { toast, ToastContainer } from 'react-toastify';
 import i18Obj from 'texts/board/board-page';
 import i18ObjErr from 'texts/errors-and-warnings/translate';
-
 const BoardList = () => {
   const [, setBoards] = useState<IBoard[]>([]);
   const [overlay, setOverlay] = useState(false);

@@ -37,6 +37,7 @@ const BoardPage = () => {
   const { setNewOrdersTasks } = boardSlice.actions;
   const [columns, setColumns] = useState<Array<ColumnProps> | []>([]);
   const [allTasks, setAllTasks] = useState<{ [x: string]: Itasks[] }>({});
+  const { resetUsersLogins } = boardSlice.actions;
 
   useEffect(() => {
     if (board) {
@@ -59,6 +60,7 @@ const BoardPage = () => {
     return () => {
       socket.close();
       dispatch(resetBordAndColumns());
+      dispatch(resetUsersLogins());
     };
   }, [dispatch, resetBordAndColumns, board]);
 

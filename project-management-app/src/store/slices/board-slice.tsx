@@ -55,6 +55,12 @@ export const boardSlice = createSlice({
     setNewOrdersTasks: (state, action: PayloadAction<{ [x: string]: Array<dataTasks> }>) => {
       state.tasks = action.payload;
     },
+    updateUsersLogins: (state, action: PayloadAction<{ login: string; id: string }>) => {
+      state.usersLogins = { ...state.usersLogins, [action.payload.login]: action.payload.id };
+    },
+    resetUsersLogins: (state) => {
+      state.usersLogins = {};
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getBoardFetch.fulfilled, (state, action) => {

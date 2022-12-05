@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { IgetUserByID, inviteUserFetch } from 'store/actions-creators/invite-user/invite-user';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
+import { Iuser } from 'store/interfaces/sign-slice';
 import { boardSlice } from 'store/slices/board-slice';
 import { i18ObjInviteUSer } from 'texts/board/invite-user';
 import { key } from 'texts/footer/footer-text';
@@ -19,9 +20,18 @@ const InviteUser = () => {
   const { language } = useAppSelector((state) => state.signSlice);
   const { inviteUserError, isErrorOrTrue } = useAppSelector((state) => state.boardSlice);
   const dispatch = useAppDispatch();
-  const { resetInviteUserError } = boardSlice.actions;
-  const onSubmit: SubmitHandler<FieldValues> = (e) => {
-    dispatch(inviteUserFetch({ ...e, dispatch } as IgetUserByID));
+  const { resetInviteUserError, updateUsersLogins } = boardSlice.actions;
+  const onSubmit: SubmitHandler<FieldValues> = async (e) => {
+    const newUser = (await dispatch(inviteUserFetch({ ...e, dispatch } as IgetUserByID)))
+      .payload as Iuser;
+    if (newUser.login) {
+      dispatch(
+        updateUsersLogins({
+          login: newUser.login,
+          id: newUser._id!,
+        })
+      );
+    }
   };
 
   useEffect(() => {

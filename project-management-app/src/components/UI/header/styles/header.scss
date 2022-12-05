@@ -139,12 +139,14 @@
         flex-direction: column;
         text-align: center;
         row-gap: 15px;
+        width:100%;
         &__sign-link{
           width: 100%;
           
         }
         .header__btn.main-page-btn  {
           display: block;
+          max-width:100%;
         }
     }
   }

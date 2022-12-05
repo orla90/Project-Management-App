@@ -11,6 +11,7 @@ export interface IsignInitialState {
 }
 
 export interface Iuser {
+  _id?: string;
   id: string;
   login: string;
   iat: number;

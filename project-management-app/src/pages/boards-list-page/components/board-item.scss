@@ -48,6 +48,9 @@
     background-image: url('../../../assets/board-page/bin.svg');
   }
 }
+.bi-plus {
+  transform: translateY(10px);
+}
 .board-item-add {
   background-color: #EBF2F8;
   display: flex;
@@ -57,14 +60,15 @@
   &:hover {
     box-shadow: 5px 5px 10px #c1c9cf;
     .board-item-add__text {
-      display: block;
+      opacity: 1;
     }
     .board-item-add__container {
       transform: translateY(-10%);
     }
   }
   .board-item-add__text {
-    display: none;
+    transition: all 0.3s ease 0s;
+    opacity: 0;
     font-weight: 600;
     font-size: 20px;
     color: $pinkColor;

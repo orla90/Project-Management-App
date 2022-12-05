@@ -6,7 +6,6 @@ import { editTaskFetch } from 'store/actions-creators/board/task-actions';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import i18Obj from 'texts/errors-and-warnings/translate';
 import './user-list.scss';
-import { v4 as uuidv4 } from 'uuid';
 
 const UsersList = (props: TaskUsers) => {
   const { usersLogins } = useAppSelector((state) => state.boardSlice);
@@ -35,7 +34,7 @@ const UsersList = (props: TaskUsers) => {
 
   const userItem = props.users.map((user) => (
     <>
-      <li className="task__users-item" key={uuidv4()} onClick={() => handleOnClick(user)}>
+      <li className="task__users-item" key={user} onClick={() => handleOnClick(user)}>
         {user}
       </li>
       <ToastContainer />
