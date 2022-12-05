@@ -38,13 +38,14 @@ const BoardForm = (props: BoardFormModalProps) => {
   };
 
   const handleAddColumn = async (data: FormValues) => {
+    props.onClose();
     await dispatch(
       createColumnFetch({ title: data.title, order: columnOrder, lang: lang })
     ).unwrap();
-    props.onClose();
   };
 
   const handleAddTask = async (data: FormValues) => {
+    props.onClose();
     await dispatch(
       createTasksColumnFetch({
         title: data.title,
@@ -53,10 +54,10 @@ const BoardForm = (props: BoardFormModalProps) => {
         description: data.description || ' ',
       })
     ).unwrap();
-    props.onClose();
   };
 
   const handleEditTask = async (data: FormValues) => {
+    props.onClose();
     await dispatch(
       editTaskFetch({
         title: data.title,
@@ -68,7 +69,6 @@ const BoardForm = (props: BoardFormModalProps) => {
         users: props.task!.users,
       })
     ).unwrap();
-    props.onClose();
   };
 
   return (
