@@ -14,7 +14,7 @@ const Footer = () => {
             </a>
           </div>
           <div className="footer__item">
-            <span>© 2022</span>
+            <span>2022</span>
           </div>
           <div className="footer__item">
             <ul className="footer__list">
