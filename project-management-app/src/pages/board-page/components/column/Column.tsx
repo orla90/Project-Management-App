@@ -2,7 +2,7 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';
@@ -20,13 +20,17 @@ const Column = ({ props }: { props: ColumnProps }) => {
   const [deleteColumnModal, setDeleteColumnModal] = useState(false);
   const [addTaskModal, setAddTaskModal] = useState(false);
   const { language } = useAppSelector((state) => state.languageSlice);
-
   const lang = language.toString() as Language;
   const dispatch = useAppDispatch();
 
   const handleOnClick = useCallback(async () => {
+    setDeleteColumnModal(false);
     deleteColumn(lang, dispatch, props.columns!, props._id!);
   }, [lang, props.columns, dispatch, props._id]);
+
+  const addTaskBtnOnClick = () => {
+    setAddTaskModal(true);
+  };
 
   return (
     <div
@@ -66,7 +70,7 @@ const Column = ({ props }: { props: ColumnProps }) => {
         </div>
 
         <div className="column__btn">
-          <CustomButton className="main-page-btn" onClick={() => setAddTaskModal(true)}>
+          <CustomButton className="main-page-btn" onClick={() => addTaskBtnOnClick()}>
             {i18Obj[lang].task}
           </CustomButton>
         </div>

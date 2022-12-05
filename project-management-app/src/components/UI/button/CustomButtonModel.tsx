@@ -5,4 +5,5 @@ export interface CustomButtonModel {
   className?: string;
   onClick?: () => void;
   type?: string;
+  disabled?: boolean;
 }
