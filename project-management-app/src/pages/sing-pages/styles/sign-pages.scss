@@ -78,6 +78,10 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 15px;
+  &__button-sybmit{
+    max-width: 250px;
+    width: 100%;
+  }
 }
 
 
