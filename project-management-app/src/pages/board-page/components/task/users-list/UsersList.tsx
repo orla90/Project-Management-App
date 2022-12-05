@@ -33,12 +33,12 @@ const UsersList = (props: TaskUsers) => {
   };
 
   const userItem = props.users.map((user) => (
-    <>
-      <li className="task__users-item" key={user} onClick={() => handleOnClick(user)}>
+    <div key={user}>
+      <li className="task__users-item" onClick={() => handleOnClick(user)}>
         {user}
       </li>
       <ToastContainer />
-    </>
+    </div>
   ));
   return <ul className="task__users-list">{userItem}</ul>;
 };
