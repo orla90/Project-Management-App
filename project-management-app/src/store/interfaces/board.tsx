@@ -1,7 +1,6 @@
-import { DraggableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd';
+import { DraggableProvided } from 'react-beautiful-dnd';
 import { Language } from 'pages/welcome-page/types/types';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
-import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 export interface BoardsProps {
   title?: string;
   owner?: string;

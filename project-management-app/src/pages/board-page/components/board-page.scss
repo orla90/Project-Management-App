@@ -36,7 +36,6 @@
 .board__list-body {
   position: relative;
   height: 100%;
-  background: radial-gradient(circle, $lightPink 0%, $lightBlue 100%);
   border-radius: 5px;
   list-style: none;
 }
@@ -97,9 +96,7 @@
     white-space: nowrap;
   }
   @media (max-width: em(440)) {
-    // gap: 5px;
     font-size: rem(16);
-    // justify-content: center;
   }
 }
 

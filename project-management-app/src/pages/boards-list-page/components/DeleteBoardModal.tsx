@@ -15,15 +15,14 @@ function DeleteBoardModal(props: IDeleteBoardModalProps) {
   const onConfirm = () => {
     dispatch(deleteBoardFetch({ id: props.id, lang: lang }));
     props.onClose();
-    console.log('доска удаляется');
   };
 
   return (
     <Modal open={props.open} title={i18Obj[lang].deleteBoard} onClose={props.onClose}>
       <div className="modal-container">
         <div className="delete-board__btn-wrapper">
-          <button className="main-page-btn btn-yes" onClick={onConfirm}>
-            {i18Obj[lang].yes}
+          <button className="main-page-btn-accent btn-yes" onClick={onConfirm}>
+            {i18Obj[lang].confirm}
           </button>
         </div>
       </div>

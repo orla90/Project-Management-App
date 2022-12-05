@@ -21,7 +21,6 @@ import { key } from 'texts/footer/footer-text';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { handleDragEnd } from './board-page-functions/dragEnd-functions';
 import { getAllUserLoginst, getColumns } from './board-page-functions/fetch-functions';
-import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
 import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { ToastContainer } from 'react-toastify';
 import { getTasks } from './board-page-functions/fetch-functions';
@@ -48,15 +47,12 @@ const BoardPage = () => {
 
     const socket = io('wss://react-final-project-production.up.railway.app/');
     socket.on('columns', (message) => {
-      console.log('WEBSOCKET COLUMNS', message);
       if (message.guid === 'uppdate_orders_from_delete_column') {
         return;
       }
-      console.log('I"M WORKiNG');
       getColumns(dispatch, setColumns);
     });
-    socket.on('tasks', (message) => {
-      console.log('WEBSOCKET TASKS', message);
+    socket.on('tasks', () => {
       getTasks(dispatch, setAllTasks);
     });
 

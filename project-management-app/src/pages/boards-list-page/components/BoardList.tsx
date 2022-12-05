@@ -8,8 +8,9 @@ import { IBoard } from './interfaces/IBoard';
 import { io } from 'socket.io-client';
 import Overlay from 'components/UI/overlay/Overlay';
 import { Language } from 'pages/welcome-page/types/types';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import i18Obj from 'texts/board/board-page';
+import i18ObjErr from 'texts/errors-and-warnings/translate';
 
 const BoardList = () => {
   const [, setBoards] = useState<IBoard[]>([]);
@@ -24,25 +25,23 @@ const BoardList = () => {
     const loadBoards = async () => {
       setOverlay(true);
       try {
-        const userBoards = await dispatch(
-          getBoardsByUserIdFetch({ userId: user!.id, lang: lang })
-        ).unwrap();
+        const userBoards = await dispatch(getBoardsByUserIdFetch({ userId: user!.id })).unwrap();
         setBoards(userBoards);
       } catch (error) {
-        alert(error);
+        toast.error(`${i18ObjErr[lang].somethingWentWrong}`);
       } finally {
         setOverlay(false);
       }
     };
     const socket = io('wss://react-final-project-production.up.railway.app/');
-    socket.on('boards', (message) => {
+    socket.on('boards', () => {
       loadBoards();
     });
     loadBoards();
     return () => {
       socket.close();
     };
-  }, [dispatch, user]);
+  }, [dispatch, user, lang]);
 
   return (
     <>

@@ -39,7 +39,6 @@ function NewBoardModal(props: INewBoardModalProps) {
     reset({ title: '', description: '' });
     props.onClose();
     navigate(ROUTES.BOARDS_LIST);
-    console.log('новая доска создалась');
   });
 
   return (

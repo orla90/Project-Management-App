@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { TaskDeleteParams, TaskChangeParams, UserProps, BoardsProps } from 'store/interfaces/board';
 import { RootState } from 'store/types/types-redux';
 import i18Obj from 'texts/errors-and-warnings/translate';
-import { dataTasks, sortArr } from './sort-data-all-tasks-fn';
+import { sortArr } from './sort-data-all-tasks-fn';
 
 export const getTasksColumnFetch = createAsyncThunk<
   Itasks,

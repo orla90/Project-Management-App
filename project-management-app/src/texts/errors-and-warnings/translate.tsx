@@ -1,4 +1,4 @@
-const i18Obj = {
+const i18ObjErr = {
   en: {
     badRequestColumnAdd: 'Failed to create a list. Please try again later.',
     badRequestTaskAdd: 'Failed to create a task. Please try again later.',
@@ -24,6 +24,7 @@ const i18Obj = {
     goodResponseDeleteProfile: 'Profile is deleted.',
     wrongColumnOrder:
       'Something went wrong while updating the column order. Please try again later.',
+    somethingWentWrong: 'Ooops, something went wrong. Please try again later.',
   },
   ru: {
     badRequestColumnAdd: 'Не удалось создать список. Пожалуйста, повторите попытку позднее.',
@@ -56,6 +57,7 @@ const i18Obj = {
     somethingWrong: 'Что-то пошло не так, попробуйте перезагрузить страницу.',
     wrongColumnOrder:
       'Что-то пошло не так при обновлении очерёдности колонок. Пожалуйста, повторите попытку позднее.',
+    somethingWentWrong: 'Упс, что-то пошло не так. Пожалуйста, повторите попытку позднее.',
   },
 };
-export default i18Obj;
+export default i18ObjErr;
