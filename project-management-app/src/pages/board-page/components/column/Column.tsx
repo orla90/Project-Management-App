@@ -2,7 +2,7 @@ import { CustomButton } from 'components/UI/button/CustomButton';
 import Modal from 'components/UI/modal/Modal';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Language } from 'pages/welcome-page/types/types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store/custom-hooks';
 import { ColumnProps } from 'store/interfaces/board';
 import i18Obj from 'texts/board/board-page';

@@ -21,7 +21,6 @@ import { key } from 'texts/footer/footer-text';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { handleDragEnd } from './board-page-functions/dragEnd-functions';
 import { getAllUserLoginst, getColumns } from './board-page-functions/fetch-functions';
-import { getAllBoardTasksFetch } from 'store/actions-creators/board/task-actions';
 import { dataTasks } from 'store/actions-creators/board/sort-data-all-tasks-fn';
 import { ToastContainer } from 'react-toastify';
 import { getTasks } from './board-page-functions/fetch-functions';

@@ -1,4 +1,3 @@
-import { Language } from 'pages/welcome-page/types/types';
 import { Itasks } from 'pages/board-page/interfaces/task-interface';
 import { Dispatch } from 'react';
 import { DropResult } from 'react-beautiful-dnd';

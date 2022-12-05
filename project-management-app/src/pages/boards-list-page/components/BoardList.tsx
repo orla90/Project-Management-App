@@ -25,9 +25,7 @@ const BoardList = () => {
     const loadBoards = async () => {
       setOverlay(true);
       try {
-        const userBoards = await dispatch(
-          getBoardsByUserIdFetch({ userId: user!.id, lang: lang })
-        ).unwrap();
+        const userBoards = await dispatch(getBoardsByUserIdFetch({ userId: user!.id })).unwrap();
         setBoards(userBoards);
       } catch (error) {
         toast.error(`${i18ObjErr[lang].somethingWentWrong}`);
@@ -43,7 +41,7 @@ const BoardList = () => {
     return () => {
       socket.close();
     };
-  }, [dispatch, user]);
+  }, [dispatch, user, lang]);
 
   return (
     <>
