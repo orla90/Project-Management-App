@@ -25,9 +25,6 @@ function DeleteBoardModal(props: IDeleteBoardModalProps) {
           <button className="main-page-btn btn-yes" onClick={onConfirm}>
             {i18Obj[lang].yes}
           </button>
-          <button className="main-page-btn btn-no" onClick={props.onClose}>
-            {i18Obj[lang].no}
-          </button>
         </div>
       </div>
     </Modal>

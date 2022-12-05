@@ -52,4 +52,7 @@
     opacity: 1;
     pointer-events: all;
   }
+  textarea {
+    resize: none;
+  }
 }
