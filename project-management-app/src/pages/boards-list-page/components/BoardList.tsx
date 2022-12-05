@@ -33,11 +33,14 @@ const BoardList = () => {
         setOverlay(false);
       }
     };
-    const socket = io('https://react-final-project-production.up.railway.app/');
-    socket.on('boards', () => {
+    const socket = io('wss://react-final-project-production.up.railway.app/');
+    socket.on('boards', (message) => {
       loadBoards();
     });
     loadBoards();
+    return () => {
+      socket.close();
+    };
   }, [dispatch, user]);
 
   return (
