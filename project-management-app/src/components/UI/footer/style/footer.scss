@@ -10,11 +10,11 @@
     justify-content: space-between;
     @media (max-width: em(600)) {
       display: grid;
-      grid-template-columns: repeat(2, 117px);
+      grid-template-columns: repeat(2, 112px);
       grid-template-rows: repeat(2, 33px);
       justify-content: center;
       align-items: center;
-      text-align: end;
+      text-align: -webkit-center;
     }
     & a {
       transition: all 0.3s ease 0s;
@@ -30,6 +30,9 @@
       &:last-child {
         grid-row: 1;
         grid-column: 1 / 3;
+        // text-align: center;
+        // display: flex;
+        // justify-content: space-between;
       }
       &:first-child {
         grid-column: 1 / 2;
@@ -38,6 +41,7 @@
       &:second-child {
         grid-column: 2 / 3;
         grid-row: 2;
+        text-align: end;
       }
     }
   }
