@@ -21,6 +21,7 @@ const CustomInput = ({
       <input
         {...propsForm}
         type={type}
+        autoComplete={type === 'password' ? 'yes' : 'no'}
         className={customClass ? customClass : ''}
         placeholder={placeholder ? placeholder : ''}
         name={name}
