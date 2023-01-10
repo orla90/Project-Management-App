@@ -32,7 +32,7 @@ const BoardList = () => {
         setOverlay(false);
       }
     };
-    const socket = io('wss://react-final-project-production.up.railway.app/');
+    const socket = io('wss://rs-app-manager-back.onrender.com/');
     socket.on('boards', () => {
       loadBoards();
     });

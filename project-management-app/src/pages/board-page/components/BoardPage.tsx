@@ -46,7 +46,7 @@ const BoardPage = () => {
       getAllUserLoginst(board, dispatch);
     }
 
-    const socket = io('wss://react-final-project-production.up.railway.app/');
+    const socket = io('wss://rs-app-manager-back.onrender.com/');
     socket.on('columns', (message) => {
       if (message.guid === 'uppdate_orders_from_delete_column') {
         return;
