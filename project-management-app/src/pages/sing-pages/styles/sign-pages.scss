@@ -1,0 +1,88 @@
+@import './../../../mixins.scss';
+
+.sign-in, .sign-up, .edite-profile{
+  padding: 90px 0px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $signPagesBackground;
+  .sign-in &__container,
+  .sign-up &__container,
+  .edite-profile &__container{
+    max-width: 400px;
+    width: 100%;
+  }
+  &__body{
+    padding: 30px 15px;
+    border-radius: 15px;
+    background-color: $whiteColor;
+  }
+  &__title{
+    text-align: center;
+    font-size: rem(24);
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: em(1.5);
+  }
+  &__question{
+    text-align: center;
+    margin-bottom: 15px;
+    & a {
+      margin-left: 5px;
+      color: $btnBgColor;
+      @media (any-hover: hover){
+        &:hover{
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  &__login, &__id {
+    & span {
+      font-weight: 700;
+      font-size: rem(24);
+    }
+  }
+  &__login{
+    margin-bottom: 5px;
+  }
+  &__id {
+    margin-bottom: 20px;
+  }
+  &__button.main-page-btn{
+    width: 100%;
+    border: none;
+    margin-bottom: 10px;
+  }
+  &__remove-user-button,&__remove-user-button.main-page-btn{
+    width: 100%;
+    background-color: $accentColor;
+  }
+  &__error-submit {
+    text-align: center;
+    margin-bottom: 5px;
+  }
+}
+
+.edite-profile__error-submit.fulfielled {
+  color: $greenColor;
+}
+.edite-profile__error-submit.rejected {
+  color: $redColor;
+}
+
+.delete-user-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  &__button-sybmit{
+    max-width: 250px;
+    width: 100%;
+  }
+}
+
+
+

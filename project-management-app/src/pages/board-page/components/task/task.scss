@@ -1,0 +1,92 @@
+@import '../../../../mixins.scss';
+
+.task {
+  background-color: $whiteColor;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.task__panel,
+.task__panel_user,
+.task__panel_task {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 5px;
+}
+
+.task__icon {
+  width: rem(20);
+  height: rem(20);
+  background-size: contain;
+  background-repeat: no-repeat;
+  align-self: baseline;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.3s ease 0s;
+  }
+}
+
+.task__icon_edit {
+  background-image: url('../../../../assets/board-page/edit.svg');
+}
+
+.task__icon_bin {
+  background-image: url('../../../../assets/board-page/bin.svg');
+}
+
+.task__icon_assign {
+  background-image: url('../../../../assets/board-page/assign.svg');
+}
+
+.task__text {
+  font-family: 'Noto Serif', serif;
+  &_title {
+    font-size: rem(18);
+    font-weight: 700;
+    line-height: 1.3;
+    color: $primaryBlackColor;
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 5px;
+    overflow-wrap: break-word;
+    word-break: break-all;
+  }
+  &_description {
+    font-size: rem(16);
+    font-weight: 500;
+    line-height: 1.3;
+    color: $lightDarkColor;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    &::first-letter {
+      text-transform: capitalize;
+    }
+    max-height: rem(150);
+    overflow-y: auto;
+  }
+  &_user {
+    font-size: rem(16);
+    font-weight: 500;
+    line-height: 1.3;
+    color: $primaryBlackColor;
+  }
+}
+
+.task__btn {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  &_confirm {
+    max-width: 300px;
+    width: 100%;
+  }
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
